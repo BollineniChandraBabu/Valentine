@@ -5,35 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will you be my Valentine?</title>
     <style>
+        :root {
+            --pink-100: #ffe6ef;
+            --pink-200: #ffc4dd;
+            --pink-300: #ff9cc6;
+            --pink-400: #ff6fae;
+            --pink-500: #e91e63;
+            --purple-500: #a64dff;
+            --card-glow: rgba(255, 255, 255, 0.75);
+            --text-dark: #2d2a32;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #fce4ec; /* Matches the pink background in the video */
-            font-family: 'Arial', sans-serif;
+            background: radial-gradient(circle at top, #fff0f6 0%, #fbe0ff 35%, #ffd1e8 70%, #ffc1da 100%);
+            font-family: 'Poppins', 'Arial', sans-serif;
             overflow: hidden;
+            color: var(--text-dark);
+            transition: background 1s ease;
+            animation: softGlow 10s ease-in-out infinite;
+            background-size: 200% 200%;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(0px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            top: -140px;
+            left: -120px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 182, 193, 0));
+            animation: floatGlow 12s ease-in-out infinite;
+        }
+
+        body::after {
+            bottom: -160px;
+            right: -90px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(221, 182, 255, 0));
+            animation: floatGlow 14s ease-in-out infinite reverse;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white card */
-            padding: 40px;
-            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.82);
+            padding: 38px 40px;
+            border-radius: 28px;
             text-align: center;
             max-width: 500px;
             width: 90%;
+            box-shadow: 0 30px 60px rgba(233, 30, 99, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: cardRise 0.9s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 35px 70px rgba(233, 30, 99, 0.25);
         }
 
         #display-image {
             width: 200px;
             border-radius: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            box-shadow: 0 16px 30px rgba(233, 30, 99, 0.2);
+            animation: floaty 4.5s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        #display-image:hover {
+            transform: translateY(-6px) rotate(-1deg);
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #333;
+            font-size: 2.4rem;
+            color: var(--text-dark);
+            margin: 0 0 8px;
+        }
+
+        .subtitle {
+            font-size: 1.05rem;
+            color: #6d5d6f;
+            margin: 0 0 20px;
+        }
+
+        .love-note {
+            font-size: 1.02rem;
+            line-height: 1.55;
+            background: rgba(255, 245, 248, 0.8);
+            border-radius: 18px;
+            padding: 16px 18px;
+            margin: 14px 0 18px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
         }
 
         .buttons {
@@ -50,18 +131,39 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+            font-weight: 600;
+        }
+
+        button:active {
+            transform: translateY(1px) scale(0.99);
         }
 
         #yes-btn {
-            background-color: #e91e63;
+            background: linear-gradient(135deg, var(--pink-500), var(--purple-500));
             color: white;
+            box-shadow: 0 16px 24px rgba(233, 30, 99, 0.35);
         }
 
         #no-btn {
-            background-color: #fff;
-            color: #333;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            background-color: #fff7fb;
+            color: #5a425f;
+            box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+        }
+
+        #yes-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 20px 32px rgba(233, 30, 99, 0.4);
+        }
+
+        #no-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .signature {
+            margin-top: 24px;
+            font-size: 1rem;
+            color: #6d5d6f;
         }
 
         /* Success Message Styling */
@@ -77,19 +179,90 @@
             margin: 10px 0;
         }
 
+        .success-content .final-note {
+            font-size: 1.05rem;
+            margin-top: 6px;
+        }
+
+        .floating-hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            bottom: -50px;
+            font-size: 18px;
+            opacity: 0.7;
+            animation: heartsUp 8s linear infinite;
+        }
+
+        .floating-hearts span:nth-child(2) { left: 15%; animation-delay: 1s; font-size: 22px; }
+        .floating-hearts span:nth-child(3) { left: 30%; animation-delay: 3s; font-size: 16px; }
+        .floating-hearts span:nth-child(4) { left: 45%; animation-delay: 2s; font-size: 20px; }
+        .floating-hearts span:nth-child(5) { left: 60%; animation-delay: 4s; font-size: 24px; }
+        .floating-hearts span:nth-child(6) { left: 75%; animation-delay: 1.5s; font-size: 18px; }
+        .floating-hearts span:nth-child(7) { left: 85%; animation-delay: 2.7s; font-size: 20px; }
+
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes cardRise {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes heartsUp {
+            0% { transform: translateY(0) scale(1); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(25px); }
+        }
+
+        @keyframes softGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .buttons { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
-
+    <div class="floating-hearts" aria-hidden="true">
+        <span style="left: 5%;">💗</span>
+        <span>💖</span>
+        <span>💞</span>
+        <span>💘</span>
+        <span>💓</span>
+        <span>💝</span>
+        <span>💕</span>
+    </div>
     <div class="container" id="main-card">
         <div id="content-wrapper">
             <img id="display-image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazh3a3piZzdoYThkaTJpY3p4ZGJ3ajVlMDYzNmVldndmY3drZ3FsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VQRPENY0Tm2puBhvYz/giphy.gif" alt="cute cat">
             <h1 id="question"> Sindhu, will you be my Valentine?</h1>
-            
+            <p class="subtitle">A little moment, a big question, and a forever kind of yes.</p>
+            <div class="love-note">
+                You make everything feel lighter, sweeter, and brighter. I’d love to spend this Valentine’s Day
+                laughing, cuddling, and making new memories together.
+            </div>
             <div class="buttons" id="button-group">
                 <button id="yes-btn">Yes</button>
                 <button id="no-btn">No</button>
@@ -123,6 +296,7 @@
                     <p>Best decision ever 😘</p>
                     <img src="https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif" alt="celebration" style="width: 250px; border-radius: 10px;">
                     <p>I love you ❤️</p>
+                    <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
                 </div>
             `;
             

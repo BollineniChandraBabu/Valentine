@@ -25,11 +25,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 32px 16px 40px;
             background: radial-gradient(circle at top, #fff6fb 0%, #fde9ff 32%, #ffd6ea 68%, #ffcade 100%);
             font-family: 'Poppins', 'Arial', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             color: var(--text-dark);
         }
 
@@ -66,12 +68,12 @@
             padding: 38px 40px;
             border-radius: 28px;
             text-align: center;
-            max-width: 500px;
-            width: 90%;
+            max-width: 540px;
+            width: min(92vw, 540px);
             box-shadow: 0 30px 60px rgba(233, 30, 99, 0.2);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            animation: cardRise 0.9s ease;
+            animation: cardRise 0.9s ease, softFloat 6s ease-in-out infinite;
             transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
 
@@ -96,11 +98,11 @@
         }
 
         #display-image {
-            width: 200px;
+            width: clamp(160px, 40vw, 220px);
             border-radius: 15px;
             margin-bottom: 18px;
             box-shadow: 0 16px 30px rgba(233, 30, 99, 0.2);
-            animation: floaty 4.5s ease-in-out infinite;
+            animation: floaty 4.5s ease-in-out infinite, glowPulse 4s ease-in-out infinite;
             transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
 
@@ -110,20 +112,20 @@
         }
 
         h1 {
-            font-size: 2.4rem;
+            font-size: clamp(1.85rem, 4.8vw, 2.4rem);
             color: var(--text-dark);
             margin: 0 0 8px;
             text-shadow: 0 2px 6px rgba(233, 30, 99, 0.15);
         }
 
         .subtitle {
-            font-size: 1.05rem;
+            font-size: clamp(0.98rem, 2.6vw, 1.05rem);
             color: #6d5d6f;
             margin: 0 0 20px;
         }
 
         .love-note {
-            font-size: 1.02rem;
+            font-size: clamp(0.98rem, 2.6vw, 1.05rem);
             line-height: 1.55;
             background: linear-gradient(135deg, rgba(255, 245, 248, 0.95), rgba(255, 233, 245, 0.75));
             border-radius: 18px;
@@ -134,29 +136,34 @@
         }
 
         .buttons {
-            margin-top: 30px;
+            margin-top: 26px;
             display: flex;
             justify-content: center;
             gap: 20px;
             min-height: 50px;
+            flex-wrap: wrap;
         }
 
         button {
             padding: 12px 30px;
-            font-size: 1.2rem;
+            font-size: clamp(1.05rem, 3.5vw, 1.2rem);
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, letter-spacing 0.3s ease;
             font-weight: 600;
+            min-width: 140px;
+            min-height: 48px;
         }
 
         #yes-btn {
-            background: linear-gradient(135deg, var(--pink-500), var(--purple-500));
+            background: linear-gradient(135deg, var(--pink-500), var(--purple-500), #ff7bbf);
             color: white;
             box-shadow: 0 16px 24px rgba(233, 30, 99, 0.35);
             position: relative;
             overflow: hidden;
+            background-size: 200% 200%;
+            animation: heartbeat 2.6s ease-in-out infinite, gradientShift 6s ease-in-out infinite;
         }
 
         #yes-btn::after {
@@ -189,6 +196,10 @@
             animation: wiggle 0.4s ease-in-out;
         }
 
+        button:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
         .signature {
             margin-top: 24px;
             font-size: 1rem;
@@ -206,6 +217,11 @@
         .success-content p {
             font-size: 1.5rem;
             margin: 10px 0;
+        }
+
+        .success-content img {
+            width: min(250px, 80vw);
+            height: auto;
         }
 
         .success-content .final-note {
@@ -234,7 +250,7 @@
             bottom: -50px;
             font-size: 18px;
             opacity: 0.7;
-            animation: heartsUp 8s linear infinite;
+            animation: heartsUp 10s linear infinite;
         }
 
         .floating-hearts span:nth-child(2) { left: 15%; animation-delay: 1s; font-size: 22px; }
@@ -247,6 +263,11 @@
         @keyframes floaty {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-12px); }
+        }
+
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
         }
 
         @keyframes cardRise {
@@ -283,15 +304,74 @@
             100% { transform: translateY(-2px) rotate(0deg); }
         }
 
+        @keyframes heartbeat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-2px) scale(1.03); }
+            70% { transform: translateY(0) scale(0.98); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 16px 30px rgba(233, 30, 99, 0.2); }
+            50% { box-shadow: 0 20px 36px rgba(233, 30, 99, 0.28); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
         @keyframes burst {
             0% { transform: translate(0, 0) scale(0.5); opacity: 0; }
             30% { opacity: 1; }
             100% { transform: translate(var(--x, 0), var(--y, -80px)) scale(1.2); opacity: 0; }
         }
 
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            .buttons { flex-direction: column; }
+        @media (max-width: 600px) {
+            body {
+                padding: 24px 12px 32px;
+            }
+
+            .container {
+                padding: 28px 22px;
+                border-radius: 22px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        @media (max-height: 700px) {
+            .container {
+                padding: 24px 20px;
+            }
+
+            .love-note {
+                padding: 14px 16px;
+            }
+        }
+
+        @media (hover: none) {
+            #yes-btn:hover,
+            #no-btn:hover,
+            #display-image:hover,
+            .container:hover {
+                transform: none;
+                animation: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
@@ -330,14 +410,20 @@
         const container = document.getElementById('content-wrapper');
 
         // 1. Logic for the runaway "No" button
-        noBtn.addEventListener('mouseover', () => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
-            
+        const moveNoButton = () => {
+            const padding = 16;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            const x = Math.max(padding, Math.random() * Math.max(maxX, padding));
+            const y = Math.max(padding, Math.random() * Math.max(maxY, padding));
+
             noBtn.style.position = 'fixed';
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
-        });
+        };
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', moveNoButton);
 
         const createBurst = () => {
             const burst = document.createElement('span');
@@ -362,7 +448,7 @@
                 <div class="success-content">
                     <h1>💖 YAY!!! 💖</h1>
                     <p>Best decision ever 😘</p>
-                    <img src="https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif" alt="celebration" style="width: 250px; border-radius: 10px;">
+                    <img src="https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif" alt="celebration" style="border-radius: 10px;">
                     <p>I love you ❤️</p>
                     <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
                 </div>

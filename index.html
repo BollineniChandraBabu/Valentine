@@ -285,6 +285,70 @@
             box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
+        .letter-card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .letter-seal {
+            border: none;
+            border-radius: 18px;
+            padding: 18px 20px;
+            background: linear-gradient(135deg, rgba(255, 231, 245, 0.95), rgba(255, 247, 252, 0.98));
+            box-shadow: 0 12px 26px rgba(233, 30, 99, 0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        .letter-seal::before,
+        .letter-seal::after {
+            content: "";
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            background: rgba(233, 30, 99, 0.18);
+            border-radius: 999px;
+        }
+
+        .letter-seal::before {
+            top: 18px;
+        }
+
+        .letter-seal::after {
+            bottom: 18px;
+        }
+
+        .letter-seal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 30px rgba(233, 30, 99, 0.22);
+        }
+
+        .letter-seal.opened {
+            background: linear-gradient(135deg, rgba(255, 214, 234, 0.9), rgba(255, 246, 252, 0.95));
+        }
+
+        .letter-icon {
+            font-size: 2.2rem;
+        }
+
+        .letter-title {
+            font-weight: 600;
+            color: #7a2e56;
+            font-size: 1rem;
+        }
+
+        .letter-subtitle {
+            font-size: 0.92rem;
+            color: #7b5b72;
+        }
+
         .page-footer {
             display: flex;
             justify-content: space-between;
@@ -1200,6 +1264,7 @@
         let activeTab = 'questions';
         let selectedChoiceIndex = null;
         let letterIndex = 0;
+        let isLetterOpen = false;
 
         const getTodayEntry = () => (todayIndex === -1 ? defaultDay : valentineWeek[todayIndex]);
 
@@ -1236,12 +1301,31 @@
 
             if (activeTab === 'letters') {
                 pageBody.innerHTML = `
-                    <div class="love-letter">${todayEntry.letters[letterIndex]}</div>
-                    <div class="page-footer">
-                        <span>Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
-                        <button class="choice-button" id="next-letter" type="button">Next letter →</button>
+                    <div class="letter-card">
+                        <button class="letter-seal ${isLetterOpen ? 'opened' : ''}" id="open-letter" type="button" aria-expanded="${isLetterOpen}">
+                            <span class="letter-icon">💌</span>
+                            <span class="letter-title">Click to open today’s love letter</span>
+                            <span class="letter-subtitle">A sweet note is waiting inside.</span>
+                        </button>
+                        <div class="letter-content" ${isLetterOpen ? '' : 'hidden'}>
+                            <div class="love-letter">${todayEntry.letters[letterIndex]}</div>
+                            <div class="page-footer">
+                                <span>Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
+                                <button class="choice-button" id="next-letter" type="button">Next letter →</button>
+                            </div>
+                        </div>
                     </div>
                 `;
+
+                const openLetterButton = document.getElementById('open-letter');
+                const letterContent = pageBody.querySelector('.letter-content');
+
+                openLetterButton.addEventListener('click', () => {
+                    isLetterOpen = true;
+                    openLetterButton.classList.add('opened');
+                    openLetterButton.setAttribute('aria-expanded', 'true');
+                    letterContent.hidden = false;
+                });
 
                 const nextLetterButton = document.getElementById('next-letter');
                 nextLetterButton.addEventListener('click', () => {
@@ -1271,6 +1355,9 @@
             contentTabs.querySelectorAll('.content-tab').forEach((tab) => {
                 tab.addEventListener('click', () => {
                     activeTab = tab.dataset.tab;
+                    if (activeTab === 'letters') {
+                        isLetterOpen = false;
+                    }
                     renderTabs();
                     renderTabContent();
                 });

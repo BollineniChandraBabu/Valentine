@@ -1938,111 +1938,22 @@
                 const symbol = loadingSymbols[index % loadingSymbols.length];
                 return `<span class="petal" style="left:${left}%; animation-delay:${delay}s; --fall-duration:${duration}s;">${symbol}</span>`;
             }).join('');
-            const buildLoadingDecoration = () => {
-                if (todayEntry.title.includes('Rose Day')) {
-                    const roseParticles = [
-                        { tx: 0, ty: -28, sx: -70, sy: -52, delay: '0.00s' },
-                        { tx: -18, ty: -16, sx: 72, sy: -44, delay: '0.12s' },
-                        { tx: 18, ty: -16, sx: -62, sy: 62, delay: '0.24s' },
-                        { tx: -22, ty: 2, sx: 60, sy: 54, delay: '0.36s' },
-                        { tx: 22, ty: 2, sx: -46, sy: -58, delay: '0.48s' },
-                        { tx: 0, ty: 14, sx: 46, sy: -62, delay: '0.60s' },
-                        { tx: 0, ty: 28, sx: -58, sy: 58, delay: '0.72s' }
-                    ].map((particle, index) => `
-                        <span
-                            class="rose-heart-particle"
-                            style="--tx:${particle.tx}px; --ty:${particle.ty}px; --sx:${particle.sx}px; --sy:${particle.sy}px; --delay:${particle.delay};"
-                        >${index % 2 === 0 ? '💗' : '🌹'}</span>
-                    `).join('');
-
-                    return `
-                        <div class="rose-display">
-                            <div class="rose-loader-stage" aria-hidden="true">
-                                ${roseParticles}
-                            </div>
-                            <div class="rose-stem">🌿</div>
+            const themedMarkup = `
+                <div class="promise-display">
+                    <div class="promise-loader-stage" aria-hidden="true">
+                        <div class="petal-field">
+                            ${petals}
                         </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Propose Day')) {
-                    return `
-                        <div class="proposal-display">
-                            <div class="proposal-ring" aria-hidden="true">💍</div>
-                            <div class="proposal-sparkles">✨ 💖 ✨</div>
+                        <canvas class="promise-loader-canvas" width="240" height="140"></canvas>
+                        <div class="promise-symbols">
+                            <span class="promise-symbol teddy">🧸</span>
+                            <span class="promise-symbol flower">🌸</span>
+                            <span class="promise-symbol heart">💗</span>
                         </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Teddy Day')) {
-                    return `
-                        <div class="teddy-display">
-                            <div class="teddy-loader" aria-hidden="true">
-                                <div class="teddy-bounce">🧸</div>
-                            </div>
-                            <div class="teddy-shadow"></div>
-                        </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Promise Day')) {
-                    return `
-                        <div class="promise-display">
-                            <div class="promise-loader-stage" aria-hidden="true">
-                                <div class="petal-field">
-                                    ${petals}
-                                </div>
-                                <canvas class="promise-loader-canvas" width="240" height="140"></canvas>
-                                <div class="promise-symbols">
-                                    <span class="promise-symbol teddy">🧸</span>
-                                    <span class="promise-symbol flower">🌸</span>
-                                    <span class="promise-symbol heart">💗</span>
-                                </div>
-                            </div>
-                            <div class="hug-hearts">💞 ✨ 💞</div>
-                        </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Hug Day')) {
-                    return `
-                        <div class="hug-display">
-                            <div class="hug-cloud" aria-hidden="true">🤗🤗🤗</div>
-                            <div class="hug-hearts">💞 💗 💞</div>
-                        </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Kiss Day')) {
-                    return `
-                        <div class="kiss-display">
-                            <div class="kiss-lips" aria-hidden="true">💋 💋 💋</div>
-                            <div class="kiss-sparkles">✨ 💖 ✨</div>
-                        </div>
-                    `;
-                }
-
-                if (todayEntry.title.includes('Valentine’s Day')) {
-                    return `
-                        <div class="valentine-display">
-                            <div class="valentine-heart" aria-hidden="true">💘</div>
-                            <div class="valentine-fireworks">🎉 💖 🎉</div>
-                        </div>
-                    `;
-                }
-
-                return '';
-            };
-
-            const themedMarkup = buildLoadingDecoration();
-            const isPromiseDay = todayEntry.title.includes('Promise Day');
-            const standalonePetals = isPromiseDay
-                ? ''
-                : `
-                    <div class="petal-field">
-                        ${petals}
                     </div>
-                `;
+                    <div class="hug-hearts">💞 ✨ 💞</div>
+                </div>
+            `;
 
             return `
                 <div class="loading-screen">
@@ -2052,7 +1963,6 @@
                     <div class="loading-icon">${loading.icon}</div>
                     <p class="loading-subtitle">Hold on, love is on the way...</p>
                     ${themedMarkup}
-                    ${standalonePetals}
                 </div>
             `;
         };
@@ -2167,9 +2077,7 @@
             overlay.innerHTML = buildLoadingMarkup(todayEntry);
             document.body.appendChild(overlay);
 
-            if (todayEntry.title.includes('Promise Day')) {
-                createPromiseLoaderAnimation(overlay);
-            }
+            createPromiseLoaderAnimation(overlay);
 
             setTimeout(() => {
                 stopPromiseLoaderAnimation(overlay);

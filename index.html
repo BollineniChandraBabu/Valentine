@@ -1299,41 +1299,6 @@
                 });
             }
 
-            if (activeTab === 'letters') {
-                pageBody.innerHTML = `
-                    <div class="letter-card">
-                        <button class="letter-seal ${isLetterOpen ? 'opened' : ''}" id="open-letter" type="button" aria-expanded="${isLetterOpen}">
-                            <span class="letter-icon">💌</span>
-                            <span class="letter-title">Click to open today’s love letter</span>
-                            <span class="letter-subtitle">A sweet note is waiting inside.</span>
-                        </button>
-                        <div class="letter-content" ${isLetterOpen ? '' : 'hidden'}>
-                            <div class="love-letter">${todayEntry.letters[letterIndex]}</div>
-                            <div class="page-footer">
-                                <span>Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
-                                <button class="choice-button" id="next-letter" type="button">Next letter →</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                const openLetterButton = document.getElementById('open-letter');
-                const letterContent = pageBody.querySelector('.letter-content');
-
-                openLetterButton.addEventListener('click', () => {
-                    isLetterOpen = true;
-                    openLetterButton.classList.add('opened');
-                    openLetterButton.setAttribute('aria-expanded', 'true');
-                    letterContent.hidden = false;
-                });
-
-                const nextLetterButton = document.getElementById('next-letter');
-                nextLetterButton.addEventListener('click', () => {
-                    letterIndex = (letterIndex + 1) % todayEntry.letters.length;
-                    renderTabContent();
-                });
-            }
-
             pageContent.classList.remove('animate');
             void pageContent.offsetWidth;
             pageContent.classList.add('animate');
@@ -1342,8 +1307,7 @@
         const renderTabs = () => {
             const tabs = [
                 { id: 'questions', label: 'Questions 💬' },
-                { id: 'choices', label: 'Choices 🎀' },
-                { id: 'letters', label: 'Love Letters 💌' }
+                { id: 'choices', label: 'Choices 🎀' }
             ];
 
             contentTabs.innerHTML = tabs.map((tab) => `
@@ -1355,9 +1319,6 @@
             contentTabs.querySelectorAll('.content-tab').forEach((tab) => {
                 tab.addEventListener('click', () => {
                     activeTab = tab.dataset.tab;
-                    if (activeTab === 'letters') {
-                        isLetterOpen = false;
-                    }
                     renderTabs();
                     renderTabContent();
                 });
@@ -1497,10 +1458,14 @@
         };
 
         const renderLoadingPage = () => {
-            const todayEntry = getTodayEntry();
-            container.innerHTML = buildLoadingMarkup(todayEntry);
+            container.innerHTML = `
+                <div class="loading-screen">
+                    <div class="loading-icon">💖</div>
+                    <p class="loading-subtitle">Loading your next page...</p>
+                </div>
+            `;
 
-            setTimeout(renderQuestionPage, 5000);
+            setTimeout(renderQuestionPage, 2000);
         };
 
         showInitialLoading();
@@ -1582,10 +1547,10 @@
             const letterContent = container.querySelector('.letter-content');
 
             openLetterButton.addEventListener('click', () => {
-                isLetterOpen = true;
-                openLetterButton.classList.add('opened');
-                openLetterButton.setAttribute('aria-expanded', 'true');
-                letterContent.hidden = false;
+                isLetterOpen = !isLetterOpen;
+                openLetterButton.classList.toggle('opened', isLetterOpen);
+                openLetterButton.setAttribute('aria-expanded', String(isLetterOpen));
+                letterContent.hidden = !isLetterOpen;
             });
 
             const nextLetterButton = document.getElementById('success-next-letter');

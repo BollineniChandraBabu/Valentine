@@ -135,6 +135,165 @@
             box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.7);
         }
 
+        .day-highlight {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 18px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.12);
+        }
+
+        .day-label {
+            margin: 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8a6e85;
+        }
+
+        #day-title {
+            margin: 6px 0 8px;
+            font-size: clamp(1.35rem, 3.6vw, 1.7rem);
+            color: #b21856;
+        }
+
+        .day-message {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: #5f4a60;
+        }
+
+        .day-extra {
+            margin: 10px 0 12px;
+            padding: 12px 14px;
+            background: linear-gradient(135deg, rgba(255, 238, 246, 0.8), rgba(255, 248, 252, 0.9));
+            border-radius: 14px;
+            color: #66465f;
+            font-size: 0.98rem;
+        }
+
+        .day-extra ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+        }
+
+        .day-reminder {
+            margin: 0;
+            font-weight: 600;
+            color: #9a4f74;
+        }
+
+        .season-note {
+            margin: 10px 0 0;
+            font-size: 0.95rem;
+            color: #7b5b72;
+            font-style: italic;
+        }
+
+        .day-pages {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .content-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+            margin-bottom: 12px;
+            scrollbar-width: thin;
+        }
+
+        .content-tab {
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            background: #fff8fb;
+            color: #7a3f5f;
+            border-radius: 999px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .content-tab.active {
+            background: linear-gradient(135deg, #ff8fbf, #d16bff);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 18px rgba(233, 30, 99, 0.25);
+        }
+
+        .page-content {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 18px;
+            box-shadow: 0 12px 24px rgba(233, 30, 99, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .page-content.animate {
+            animation: fadeSlide 0.45s ease;
+        }
+
+        .page-title {
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+            color: #7a2e56;
+        }
+
+        .question-list {
+            margin: 0 0 12px 18px;
+            color: #5f4a60;
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .choice-button {
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            background: #fff4fb;
+            color: #6b3a59;
+            border-radius: 14px;
+            padding: 10px 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .choice-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 18px rgba(233, 30, 99, 0.18);
+        }
+
+        .choice-button.selected {
+            background: linear-gradient(135deg, #ff8fbf, #d16bff);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .love-letter {
+            background: linear-gradient(135deg, rgba(255, 235, 245, 0.9), rgba(255, 250, 252, 0.95));
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-size: 0.98rem;
+            color: #5c3f55;
+            line-height: 1.5;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+            color: #8a5c78;
+            font-size: 0.9rem;
+        }
+
         .buttons {
             margin-top: 26px;
             display: flex;
@@ -326,6 +485,11 @@
             100% { transform: translate(var(--x, 0), var(--y, -80px)) scale(1.2); opacity: 0; }
         }
 
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 24px 12px 32px;
@@ -343,6 +507,10 @@
 
             button {
                 width: 100%;
+            }
+
+            .content-tabs {
+                justify-content: flex-start;
             }
         }
 
@@ -388,11 +556,32 @@
     <div class="container" id="main-card">
         <div id="content-wrapper">
             <img id="display-image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazh3a3piZzdoYThkaTJpY3p4ZGJ3ajVlMDYzNmVldndmY3drZ3FsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VQRPENY0Tm2puBhvYz/giphy.gif" alt="cute cat">
-            <h1 id="question"> Sindhu, will you be my Valentine?</h1>
-            <p class="subtitle">A little moment, a big question, and a forever kind of yes.</p>
+            <h1 id="question">Sindhu, will you be my Valentine?</h1>
+            <p class="subtitle">A soft moment, a brave question, and a forever kind of yes.</p>
             <div class="love-note">
                 You make everything feel lighter, sweeter, and brighter. I’d love to spend this Valentine’s Day
-                laughing, cuddling, and making new memories together.
+                laughing, cuddling, and making new memories that feel like home.
+            </div>
+            <div class="day-highlight">
+                <p class="day-label" id="day-label">Today is</p>
+                <h2 id="day-title">Rose Day 🌹</h2>
+                <p class="day-message" id="day-message">
+                    Let me shower you with roses and remind you how wildly beautiful love can be.
+                </p>
+                <div class="day-extra" id="day-extra"></div>
+                <p class="day-reminder" id="day-reminder">Come back tomorrow for a brand-new love surprise. 💞</p>
+                <p class="season-note" id="season-note" hidden></p>
+            </div>
+            <div class="day-pages">
+                <div class="content-tabs" id="content-tabs" aria-label="Today's love tabs"></div>
+                <div class="page-content" id="page-content">
+                    <h3 class="page-title" id="page-title">Rose Day Love Page</h3>
+                    <div id="page-body"></div>
+                    <div class="page-footer">
+                        <span id="page-count">Today’s page</span>
+                        <span id="today-badge">Today’s pick 💖</span>
+                    </div>
+                </div>
             </div>
             <div class="buttons" id="button-group">
                 <button id="yes-btn">Yes</button>
@@ -408,6 +597,355 @@
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
         const container = document.getElementById('content-wrapper');
+        const dayLabel = document.getElementById('day-label');
+        const dayTitle = document.getElementById('day-title');
+        const dayMessage = document.getElementById('day-message');
+        const dayExtra = document.getElementById('day-extra');
+        const dayReminder = document.getElementById('day-reminder');
+        const seasonNote = document.getElementById('season-note');
+        const contentTabs = document.getElementById('content-tabs');
+        const pageContent = document.getElementById('page-content');
+        const pageTitle = document.getElementById('page-title');
+        const pageBody = document.getElementById('page-body');
+        const pageCount = document.getElementById('page-count');
+        const todayBadge = document.getElementById('today-badge');
+
+        const valentineWeek = [
+            {
+                month: 1,
+                day: 7,
+                title: 'Rose Day 🌹',
+                message: 'A single rose can say “I adore you,” but I want to give you a whole garden of care.',
+                proposal: 'Will you let me fill your days with little blooms of love?',
+                questions: [
+                    'Which color rose matches your mood today?',
+                    'Can I surprise you with a tiny bouquet and a big hug?',
+                    'Will you accept a rose and my heart with it?'
+                ],
+                choices: [
+                    'Blush pink roses',
+                    'Sunny yellow roses',
+                    'Classic red roses',
+                    'A single white rose'
+                ],
+                letters: [
+                    'Every petal feels like a soft thank you for the way you light up my days. If I could, I’d leave a rose on your pillow every morning and a kiss on your forehead every night.',
+                    'I want our love to bloom gently, like a garden that grows brighter each day. You’re my favorite flower in every season.'
+                ]
+            },
+            {
+                month: 1,
+                day: 8,
+                title: 'Propose Day 💍',
+                message: 'Today I’m brave enough to ask the sweetest question of all.',
+                proposal: 'Will you be my forever yes, my favorite hello, and my best love story?',
+                questions: [
+                    'Can we turn every “someday” into “us”?',
+                    'Will you say yes to slow dances, shared dreams, and silly smiles?',
+                    'May I be the one who always chooses you?'
+                ],
+                choices: [
+                    'A sunset walk proposal',
+                    'A cozy candlelit question',
+                    'A note tucked in a book',
+                    'A promise whispered softly'
+                ],
+                letters: [
+                    'I’m not asking for perfection, just a lifetime of real love. The kind that shows up, holds on, and keeps choosing each other every day.',
+                    'I want to build a life where we celebrate little wins, hold each other on hard days, and never stop being best friends.'
+                ]
+            },
+            {
+                month: 1,
+                day: 9,
+                title: 'Chocolate Day 🍫',
+                message: 'Life is sweeter with you, so let’s share every bite and every laugh.',
+                proposal: 'Can I be the one who brings your favorite treats and warm hugs?',
+                questions: [
+                    'Which chocolate should we share first: dark, milk, or all of them?',
+                    'Can I be the sweet surprise in your day?',
+                    'Will you save the last bite for me?'
+                ],
+                choices: [
+                    'Caramel truffle',
+                    'Hazelnut praline',
+                    'Dark chocolate sea salt',
+                    'Strawberry cream'
+                ],
+                letters: [
+                    'Love feels like melting chocolate on a rainy afternoon—warm, sweet, and wrapped in comfort. I want to be that for you.',
+                    'Let’s make every day a little sweeter, with shared treats, soft laughter, and all the joy in between.'
+                ]
+            },
+            {
+                month: 1,
+                day: 10,
+                title: 'Teddy Day 🧸',
+                message: 'Here’s a teddy bear to remind you you’re always safe and adored.',
+                proposal: 'Will you be my cozy cuddle buddy for every season of love?',
+                questions: [
+                    'Should our teddy be named Snuggle or Honey?',
+                    'Can I be your safe place after a long day?',
+                    'Will you let me keep you wrapped in warmth?'
+                ],
+                choices: [
+                    'Snuggle bear',
+                    'Honey bear',
+                    'Moonlight bear',
+                    'Heart hug bear'
+                ],
+                letters: [
+                    'If love had a shape, it would be soft and cuddly. I want to be your comfort, your warmth, and your favorite place to rest.',
+                    'Whenever you need a safe place, I’ll be your gentle hug, your cozy corner, and your calm.'
+                ]
+            },
+            {
+                month: 1,
+                day: 11,
+                title: 'Promise Day 🤞',
+                message: 'I promise to choose you, respect you, and care for you every day.',
+                proposal: 'Will you let me keep a forever promise by your side?',
+                questions: [
+                    'Can I promise to listen, laugh, and love you better every day?',
+                    'Will you hold my hand through every season?',
+                    'Can we promise to make each other feel safe and seen?'
+                ],
+                choices: [
+                    'Always be honest',
+                    'Always be kind',
+                    'Always show up',
+                    'Always choose you'
+                ],
+                letters: [
+                    'My promise is simple: I will love you in ways that feel steady and true. I’ll be there, with patience, kindness, and a heart that keeps choosing you.',
+                    'I promise to hold your heart gently, celebrate your wins, and stand by you when the world feels loud.'
+                ]
+            },
+            {
+                month: 1,
+                day: 12,
+                title: 'Hug Day 🤗',
+                message: 'Let every hug remind you that you’re cherished, safe, and adored.',
+                proposal: 'Can I be the arms you run into whenever you need comfort?',
+                questions: [
+                    'How many hugs should I owe you today—10 or 100?',
+                    'Can I be the squeeze that turns your day around?',
+                    'Will you let me hold you close when words fall short?'
+                ],
+                choices: [
+                    'Morning sunshine hug',
+                    'After-work unwind hug',
+                    'Quiet midnight hug',
+                    'Celebration hug'
+                ],
+                letters: [
+                    'Hugs say what words can’t: “I’m here, I’ve got you, and you’re never alone.” I hope you feel that in every embrace we share.',
+                    'Whenever you’re tired, I want to hold you close and remind you that you’re deeply loved.'
+                ]
+            },
+            {
+                month: 1,
+                day: 13,
+                title: 'Kiss Day 💋',
+                message: 'A kiss that says thank you, I love you, and I’m all yours.',
+                proposal: 'Will you be the kiss that makes my heart flutter forever?',
+                questions: [
+                    'May I steal a sweet kiss and leave a thousand smiles?',
+                    'Can I be your favorite hello and goodnight?',
+                    'Will you let my kiss say “I love you” every time?'
+                ],
+                choices: [
+                    'Forehead kiss',
+                    'Cheek kiss',
+                    'Hand kiss',
+                    'Slow, sweet kiss'
+                ],
+                letters: [
+                    'Every kiss is a tiny promise—soft, sincere, and full of devotion. I hope mine always make you feel cherished and adored.',
+                    'Let our kisses be little reminders that we belong to each other, today and always.'
+                ]
+            },
+            {
+                month: 1,
+                day: 14,
+                title: 'Valentine’s Day 💘',
+                message: 'Today I celebrate you, us, and every day that led here.',
+                proposal: 'Will you be my Valentine today, tomorrow, and always?',
+                questions: [
+                    'Will you be my forever Valentine?',
+                    'Can we write a love story that’s gentle and brave?',
+                    'Will you be my today, my tomorrow, and my always?'
+                ],
+                choices: [
+                    'A candlelit dinner',
+                    'A stargazing date',
+                    'A handwritten letter',
+                    'A slow dance at home'
+                ],
+                letters: [
+                    'Valentine’s Day is just one day, but loving you is my favorite everyday. Thank you for being my calm, my joy, and my home.',
+                    'I want to keep choosing you, celebrating you, and loving you in all the small and beautiful ways.'
+                ]
+            }
+        ];
+
+        const getTodayKey = () => {
+            const now = new Date();
+            return { month: now.getMonth(), day: now.getDate() };
+        };
+
+        const buildPreviousDays = (currentIndex) => {
+            const previousDays = valentineWeek.slice(0, currentIndex).map((entry) => `
+                <li><strong>${entry.title}:</strong> ${entry.proposal}</li>
+            `).join('');
+
+            return `
+                <p>Here’s a replay of every love note that led to today:</p>
+                <ul>${previousDays}</ul>
+            `;
+        };
+
+        const todayKey = getTodayKey();
+        const todayIndex = valentineWeek.findIndex(
+            (entry) => entry.month === todayKey.month && entry.day === todayKey.day
+        );
+
+        const defaultDay = {
+            title: 'Everyday Love ✨',
+            message: 'Even outside Valentine’s week, I’m still choosing you with my whole heart.',
+            proposal: 'Will you keep this love story close until next Valentine’s Day?',
+            questions: [
+                'Can we plan a tiny date just for us?',
+                'Which song reminds you of us right now?',
+                'Can I send you a sweet message today?'
+            ],
+            choices: [
+                'A cozy coffee date',
+                'A sunset walk',
+                'A movie night',
+                'A handwritten note'
+            ],
+            letters: [
+                'No special day is required for loving you. I want to keep showing up in all the small ways that make your heart feel safe and treasured.',
+                'Until Valentine’s week arrives again, let’s keep building our love with laughter, patience, and gentle moments.'
+            ]
+        };
+
+        let activeTab = 'questions';
+        let selectedChoiceIndex = null;
+        let letterIndex = 0;
+
+        const getTodayEntry = () => (todayIndex === -1 ? defaultDay : valentineWeek[todayIndex]);
+
+        const renderTabContent = () => {
+            const todayEntry = getTodayEntry();
+
+            if (activeTab === 'questions') {
+                pageBody.innerHTML = `
+                    <ul class="question-list">
+                        ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            if (activeTab === 'choices') {
+                pageBody.innerHTML = `
+                    <div class="choice-grid">
+                        ${todayEntry.choices.map((choice, index) => `
+                            <button class="choice-button ${selectedChoiceIndex === index ? 'selected' : ''}" type="button" data-choice="${index}">
+                                ${choice}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p>${selectedChoiceIndex === null ? 'Pick a little love surprise.' : `You chose: ${todayEntry.choices[selectedChoiceIndex]} 💖`}</p>
+                `;
+
+                pageBody.querySelectorAll('.choice-button').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        selectedChoiceIndex = Number(button.dataset.choice);
+                        renderTabContent();
+                    });
+                });
+            }
+
+            if (activeTab === 'letters') {
+                pageBody.innerHTML = `
+                    <div class="love-letter">${todayEntry.letters[letterIndex]}</div>
+                    <div class="page-footer">
+                        <span>Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
+                        <button class="choice-button" id="next-letter" type="button">Next letter →</button>
+                    </div>
+                `;
+
+                const nextLetterButton = document.getElementById('next-letter');
+                nextLetterButton.addEventListener('click', () => {
+                    letterIndex = (letterIndex + 1) % todayEntry.letters.length;
+                    renderTabContent();
+                });
+            }
+
+            pageContent.classList.remove('animate');
+            void pageContent.offsetWidth;
+            pageContent.classList.add('animate');
+        };
+
+        const renderTabs = () => {
+            const tabs = [
+                { id: 'questions', label: 'Questions 💬' },
+                { id: 'choices', label: 'Choices 🎀' },
+                { id: 'letters', label: 'Love Letters 💌' }
+            ];
+
+            contentTabs.innerHTML = tabs.map((tab) => `
+                <button class="content-tab ${activeTab === tab.id ? 'active' : ''}" data-tab="${tab.id}" type="button">
+                    ${tab.label}
+                </button>
+            `).join('');
+
+            contentTabs.querySelectorAll('.content-tab').forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    activeTab = tab.dataset.tab;
+                    renderTabs();
+                    renderTabContent();
+                });
+            });
+        };
+
+        const updateDayContent = () => {
+            const todayEntry = getTodayEntry();
+            const isValentineToday = todayIndex === valentineWeek.length - 1;
+
+            dayLabel.textContent = 'Today is';
+            dayTitle.textContent = todayEntry.title;
+            dayMessage.textContent = todayEntry.message;
+
+            if (isValentineToday) {
+                dayExtra.innerHTML = buildPreviousDays(valentineWeek.length - 1);
+                dayReminder.textContent = 'Happy Valentine’s Day! Relive every sweet promise again. 💖';
+            } else {
+                dayExtra.textContent = todayEntry.proposal;
+                dayReminder.textContent = todayIndex === -1
+                    ? 'Come back next Valentine’s Day for a brand-new wave of love. 💌'
+                    : 'Come back tomorrow for a brand-new love surprise. 💞';
+            }
+
+            if (todayIndex === -1) {
+                seasonNote.hidden = false;
+                seasonNote.textContent = 'It’s not Valentine’s week yet—this page is a little love preview just for you.';
+            } else {
+                seasonNote.hidden = true;
+            }
+
+            pageTitle.textContent = `${todayEntry.title} Love Page`;
+            pageCount.textContent = todayIndex === -1 ? 'Love note for today' : 'Today’s page';
+            todayBadge.textContent = 'Today’s pick 💖';
+            todayBadge.style.opacity = '1';
+
+            renderTabs();
+            renderTabContent();
+        };
+
+        updateDayContent();
 
         // 1. Logic for the runaway "No" button
         const moveNoButton = () => {

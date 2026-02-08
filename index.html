@@ -551,6 +551,15 @@
             font-size: clamp(2.2rem, 6vw, 3rem);
         }
 
+        .loading-heart {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: clamp(2.2rem, 6vw, 3rem);
+            animation: heartbeat 1.6s ease-in-out infinite;
+        }
+
         .loading-subtitle {
             margin: 0;
             font-size: 1rem;
@@ -1435,6 +1444,7 @@
                 <div class="loading-screen">
                     <h2 class="loading-title">${loading.title}</h2>
                     <p class="loading-theme">Today’s theme: ${dayThemeLabel}</p>
+                    <div class="loading-heart" aria-hidden="true">💖</div>
                     <div class="loading-icon">${loading.icon}</div>
                     <p class="loading-subtitle">Hold on, love is on the way...</p>
                     ${themedMarkup}
@@ -1460,7 +1470,7 @@
         const renderLoadingPage = () => {
             container.innerHTML = `
                 <div class="loading-screen">
-                    <div class="loading-icon">💖</div>
+                    <div class="loading-heart" aria-hidden="true">💖</div>
                     <p class="loading-subtitle">Loading your next page...</p>
                 </div>
             `;
@@ -1544,6 +1554,8 @@
             );
 
             const openLetterButton = document.getElementById('success-open-letter');
+            const letterTitle = openLetterButton.querySelector('.letter-title');
+            const letterSubtitle = openLetterButton.querySelector('.letter-subtitle');
             const letterContent = container.querySelector('.letter-content');
 
             openLetterButton.addEventListener('click', () => {
@@ -1551,6 +1563,12 @@
                 openLetterButton.classList.toggle('opened', isLetterOpen);
                 openLetterButton.setAttribute('aria-expanded', String(isLetterOpen));
                 letterContent.hidden = !isLetterOpen;
+                letterTitle.textContent = isLetterOpen
+                    ? 'Click to close today’s love letter'
+                    : 'Click to open today’s love letter';
+                letterSubtitle.textContent = isLetterOpen
+                    ? 'Keep it close, then tuck it back in.'
+                    : 'A sweet note is waiting inside.';
             });
 
             const nextLetterButton = document.getElementById('success-next-letter');

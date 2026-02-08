@@ -798,7 +798,7 @@
             overflow: hidden;
         }
 
-        .promise-loader-stage .petal-field {
+        .themed-loader-stage .petal-field {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -809,6 +809,17 @@
             box-shadow: none;
             pointer-events: none;
             z-index: 1;
+        }
+
+        .themed-loader-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            place-items: center;
+            gap: 10px;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
         }
 
         .promise-loader-canvas {
@@ -1780,8 +1791,13 @@
 
                     return `
                         <div class="rose-display">
-                            <div class="rose-loader-stage" aria-hidden="true">
-                                ${roseParticles}
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    ${roseParticles}
+                                </div>
                             </div>
                             <div class="rose-stem">🌿</div>
                         </div>
@@ -1791,8 +1807,15 @@
                 if (todayEntry.title.includes('Propose Day')) {
                     return `
                         <div class="proposal-display">
-                            <div class="proposal-ring" aria-hidden="true">💍</div>
-                            <div class="proposal-sparkles">✨ 💖 ✨</div>
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    <div class="proposal-ring">💍</div>
+                                    <div class="proposal-sparkles">✨ 💖 ✨</div>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -1800,10 +1823,17 @@
                 if (todayEntry.title.includes('Teddy Day')) {
                     return `
                         <div class="teddy-display">
-                            <div class="teddy-loader" aria-hidden="true">
-                                <div class="teddy-bounce">🧸</div>
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    <div class="teddy-loader">
+                                        <div class="teddy-bounce">🧸</div>
+                                    </div>
+                                    <div class="teddy-shadow"></div>
+                                </div>
                             </div>
-                            <div class="teddy-shadow"></div>
                         </div>
                     `;
                 }
@@ -1811,7 +1841,7 @@
                 if (todayEntry.title.includes('Promise Day')) {
                     return `
                         <div class="promise-display">
-                            <div class="promise-loader-stage" aria-hidden="true">
+                            <div class="promise-loader-stage themed-loader-stage" aria-hidden="true">
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
@@ -1825,8 +1855,15 @@
                 if (todayEntry.title.includes('Hug Day')) {
                     return `
                         <div class="hug-display">
-                            <div class="hug-cloud" aria-hidden="true">🤗🤗🤗</div>
-                            <div class="hug-hearts">💞 💗 💞</div>
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    <div class="hug-cloud">🤗🤗🤗</div>
+                                    <div class="hug-hearts">💞 💗 💞</div>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -1834,8 +1871,15 @@
                 if (todayEntry.title.includes('Kiss Day')) {
                     return `
                         <div class="kiss-display">
-                            <div class="kiss-lips" aria-hidden="true">💋 💋 💋</div>
-                            <div class="kiss-sparkles">✨ 💖 ✨</div>
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    <div class="kiss-lips">💋 💋 💋</div>
+                                    <div class="kiss-sparkles">✨ 💖 ✨</div>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -1843,8 +1887,15 @@
                 if (todayEntry.title.includes('Valentine’s Day')) {
                     return `
                         <div class="valentine-display">
-                            <div class="valentine-heart" aria-hidden="true">💘</div>
-                            <div class="valentine-fireworks">🎉 💖 🎉</div>
+                            <div class="rose-loader-stage themed-loader-stage" aria-hidden="true">
+                                <div class="petal-field">
+                                    ${petals}
+                                </div>
+                                <div class="themed-loader-content">
+                                    <div class="valentine-heart">💘</div>
+                                    <div class="valentine-fireworks">🎉 💖 🎉</div>
+                                </div>
+                            </div>
                         </div>
                     `;
                 }
@@ -1853,8 +1904,7 @@
             };
 
             const themedMarkup = buildLoadingDecoration();
-            const isPromiseDay = todayEntry.title.includes('Promise Day');
-            const standalonePetals = isPromiseDay
+            const standalonePetals = themedMarkup
                 ? ''
                 : `
                     <div class="petal-field">

@@ -21,11 +21,16 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            min-height: 100%;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100dvh;
             margin: 0;
             padding: 32px 16px 40px;
             background: radial-gradient(circle at top, #fff6fb 0%, #fde9ff 32%, #ffd6ea 68%, #ffcade 100%);
@@ -452,6 +457,27 @@
             margin-top: 6px;
         }
 
+        @media (max-width: 600px) {
+            body {
+                align-items: flex-start;
+                padding: 20px 12px 32px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 28px 20px;
+                border-radius: 22px;
+            }
+
+            #display-image {
+                width: min(70vw, 220px);
+            }
+
+            .content-tabs {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
         .success-title {
             margin: 0 0 8px;
             font-size: clamp(1.6rem, 4.2vw, 2.2rem);
@@ -840,7 +866,7 @@
     </div>
     <div class="container" id="main-card">
         <div id="content-wrapper">
-            <img id="display-image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazh3a3piZzdoYThkaTJpY3p4ZGJ3ajVlMDYzNmVldndmY3drZ3FsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VQRPENY0Tm2puBhvYz/giphy.gif" alt="Today's love scene">
+            <img id="display-image" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27320%27%20height%3D%27240%27%20viewBox%3D%270%200%20320%20240%27%3E%3Crect%20width%3D%27320%27%20height%3D%27240%27%20rx%3D%2724%27%20fill%3D%27%23ffe6ef%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2755%25%27%20text-anchor%3D%27middle%27%20font-size%3D%2756%27%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E" alt="Today's love scene">
             <h1 id="question">Sindhu, will you be my Valentine?</h1>
             <p class="subtitle">A soft moment, a brave question, and a forever kind of yes.</p>
             <div class="love-note">
@@ -919,6 +945,33 @@
             return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
         };
 
+        const createDecorativeImage = (emoji, label, accent = '#ff9cc6') => {
+            const safeLabel = label || 'Love note';
+            const safeEmoji = emoji || '💖';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+                    <defs>
+                        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff1f7"/>
+                            <stop offset="100%" stop-color="${accent}"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+                    <circle cx="80" cy="60" r="24" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="250" cy="80" r="18" fill="rgba(255,255,255,0.4)"/>
+                    <text x="50%" y="48%" text-anchor="middle" font-size="56">${safeEmoji}</text>
+                    <text x="50%" y="68%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#7a2e56">
+                        ${safeLabel}
+                    </text>
+                    <text x="50%" y="80%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="12" fill="#6b3a59">
+                        Love note preview
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
         const setImageWithFallback = (imageEl, src, altText, label) => {
             if (!imageEl) {
                 return;
@@ -938,11 +991,11 @@
                 day: 7,
                 title: 'Rose Day 🌹',
                 image: {
-                    src: 'https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif',
+                    src: createDecorativeImage('🌹', 'Rose Day', '#ffb3c7'),
                     alt: 'A bouquet of roses glowing with love'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif',
+                    src: createDecorativeImage('🌷', 'Rose Day Celebration', '#ff8fbf'),
                     alt: 'A rose-filled celebration for a sweet yes'
                 },
                 loading: {
@@ -973,11 +1026,11 @@
                 day: 8,
                 title: 'Propose Day 💍',
                 image: {
-                    src: 'https://media.giphy.com/media/3o6ZsY8iVyjY7q1Bte/giphy.gif',
+                    src: createDecorativeImage('💍', 'Propose Day', '#f0b1ff'),
                     alt: 'A sparkling ring for a sweet proposal'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/3o6ZsYOZg9AQ3Z6xUk/giphy.gif',
+                    src: createDecorativeImage('✨', 'Propose Day Yes', '#d9a6ff'),
                     alt: 'A sparkling yes moment with hearts'
                 },
                 loading: {
@@ -1008,11 +1061,11 @@
                 day: 9,
                 title: 'Chocolate Day 🍫',
                 image: {
-                    src: 'https://media.giphy.com/media/3o6ZsV4RBs7JjYq3lu/giphy.gif',
+                    src: createDecorativeImage('🍫', 'Chocolate Day', '#ffc4dd'),
                     alt: 'Delicious chocolates for a sweet day'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/l0MYy7QpDDVGVfAAw/giphy.gif',
+                    src: createDecorativeImage('🍬', 'Chocolate Day Celebration', '#ffb3d5'),
                     alt: 'Chocolate treats raining down in celebration'
                 },
                 loading: {
@@ -1043,11 +1096,11 @@
                 day: 10,
                 title: 'Teddy Day 🧸',
                 image: {
-                    src: 'https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif',
+                    src: createDecorativeImage('🧸', 'Teddy Day', '#ffd1e8'),
                     alt: 'A cuddly teddy bear waving hello'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif',
+                    src: createDecorativeImage('🤗', 'Teddy Day Hug', '#ffc8e0'),
                     alt: 'A bear hug celebration'
                 },
                 loading: {
@@ -1078,11 +1131,11 @@
                 day: 11,
                 title: 'Promise Day 🤞',
                 image: {
-                    src: 'https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif',
+                    src: createDecorativeImage('🤞', 'Promise Day', '#f7b2ff'),
                     alt: 'Pinky promise with floating hearts'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/26gscJ77E1YX4uQ8w/giphy.gif',
+                    src: createDecorativeImage('💞', 'Promise Day Promise', '#e6a6ff'),
                     alt: 'Hands linked in a promise'
                 },
                 loading: {
@@ -1113,11 +1166,11 @@
                 day: 12,
                 title: 'Hug Day 🤗',
                 image: {
-                    src: 'https://media.giphy.com/media/3M4NpbLCTxBqU/giphy.gif',
+                    src: createDecorativeImage('🤗', 'Hug Day', '#ffc4dd'),
                     alt: 'A warm hug with happy hearts'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/1gV1Y0gV5bE1O/giphy.gif',
+                    src: createDecorativeImage('💗', 'Hug Day Cuddle', '#ffb6d5'),
                     alt: 'A cozy hug celebration'
                 },
                 loading: {
@@ -1148,11 +1201,11 @@
                 day: 13,
                 title: 'Kiss Day 💋',
                 image: {
-                    src: 'https://media.giphy.com/media/KztT2c4u8mYYUiMKdJ/giphy.gif',
+                    src: createDecorativeImage('💋', 'Kiss Day', '#ff9cc6'),
                     alt: 'A sweet kiss with floating sparkles'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif',
+                    src: createDecorativeImage('😘', 'Kiss Day Blush', '#ff8fbf'),
                     alt: 'A kiss blown with heart sparkles'
                 },
                 loading: {
@@ -1183,11 +1236,11 @@
                 day: 14,
                 title: 'Valentine’s Day 💘',
                 image: {
-                    src: 'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+                    src: createDecorativeImage('💘', 'Valentine’s Day', '#ff6fae'),
                     alt: 'A heart bursting with Valentine cheer'
                 },
                 successImage: {
-                    src: 'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+                    src: createDecorativeImage('🎉', 'Valentine’s Day Cheer', '#ff8fbf'),
                     alt: 'A heart bursting with Valentine cheer'
                 },
                 loading: {
@@ -1239,11 +1292,11 @@
         const defaultDay = {
             title: 'Everyday Love ✨',
             image: {
-                src: 'https://media.giphy.com/media/VQRPENY0Tm2puBhvYz/giphy.gif',
+                src: createDecorativeImage('💖', 'Everyday Love', '#ffd1e8'),
                 alt: 'A cozy love scene for any day'
             },
             successImage: {
-                src: 'https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif',
+                src: createDecorativeImage('🎉', 'Everyday Love Cheers', '#ffc4dd'),
                 alt: 'A cheerful celebration for an everyday yes'
             },
             loading: {

@@ -462,6 +462,7 @@
             align-items: center;
             gap: 16px;
             padding: 12px 0;
+            animation: fadeIn 0.6s ease;
         }
 
         .loading-title {
@@ -478,6 +479,14 @@
             margin: 0;
             font-size: 1rem;
             color: #6b3a59;
+        }
+
+        .loading-theme {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #8a5c78;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
 
         .petal-field {
@@ -1261,6 +1270,7 @@
         const renderLoadingPage = () => {
             const todayEntry = getTodayEntry();
             const loading = todayEntry.loading || defaultDay.loading;
+            const dayThemeLabel = todayEntry.title || 'Valentine’s Day';
             const petals = Array.from({ length: 8 }).map((_, index) => {
                 const left = 10 + index * 10;
                 const delay = (index * 0.2).toFixed(2);
@@ -1324,6 +1334,7 @@
             container.innerHTML = `
                 <div class="loading-screen">
                     <h2 class="loading-title">${loading.title}</h2>
+                    <p class="loading-theme">Today’s theme: ${dayThemeLabel}</p>
                     <div class="loading-icon">${loading.icon}</div>
                     <p class="loading-subtitle">Hold on, love is on the way...</p>
                     ${themedMarkup}

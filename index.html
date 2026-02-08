@@ -991,6 +991,25 @@
         const pageBody = document.getElementById('page-body');
         const pageCount = document.getElementById('page-count');
         const todayBadge = document.getElementById('today-badge');
+        const noMessages = [
+            'I miss you.',
+            'I like you.',
+            'I adore you.',
+            'I’m thinking of you.',
+            'You mean the world to me.'
+        ];
+
+        const speakMessage = (message) => {
+            if (!('speechSynthesis' in window)) {
+                return;
+            }
+            const utterance = new SpeechSynthesisUtterance(message);
+            utterance.pitch = 1.6;
+            utterance.rate = 0.95;
+            utterance.volume = 1;
+            speechSynthesis.cancel();
+            speechSynthesis.speak(utterance);
+        };
 
         const createFallbackImage = (label) => {
             const safeLabel = label || 'Love note';
@@ -1772,6 +1791,8 @@
         const handleNoInteraction = (event) => {
             event.preventDefault();
             event.stopPropagation();
+            const randomMessage = noMessages[Math.floor(Math.random() * noMessages.length)];
+            speakMessage(randomMessage);
             moveNoButton();
         };
 
@@ -1797,7 +1818,10 @@
         yesBtn.addEventListener('mouseenter', createBurst);
 
         // 2. Logic for the "Yes" click (loading → question page → success page)
-        yesBtn.addEventListener('click', renderLoadingPage);
+        yesBtn.addEventListener('click', () => {
+            speakMessage('Sindhu, I love you.');
+            setTimeout(renderLoadingPage, 600);
+        });
     </script>
 </body>
 </html>

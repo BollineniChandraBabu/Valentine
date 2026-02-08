@@ -714,7 +714,11 @@
             top: -20px;
             font-size: 1.2rem;
             opacity: 0;
-            animation: petalFall 2s ease-in-out forwards;
+            animation-name: petalFall;
+            animation-duration: var(--fall-duration, 2.8s);
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
         }
 
         .rose-display {
@@ -1752,9 +1756,10 @@
             const loadingSymbols = [loading.petals, '💗', '🌸', '🌹', '💖', '🌷'];
             const petals = Array.from({ length: 8 }).map((_, index) => {
                 const left = 10 + index * 10;
-                const delay = (index * 0.2).toFixed(2);
+                const delay = (index * -0.35).toFixed(2);
+                const duration = (2.4 + (index % 4) * 0.4).toFixed(2);
                 const symbol = loadingSymbols[index % loadingSymbols.length];
-                return `<span class="petal" style="left:${left}%; animation-delay:${delay}s;">${symbol}</span>`;
+                return `<span class="petal" style="left:${left}%; animation-delay:${delay}s; --fall-duration:${duration}s;">${symbol}</span>`;
             }).join('');
             const buildLoadingDecoration = () => {
                 if (todayEntry.title.includes('Rose Day')) {

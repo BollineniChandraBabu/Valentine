@@ -388,6 +388,191 @@
             margin-top: 6px;
         }
 
+        .success-title {
+            margin: 0 0 8px;
+            font-size: clamp(1.6rem, 4.2vw, 2.2rem);
+            color: #b21856;
+        }
+
+        .success-subtitle {
+            margin: 0 0 16px;
+            font-size: 1.05rem;
+            color: #6b3a59;
+        }
+
+        .success-message {
+            font-size: 1.05rem;
+            line-height: 1.55;
+            color: #5c3f55;
+            background: linear-gradient(135deg, rgba(255, 245, 250, 0.95), rgba(255, 233, 247, 0.85));
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.7);
+        }
+
+        .success-questions {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.12);
+            margin-bottom: 16px;
+        }
+
+        .success-questions h3,
+        .success-letters h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+            color: #7a2e56;
+        }
+
+        .success-letters {
+            text-align: left;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 16px;
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.12);
+        }
+
+        .success-letters ul,
+        .success-questions ul {
+            margin: 0;
+            padding-left: 18px;
+            color: #5f4a60;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .success-actions .choice-button {
+            padding: 10px 18px;
+        }
+
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+        }
+
+        .loading-title {
+            margin: 0;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: #b21856;
+        }
+
+        .loading-icon {
+            font-size: clamp(2.2rem, 6vw, 3rem);
+        }
+
+        .loading-subtitle {
+            margin: 0;
+            font-size: 1rem;
+            color: #6b3a59;
+        }
+
+        .petal-field {
+            position: relative;
+            width: min(260px, 80vw);
+            height: 140px;
+            margin-top: 6px;
+            overflow: hidden;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(255, 240, 247, 0.95), rgba(255, 214, 234, 0.85));
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.7);
+        }
+
+        .petal {
+            position: absolute;
+            top: -20px;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: petalFall 2s ease-in-out forwards;
+        }
+
+        .rose-display {
+            display: grid;
+            place-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .rose-bloom {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            font-size: 1.6rem;
+        }
+
+        .rose-stem {
+            font-size: 1.4rem;
+        }
+
+        .proposal-display,
+        .hug-display,
+        .kiss-display,
+        .valentine-display {
+            display: grid;
+            place-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .proposal-ring {
+            display: grid;
+            place-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 999px;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.95), rgba(255, 214, 234, 0.9));
+            border: 2px solid rgba(255, 143, 191, 0.6);
+            box-shadow: 0 12px 20px rgba(233, 30, 99, 0.18);
+            font-size: 1.8rem;
+        }
+
+        .proposal-sparkles {
+            display: flex;
+            gap: 6px;
+            font-size: 1.2rem;
+        }
+
+        .hug-cloud {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 18px rgba(233, 30, 99, 0.12);
+            font-size: 1.4rem;
+        }
+
+        .hug-hearts,
+        .kiss-sparkles,
+        .valentine-fireworks {
+            display: flex;
+            gap: 6px;
+            font-size: 1.2rem;
+        }
+
+        .kiss-lips {
+            font-size: 2rem;
+            letter-spacing: 6px;
+        }
+
+        .valentine-heart {
+            font-size: 2rem;
+        }
+
         .floating-hearts {
             position: absolute;
             inset: 0;
@@ -490,6 +675,12 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes petalFall {
+            0% { transform: translateY(0) rotate(0deg) scale(0.9); opacity: 0; }
+            20% { opacity: 0.9; }
+            100% { transform: translateY(160px) rotate(120deg) scale(1.1); opacity: 0; }
+        }
+
         @media (max-width: 600px) {
             body {
                 padding: 24px 12px 32px;
@@ -555,7 +746,7 @@
     </div>
     <div class="container" id="main-card">
         <div id="content-wrapper">
-            <img id="display-image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazh3a3piZzdoYThkaTJpY3p4ZGJ3ajVlMDYzNmVldndmY3drZ3FsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VQRPENY0Tm2puBhvYz/giphy.gif" alt="cute cat">
+            <img id="display-image" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazh3a3piZzdoYThkaTJpY3p4ZGJ3ajVlMDYzNmVldndmY3drZ3FsYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/VQRPENY0Tm2puBhvYz/giphy.gif" alt="Today's love scene">
             <h1 id="question">Sindhu, will you be my Valentine?</h1>
             <p class="subtitle">A soft moment, a brave question, and a forever kind of yes.</p>
             <div class="love-note">
@@ -615,6 +806,19 @@
                 month: 1,
                 day: 7,
                 title: 'Rose Day 🌹',
+                image: {
+                    src: 'https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif',
+                    alt: 'A bouquet of roses glowing with love'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif',
+                    alt: 'A rose-filled celebration for a sweet yes'
+                },
+                loading: {
+                    title: 'Preparing your rose surprise...',
+                    icon: '🌹💞🌹',
+                    petals: '🌹'
+                },
                 message: 'A single rose can say “I adore you,” but I want to give you a whole garden of care.',
                 proposal: 'Will you let me fill your days with little blooms of love?',
                 questions: [
@@ -637,6 +841,19 @@
                 month: 1,
                 day: 8,
                 title: 'Propose Day 💍',
+                image: {
+                    src: 'https://media.giphy.com/media/3o6ZsY8iVyjY7q1Bte/giphy.gif',
+                    alt: 'A sparkling ring for a sweet proposal'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/3o6ZsYOZg9AQ3Z6xUk/giphy.gif',
+                    alt: 'A sparkling yes moment with hearts'
+                },
+                loading: {
+                    title: 'Setting up your forever question...',
+                    icon: '💍💖💍',
+                    petals: '✨'
+                },
                 message: 'Today I’m brave enough to ask the sweetest question of all.',
                 proposal: 'Will you be my forever yes, my favorite hello, and my best love story?',
                 questions: [
@@ -659,6 +876,19 @@
                 month: 1,
                 day: 9,
                 title: 'Chocolate Day 🍫',
+                image: {
+                    src: 'https://media.giphy.com/media/3o6ZsV4RBs7JjYq3lu/giphy.gif',
+                    alt: 'Delicious chocolates for a sweet day'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/l0MYy7QpDDVGVfAAw/giphy.gif',
+                    alt: 'Chocolate treats raining down in celebration'
+                },
+                loading: {
+                    title: 'Unwrapping your sweet surprise...',
+                    icon: '🍫💞🍫',
+                    petals: '🍫'
+                },
                 message: 'Life is sweeter with you, so let’s share every bite and every laugh.',
                 proposal: 'Can I be the one who brings your favorite treats and warm hugs?',
                 questions: [
@@ -681,6 +911,19 @@
                 month: 1,
                 day: 10,
                 title: 'Teddy Day 🧸',
+                image: {
+                    src: 'https://media.giphy.com/media/11sBLVxNs7v6WA/giphy.gif',
+                    alt: 'A cuddly teddy bear waving hello'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif',
+                    alt: 'A bear hug celebration'
+                },
+                loading: {
+                    title: 'Fluffing your teddy cuddles...',
+                    icon: '🧸💝🧸',
+                    petals: '💗'
+                },
                 message: 'Here’s a teddy bear to remind you you’re always safe and adored.',
                 proposal: 'Will you be my cozy cuddle buddy for every season of love?',
                 questions: [
@@ -703,6 +946,19 @@
                 month: 1,
                 day: 11,
                 title: 'Promise Day 🤞',
+                image: {
+                    src: 'https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif',
+                    alt: 'Pinky promise with floating hearts'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/26gscJ77E1YX4uQ8w/giphy.gif',
+                    alt: 'Hands linked in a promise'
+                },
+                loading: {
+                    title: 'Sealing your promise moment...',
+                    icon: '🤞💫🤞',
+                    petals: '💫'
+                },
                 message: 'I promise to choose you, respect you, and care for you every day.',
                 proposal: 'Will you let me keep a forever promise by your side?',
                 questions: [
@@ -725,6 +981,19 @@
                 month: 1,
                 day: 12,
                 title: 'Hug Day 🤗',
+                image: {
+                    src: 'https://media.giphy.com/media/3M4NpbLCTxBqU/giphy.gif',
+                    alt: 'A warm hug with happy hearts'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/1gV1Y0gV5bE1O/giphy.gif',
+                    alt: 'A cozy hug celebration'
+                },
+                loading: {
+                    title: 'Wrapping you in hugs...',
+                    icon: '🤗💗🤗',
+                    petals: '💞'
+                },
                 message: 'Let every hug remind you that you’re cherished, safe, and adored.',
                 proposal: 'Can I be the arms you run into whenever you need comfort?',
                 questions: [
@@ -747,6 +1016,19 @@
                 month: 1,
                 day: 13,
                 title: 'Kiss Day 💋',
+                image: {
+                    src: 'https://media.giphy.com/media/KztT2c4u8mYYUiMKdJ/giphy.gif',
+                    alt: 'A sweet kiss with floating sparkles'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/3oz8xsaLjLVqVXr3tS/giphy.gif',
+                    alt: 'A kiss blown with heart sparkles'
+                },
+                loading: {
+                    title: 'Sending you a thousand kisses...',
+                    icon: '💋✨💋',
+                    petals: '✨'
+                },
                 message: 'A kiss that says thank you, I love you, and I’m all yours.',
                 proposal: 'Will you be the kiss that makes my heart flutter forever?',
                 questions: [
@@ -769,6 +1051,19 @@
                 month: 1,
                 day: 14,
                 title: 'Valentine’s Day 💘',
+                image: {
+                    src: 'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+                    alt: 'A heart bursting with Valentine cheer'
+                },
+                successImage: {
+                    src: 'https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif',
+                    alt: 'A heart bursting with Valentine cheer'
+                },
+                loading: {
+                    title: 'Cueing the Valentine fireworks...',
+                    icon: '💘🎉💘',
+                    petals: '💖'
+                },
                 message: 'Today I celebrate you, us, and every day that led here.',
                 proposal: 'Will you be my Valentine today, tomorrow, and always?',
                 questions: [
@@ -812,6 +1107,19 @@
 
         const defaultDay = {
             title: 'Everyday Love ✨',
+            image: {
+                src: 'https://media.giphy.com/media/VQRPENY0Tm2puBhvYz/giphy.gif',
+                alt: 'A cozy love scene for any day'
+            },
+            successImage: {
+                src: 'https://media.giphy.com/media/3oriO6qJiXajN0TyDu/giphy.gif',
+                alt: 'A cheerful celebration for an everyday yes'
+            },
+            loading: {
+                title: 'Getting your love dashboard ready...',
+                icon: '💖✨💖',
+                petals: '💗'
+            },
             message: 'Even outside Valentine’s week, I’m still choosing you with my whole heart.',
             proposal: 'Will you keep this love story close until next Valentine’s Day?',
             questions: [
@@ -914,10 +1222,13 @@
         const updateDayContent = () => {
             const todayEntry = getTodayEntry();
             const isValentineToday = todayIndex === valentineWeek.length - 1;
+            const displayImage = document.getElementById('display-image');
 
             dayLabel.textContent = 'Today is';
             dayTitle.textContent = todayEntry.title;
             dayMessage.textContent = todayEntry.message;
+            displayImage.src = todayEntry.image?.src || defaultDay.image.src;
+            displayImage.alt = todayEntry.image?.alt || defaultDay.image.alt;
 
             if (isValentineToday) {
                 dayExtra.innerHTML = buildPreviousDays(valentineWeek.length - 1);
@@ -946,6 +1257,140 @@
         };
 
         updateDayContent();
+
+        const renderLoadingPage = () => {
+            const todayEntry = getTodayEntry();
+            const loading = todayEntry.loading || defaultDay.loading;
+            const petals = Array.from({ length: 8 }).map((_, index) => {
+                const left = 10 + index * 10;
+                const delay = (index * 0.2).toFixed(2);
+                return `<span class="petal" style="left:${left}%; animation-delay:${delay}s;">${loading.petals}</span>`;
+            }).join('');
+            const buildLoadingDecoration = () => {
+                if (todayEntry.title.includes('Rose Day')) {
+                    return `
+                        <div class="rose-display">
+                            <div class="rose-bloom" aria-hidden="true">
+                                <span>💗</span><span>🌹</span><span>💗</span>
+                                <span>🌹</span><span>❤️</span><span>🌹</span>
+                                <span>💗</span><span>🌹</span><span>💗</span>
+                            </div>
+                            <div class="rose-stem">🌿</div>
+                        </div>
+                    `;
+                }
+
+                if (todayEntry.title.includes('Propose Day')) {
+                    return `
+                        <div class="proposal-display">
+                            <div class="proposal-ring" aria-hidden="true">💍</div>
+                            <div class="proposal-sparkles">✨ 💖 ✨</div>
+                        </div>
+                    `;
+                }
+
+                if (todayEntry.title.includes('Hug Day')) {
+                    return `
+                        <div class="hug-display">
+                            <div class="hug-cloud" aria-hidden="true">🤗🤗🤗</div>
+                            <div class="hug-hearts">💞 💗 💞</div>
+                        </div>
+                    `;
+                }
+
+                if (todayEntry.title.includes('Kiss Day')) {
+                    return `
+                        <div class="kiss-display">
+                            <div class="kiss-lips" aria-hidden="true">💋 💋 💋</div>
+                            <div class="kiss-sparkles">✨ 💖 ✨</div>
+                        </div>
+                    `;
+                }
+
+                if (todayEntry.title.includes('Valentine’s Day')) {
+                    return `
+                        <div class="valentine-display">
+                            <div class="valentine-heart" aria-hidden="true">💘</div>
+                            <div class="valentine-fireworks">🎉 💖 🎉</div>
+                        </div>
+                    `;
+                }
+
+                return '';
+            };
+
+            const themedMarkup = buildLoadingDecoration();
+
+            container.innerHTML = `
+                <div class="loading-screen">
+                    <h2 class="loading-title">${loading.title}</h2>
+                    <div class="loading-icon">${loading.icon}</div>
+                    <p class="loading-subtitle">Hold on, love is on the way...</p>
+                    ${themedMarkup}
+                    <div class="petal-field">
+                        ${petals}
+                    </div>
+                </div>
+            `;
+
+            setTimeout(renderQuestionPage, 2000);
+        };
+
+        const renderQuestionPage = () => {
+            const todayEntry = getTodayEntry();
+            container.innerHTML = `
+                <div class="success-content">
+                    <h2 class="success-title">${todayEntry.title} Questions 💞</h2>
+                    <p class="success-subtitle">Answer just one, or let me know which feels the sweetest.</p>
+                    <div class="success-questions">
+                        <h3>Today’s love questions</h3>
+                        <ul>
+                            ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <div class="success-message">
+                        Your answers are my favorite love notes. I’m all ears and all heart.
+                    </div>
+                    <div class="success-actions">
+                        <button class="choice-button" id="go-back" type="button">Go back</button>
+                        <button class="choice-button selected" id="to-success" type="button">Next page →</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('go-back').addEventListener('click', () => {
+                window.location.reload();
+            });
+
+            document.getElementById('to-success').addEventListener('click', renderSuccessPage);
+        };
+
+        const renderSuccessPage = () => {
+            const todayEntry = getTodayEntry();
+            const successImage = todayEntry.successImage?.src || todayEntry.image?.src || defaultDay.successImage.src;
+            const successAlt = todayEntry.successImage?.alt || todayEntry.image?.alt || defaultDay.successImage.alt;
+
+            container.innerHTML = `
+                <div class="success-content">
+                    <h2 class="success-title">Best decision ever 💖</h2>
+                    <p class="success-subtitle">You just made my whole day sparkle.</p>
+                    <img src="${successImage}" alt="${successAlt}" style="border-radius: 14px; margin-bottom: 14px;">
+                    <div class="success-message">
+                        I’ll keep choosing you in the little moments and the big ones. Thank you for saying yes to this love.
+                    </div>
+                    <div class="success-letters">
+                        <h3>Love letters for today</h3>
+                        <ul>
+                            ${todayEntry.letters.map((letter) => `<li>${letter}</li>`).join('')}
+                        </ul>
+                    </div>
+                    <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
+                </div>
+            `;
+
+            document.getElementById('main-card').style.backgroundColor = 'transparent';
+            document.getElementById('main-card').style.boxShadow = 'none';
+        };
 
         // 1. Logic for the runaway "No" button
         const moveNoButton = () => {
@@ -987,22 +1432,8 @@
 
         yesBtn.addEventListener('mouseenter', createBurst);
 
-        // 2. Logic for the "Yes" click (Updates to match your screenshot)
-        yesBtn.addEventListener('click', () => {
-            container.innerHTML = `
-                <div class="success-content">
-                    <h1>💖 YAY!!! 💖</h1>
-                    <p>Best decision ever 😘</p>
-                    <img src="https://media.giphy.com/media/TdfyKrN7HGTIY/giphy.gif" alt="celebration" style="border-radius: 10px;">
-                    <p>I love you ❤️</p>
-                    <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
-                </div>
-            `;
-            
-            // Optional: Remove background restriction so they can see the whole message
-            document.getElementById('main-card').style.backgroundColor = 'transparent';
-            document.getElementById('main-card').style.boxShadow = 'none';
-        });
+        // 2. Logic for the "Yes" click (loading → question page → success page)
+        yesBtn.addEventListener('click', renderLoadingPage);
     </script>
 </body>
 </html>

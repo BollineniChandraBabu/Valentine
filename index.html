@@ -465,6 +465,18 @@
             animation: fadeIn 0.6s ease;
         }
 
+        .initial-loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at top, rgba(255, 246, 251, 0.97) 0%, rgba(253, 233, 255, 0.95) 32%, rgba(255, 214, 234, 0.92) 68%, rgba(255, 202, 222, 0.9) 100%);
+            backdrop-filter: blur(6px);
+        }
+
         .loading-title {
             margin: 0;
             font-size: clamp(1.5rem, 4vw, 2rem);
@@ -809,6 +821,43 @@
         const pageBody = document.getElementById('page-body');
         const pageCount = document.getElementById('page-count');
         const todayBadge = document.getElementById('today-badge');
+
+        const createFallbackImage = (label) => {
+            const safeLabel = label || 'Love note';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+                    <defs>
+                        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffe6ef"/>
+                            <stop offset="100%" stop-color="#ffd1f0"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+                    <text x="50%" y="46%" text-anchor="middle" font-size="56">💖</text>
+                    <text x="50%" y="66%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#b21856">
+                        ${safeLabel}
+                    </text>
+                    <text x="50%" y="78%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="12" fill="#6b3a59">
+                        Image unavailable
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
+        const setImageWithFallback = (imageEl, src, altText, label) => {
+            if (!imageEl) {
+                return;
+            }
+
+            imageEl.alt = altText || label || 'Love note image';
+            imageEl.src = src;
+            imageEl.onerror = () => {
+                imageEl.onerror = null;
+                imageEl.src = createFallbackImage(label);
+            };
+        };
 
         const valentineWeek = [
             {
@@ -1236,8 +1285,12 @@
             dayLabel.textContent = 'Today is';
             dayTitle.textContent = todayEntry.title;
             dayMessage.textContent = todayEntry.message;
-            displayImage.src = todayEntry.image?.src || defaultDay.image.src;
-            displayImage.alt = todayEntry.image?.alt || defaultDay.image.alt;
+            setImageWithFallback(
+                displayImage,
+                todayEntry.image?.src || defaultDay.image.src,
+                todayEntry.image?.alt || defaultDay.image.alt,
+                todayEntry.title
+            );
 
             if (isValentineToday) {
                 dayExtra.innerHTML = buildPreviousDays(valentineWeek.length - 1);
@@ -1267,8 +1320,7 @@
 
         updateDayContent();
 
-        const renderLoadingPage = () => {
-            const todayEntry = getTodayEntry();
+        const buildLoadingMarkup = (todayEntry) => {
             const loading = todayEntry.loading || defaultDay.loading;
             const dayThemeLabel = todayEntry.title || 'Valentine’s Day';
             const petals = Array.from({ length: 8 }).map((_, index) => {
@@ -1331,7 +1383,7 @@
 
             const themedMarkup = buildLoadingDecoration();
 
-            container.innerHTML = `
+            return `
                 <div class="loading-screen">
                     <h2 class="loading-title">${loading.title}</h2>
                     <p class="loading-theme">Today’s theme: ${dayThemeLabel}</p>
@@ -1343,9 +1395,28 @@
                     </div>
                 </div>
             `;
-
-            setTimeout(renderQuestionPage, 2000);
         };
+
+        const showInitialLoading = () => {
+            const todayEntry = getTodayEntry();
+            const overlay = document.createElement('div');
+            overlay.className = 'initial-loading-overlay';
+            overlay.innerHTML = buildLoadingMarkup(todayEntry);
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.remove();
+            }, 5000);
+        };
+
+        const renderLoadingPage = () => {
+            const todayEntry = getTodayEntry();
+            container.innerHTML = buildLoadingMarkup(todayEntry);
+
+            setTimeout(renderQuestionPage, 5000);
+        };
+
+        showInitialLoading();
 
         const renderQuestionPage = () => {
             const todayEntry = getTodayEntry();
@@ -1398,6 +1469,14 @@
                     <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
                 </div>
             `;
+
+            const successImg = container.querySelector('.success-content img');
+            setImageWithFallback(
+                successImg,
+                successImage,
+                successAlt,
+                todayEntry.title
+            );
 
             document.getElementById('main-card').style.backgroundColor = 'transparent';
             document.getElementById('main-card').style.boxShadow = 'none';

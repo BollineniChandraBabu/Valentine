@@ -271,8 +271,16 @@
             border-radius: 14px;
             padding: 10px 12px;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+        }
+
+        a.choice-button {
+            text-decoration: none;
         }
 
         .choice-button:hover {
@@ -609,6 +617,31 @@
 
         .success-actions .choice-button {
             padding: 10px 18px;
+        }
+
+        .mcq-item {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 16px;
+            padding: 14px 16px;
+            border: 1px solid rgba(233, 30, 99, 0.12);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.08);
+            margin-bottom: 12px;
+        }
+
+        .mcq-question {
+            margin: 0 0 10px;
+            font-weight: 600;
+            color: #7a2e56;
+        }
+
+        .mcq-quote {
+            margin: 8px 0 0;
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(255, 239, 248, 0.95), rgba(255, 247, 252, 0.95));
+            color: #5c3f55;
+            font-style: italic;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.7);
         }
 
         .loading-screen {
@@ -1185,6 +1218,26 @@
                     'Will you say yes to slow dances, shared dreams, and silly smiles?',
                     'May I be the one who always chooses you?'
                 ],
+                mcq: [
+                    {
+                        prompt: 'How should I pop the question?',
+                        options: [
+                            { label: 'Under fairy lights ✨', quote: 'A soft glow, a steady heartbeat, and the simplest question: will you be mine?' },
+                            { label: 'Over a handwritten note 💌', quote: 'Every word would hold the promise of forever, tucked gently between the lines.' },
+                            { label: 'During a sunset walk 🌅', quote: 'When the sky blushes, I’d ask you to stay and shine with me always.' },
+                            { label: 'With a cozy at-home surprise 🕯️', quote: 'Just us, our favorite song, and a forever yes whispered softly.' }
+                        ]
+                    },
+                    {
+                        prompt: 'What kind of forever do you want us to build?',
+                        options: [
+                            { label: 'Playful and adventurous 🎢', quote: 'I promise a life full of laughter, road trips, and new stories.' },
+                            { label: 'Calm and cozy 🧸', quote: 'Let’s make a home where peace lives and love always feels safe.' },
+                            { label: 'Romantic and dreamy 💫', quote: 'I’ll keep choosing you in every sunrise and every starlit night.' },
+                            { label: 'All of the above 💖', quote: 'Then I’ll give you every version of forever, all wrapped in love.' }
+                        ]
+                    }
+                ],
                 choices: [
                     'A sunset walk proposal',
                     'A cozy candlelit question',
@@ -1681,9 +1734,27 @@
                     <p class="success-subtitle">Answer just one, or let me know which feels the sweetest.</p>
                     <div class="success-questions">
                         <h3>Today’s love questions</h3>
-                        <ul>
-                            ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
-                        </ul>
+                        ${
+                            todayEntry.mcq?.length
+                                ? todayEntry.mcq.map((item, index) => `
+                                    <div class="mcq-item" data-question="${index}">
+                                        <p class="mcq-question">${item.prompt}</p>
+                                        <div class="choice-grid">
+                                            ${item.options.map((option, optionIndex) => `
+                                                <button class="choice-button" type="button" data-question="${index}" data-option="${optionIndex}">
+                                                    ${option.label}
+                                                </button>
+                                            `).join('')}
+                                        </div>
+                                        <div class="mcq-quote" data-quote="${index}" hidden></div>
+                                    </div>
+                                `).join('')
+                                : `
+                                    <ul>
+                                        ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
+                                    </ul>
+                                `
+                        }
                     </div>
                     <div class="success-message">
                         Your answers are my favorite love notes. I’m all ears and all heart.
@@ -1700,12 +1771,32 @@
             });
 
             document.getElementById('to-success').addEventListener('click', renderSuccessPage);
+
+            if (todayEntry.mcq?.length) {
+                container.querySelectorAll('.choice-button[data-question]').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const questionIndex = Number(button.dataset.question);
+                        const optionIndex = Number(button.dataset.option);
+                        const questionBlock = container.querySelector(`.mcq-item[data-question="${questionIndex}"]`);
+                        const quoteBox = container.querySelector(`.mcq-quote[data-quote="${questionIndex}"]`);
+                        const option = todayEntry.mcq[questionIndex].options[optionIndex];
+
+                        questionBlock.querySelectorAll('.choice-button').forEach((choice) => {
+                            choice.classList.toggle('selected', choice === button);
+                        });
+
+                        quoteBox.textContent = `“${option.quote}”`;
+                        quoteBox.hidden = false;
+                    });
+                });
+            }
         };
 
         const renderSuccessPage = () => {
             const todayEntry = getTodayEntry();
             const successImage = todayEntry.successImage?.src || todayEntry.image?.src || defaultDay.successImage.src;
             const successAlt = todayEntry.successImage?.alt || todayEntry.image?.alt || defaultDay.successImage.alt;
+            const whatsappMessage = encodeURIComponent('Love you too, Chandu ❤️');
             isLetterOpen = false;
             letterIndex = 0;
 
@@ -1735,6 +1826,11 @@
                         </div>
                     </div>
                     <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
+                    <div class="success-actions">
+                        <a class="choice-button selected" href="https://wa.me/7093349948?text=${whatsappMessage}" target="_blank" rel="noopener">
+                            Send “Love you too” to Chandu ❤️
+                        </a>
+                    </div>
                 </div>
             `;
 

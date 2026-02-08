@@ -1600,8 +1600,8 @@
         ];
 
         const getTodayKey = () => {
-            // Test override: lock the app to Promise Day (Feb 11).
-            return { month: 1, day: 11 };
+            const now = new Date();
+            return { month: now.getMonth(), day: now.getDate() };
         };
 
         const buildPreviousDays = (currentIndex) => {

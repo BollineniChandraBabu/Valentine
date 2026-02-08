@@ -1043,6 +1043,56 @@
             return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
         };
 
+        const createValentinePenguinImage = (label = 'Be my Valentine?') => {
+            const safeLabel = label || 'Be my Valentine?';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260">
+                    <defs>
+                        <linearGradient id="bed" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffd1e8"/>
+                            <stop offset="100%" stop-color="#ffb3d5"/>
+                        </linearGradient>
+                        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff6fb"/>
+                            <stop offset="100%" stop-color="#fde2f0"/>
+                        </linearGradient>
+                        <linearGradient id="penguin" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#8fb6ff"/>
+                            <stop offset="100%" stop-color="#6d93ff"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="360" height="260" rx="28" fill="url(#wall)"/>
+                    <rect x="18" y="110" width="324" height="120" rx="26" fill="url(#bed)"/>
+                    <rect x="30" y="84" width="200" height="60" rx="24" fill="#ffdbe9"/>
+                    <rect x="214" y="70" width="110" height="100" rx="26" fill="#f7b9d6"/>
+                    <rect x="214" y="70" width="110" height="100" rx="26" fill="url(#bed)" opacity="0.6"/>
+                    <rect x="250" y="108" width="30" height="50" rx="10" fill="#fff4fb" opacity="0.6"/>
+
+                    <ellipse cx="150" cy="185" rx="72" ry="52" fill="url(#penguin)"/>
+                    <ellipse cx="150" cy="180" rx="48" ry="38" fill="#fff9f2"/>
+                    <ellipse cx="115" cy="200" rx="18" ry="26" fill="#86a9ff"/>
+                    <ellipse cx="185" cy="200" rx="18" ry="26" fill="#86a9ff"/>
+                    <polygon points="150,170 165,178 150,186 135,178" fill="#f6b146"/>
+                    <circle cx="140" cy="162" r="6" fill="#2d2a32"/>
+                    <circle cx="160" cy="162" r="6" fill="#2d2a32"/>
+                    <circle cx="138" cy="160" r="2" fill="#fff"/>
+                    <circle cx="158" cy="160" r="2" fill="#fff"/>
+
+                    <path d="M70 70c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff7ab8"/>
+                    <path d="M110 50c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff6fae"/>
+                    <path d="M250 44c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff6fae"/>
+                    <path d="M290 88c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff8fbf"/>
+                    <path d="M82 110c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff8fbf"/>
+
+                    <text x="50%" y="248" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#7a2e56">
+                        ${safeLabel}
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
         const setImageWithFallback = (imageEl, src, altText, label) => {
             if (!imageEl) {
                 return;
@@ -1307,12 +1357,12 @@
                 day: 14,
                 title: 'Valentine’s Day 💘',
                 image: {
-                    src: createDecorativeImage('💘', 'Valentine’s Day', '#ff6fae'),
-                    alt: 'A heart bursting with Valentine cheer'
+                    src: createValentinePenguinImage('Will you be my Valentine?'),
+                    alt: 'A cozy penguin with hearts and a Valentine message'
                 },
                 successImage: {
-                    src: createDecorativeImage('🎉', 'Valentine’s Day Cheer', '#ff8fbf'),
-                    alt: 'A heart bursting with Valentine cheer'
+                    src: createValentinePenguinImage('Best decision ever 💖'),
+                    alt: 'A penguin celebrating with hearts and confetti'
                 },
                 loading: {
                     title: 'Cueing the Valentine fireworks...',

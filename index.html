@@ -819,6 +819,43 @@
             display: block;
         }
 
+        .promise-symbols {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .promise-symbol {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            text-shadow: 0 3px 8px rgba(255, 255, 255, 0.6);
+        }
+
+        .promise-symbol.teddy {
+            left: 18%;
+            bottom: 18px;
+            font-size: 2.15rem;
+            animation: teddyBounce 1.05s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .promise-symbol.flower {
+            right: 20%;
+            bottom: 30px;
+            font-size: 1.6rem;
+            animation: promisePulse 1.7s ease-in-out infinite;
+            animation-delay: 0.2s;
+        }
+
+        .promise-symbol.heart {
+            right: 34%;
+            top: 20px;
+            font-size: 1.55rem;
+            animation: promisePulse 1.5s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
         .rose-bloom {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1956,6 +1993,11 @@
                                     ${petals}
                                 </div>
                                 <canvas class="promise-loader-canvas" width="240" height="140"></canvas>
+                                <div class="promise-symbols">
+                                    <span class="promise-symbol teddy">🧸</span>
+                                    <span class="promise-symbol flower">🌸</span>
+                                    <span class="promise-symbol heart">💗</span>
+                                </div>
                             </div>
                             <div class="hug-hearts">💞 ✨ 💞</div>
                         </div>

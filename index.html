@@ -813,7 +813,7 @@
 
         .themed-loader-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             display: grid;
             place-items: center;
             gap: 10px;
@@ -822,12 +822,14 @@
             padding: 10px;
         }
 
-        .promise-loader-canvas {
-            position: relative;
+        .morph-loader-canvas {
+            position: absolute;
+            inset: 0;
             z-index: 2;
             width: 100%;
             height: 100%;
             display: block;
+            pointer-events: none;
         }
 
         .rose-bloom {
@@ -1795,6 +1797,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     ${roseParticles}
                                 </div>
@@ -1811,6 +1814,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     <div class="proposal-ring">💍</div>
                                     <div class="proposal-sparkles">✨ 💖 ✨</div>
@@ -1827,6 +1831,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     <div class="teddy-loader">
                                         <div class="teddy-bounce">🧸</div>
@@ -1845,7 +1850,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
-                                <canvas class="promise-loader-canvas" width="240" height="140"></canvas>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                             </div>
                             <div class="hug-hearts">💞 ✨ 💞</div>
                         </div>
@@ -1859,6 +1864,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     <div class="hug-cloud">🤗🤗🤗</div>
                                     <div class="hug-hearts">💞 💗 💞</div>
@@ -1875,6 +1881,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     <div class="kiss-lips">💋 💋 💋</div>
                                     <div class="kiss-sparkles">✨ 💖 ✨</div>
@@ -1891,6 +1898,7 @@
                                 <div class="petal-field">
                                     ${petals}
                                 </div>
+                                <canvas class="morph-loader-canvas" width="240" height="140"></canvas>
                                 <div class="themed-loader-content">
                                     <div class="valentine-heart">💘</div>
                                     <div class="valentine-fireworks">🎉 💖 🎉</div>
@@ -1925,24 +1933,27 @@
             `;
         };
 
-        const createPromiseLoaderAnimation = (overlay) => {
-            const canvas = overlay.querySelector('.promise-loader-canvas');
-            if (!canvas) {
+        const createMorphLoaderAnimation = (overlay) => {
+            const canvases = Array.from(overlay.querySelectorAll('.morph-loader-canvas'));
+            if (!canvases.length) {
                 return;
             }
 
-            const ctx = canvas.getContext('2d');
-            if (!ctx) {
-                return;
-            }
+            const rafIds = [];
 
-            const pointCount = innerWidth < 600 ? 360 : 520;
-            const particles = Array.from({ length: pointCount }, () => ({ x: 0, y: 0 }));
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const phaseDuration = 1200;
-            const start = performance.now();
-            let rafId = 0;
+            const startCanvasAnimation = (canvas) => {
+                const ctx = canvas.getContext('2d');
+                if (!ctx) {
+                    return null;
+                }
+
+                const pointCount = innerWidth < 600 ? 360 : 520;
+                const particles = Array.from({ length: pointCount }, () => ({ x: 0, y: 0 }));
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const phaseDuration = 1200;
+                const start = performance.now();
+                let rafId = 0;
 
             const heartShape = (t) => {
                 const sine = Math.sin(t);
@@ -2017,15 +2028,27 @@
                 }
             };
 
-            rafId = requestAnimationFrame(drawFrame);
-            overlay.dataset.promiseRaf = String(rafId);
+                rafId = requestAnimationFrame(drawFrame);
+                return rafId;
+            };
+
+            canvases.forEach((canvas) => {
+                const rafId = startCanvasAnimation(canvas);
+                if (rafId) {
+                    rafIds.push(rafId);
+                }
+            });
+
+            overlay.dataset.loaderRafIds = rafIds.join(',');
         };
 
-        const stopPromiseLoaderAnimation = (overlay) => {
-            const rafValue = Number(overlay?.dataset?.promiseRaf);
-            if (Number.isFinite(rafValue) && rafValue > 0) {
-                cancelAnimationFrame(rafValue);
-            }
+        const stopMorphLoaderAnimation = (overlay) => {
+            const ids = (overlay?.dataset?.loaderRafIds || '')
+                .split(',')
+                .map((value) => Number(value))
+                .filter((value) => Number.isFinite(value) && value > 0);
+
+            ids.forEach((rafId) => cancelAnimationFrame(rafId));
         };
 
         const showInitialLoading = () => {
@@ -2035,12 +2058,10 @@
             overlay.innerHTML = buildLoadingMarkup(todayEntry);
             document.body.appendChild(overlay);
 
-            if (todayEntry.title.includes('Promise Day')) {
-                createPromiseLoaderAnimation(overlay);
-            }
+            createMorphLoaderAnimation(overlay);
 
             setTimeout(() => {
-                stopPromiseLoaderAnimation(overlay);
+                stopMorphLoaderAnimation(overlay);
                 overlay.remove();
             }, 5000);
         };

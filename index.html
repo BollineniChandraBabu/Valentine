@@ -1538,6 +1538,8 @@
             const todayEntry = getTodayEntry();
             const successImage = todayEntry.successImage?.src || todayEntry.image?.src || defaultDay.successImage.src;
             const successAlt = todayEntry.successImage?.alt || todayEntry.image?.alt || defaultDay.successImage.alt;
+            isLetterOpen = false;
+            letterIndex = 0;
 
             container.innerHTML = `
                 <div class="success-content">
@@ -1549,9 +1551,20 @@
                     </div>
                     <div class="success-letters">
                         <h3>Love letters for today</h3>
-                        <ul>
-                            ${todayEntry.letters.map((letter) => `<li>${letter}</li>`).join('')}
-                        </ul>
+                        <div class="letter-card">
+                            <button class="letter-seal" id="success-open-letter" type="button" aria-expanded="false">
+                                <span class="letter-icon">💌</span>
+                                <span class="letter-title">Click to open today’s love letter</span>
+                                <span class="letter-subtitle">A sweet note is waiting inside.</span>
+                            </button>
+                            <div class="letter-content" hidden>
+                                <div class="love-letter">${todayEntry.letters[letterIndex]}</div>
+                                <div class="page-footer">
+                                    <span>Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
+                                    <button class="choice-button" id="success-next-letter" type="button">Next letter →</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
                 </div>
@@ -1564,6 +1577,23 @@
                 successAlt,
                 todayEntry.title
             );
+
+            const openLetterButton = document.getElementById('success-open-letter');
+            const letterContent = container.querySelector('.letter-content');
+
+            openLetterButton.addEventListener('click', () => {
+                isLetterOpen = true;
+                openLetterButton.classList.add('opened');
+                openLetterButton.setAttribute('aria-expanded', 'true');
+                letterContent.hidden = false;
+            });
+
+            const nextLetterButton = document.getElementById('success-next-letter');
+            nextLetterButton.addEventListener('click', () => {
+                letterIndex = (letterIndex + 1) % todayEntry.letters.length;
+                container.querySelector('.love-letter').textContent = todayEntry.letters[letterIndex];
+                container.querySelector('.page-footer span').textContent = `Letter ${letterIndex + 1} of ${todayEntry.letters.length}`;
+            });
 
             document.getElementById('main-card').style.backgroundColor = 'transparent';
             document.getElementById('main-card').style.boxShadow = 'none';

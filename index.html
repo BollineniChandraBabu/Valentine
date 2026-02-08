@@ -960,8 +960,15 @@
             noBtn.style.top = `${y}px`;
         };
 
+        const handleNoInteraction = (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            moveNoButton();
+        };
+
         noBtn.addEventListener('mouseover', moveNoButton);
-        noBtn.addEventListener('touchstart', moveNoButton);
+        noBtn.addEventListener('touchstart', handleNoInteraction, { passive: false });
+        noBtn.addEventListener('click', handleNoInteraction);
 
         const createBurst = () => {
             const burst = document.createElement('span');

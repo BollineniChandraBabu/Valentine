@@ -1329,6 +1329,7 @@
         const bgmPlayer = new Audio(randomBgmTrack);
         bgmPlayer.loop = true;
         bgmPlayer.preload = 'auto';
+        bgmPlayer.volume = 0.35;
         let hasStartedBgm = false;
 
         const startBgmAfterYes = async () => {

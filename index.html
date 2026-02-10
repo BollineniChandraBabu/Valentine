@@ -1331,10 +1331,38 @@
         const bgmPlayer = new Audio(randomBgmTrack);
         bgmPlayer.loop = true;
         bgmPlayer.preload = 'auto';
+        const initialBgmVolume = 0.03;
         const defaultBgmVolume = 0.35;
         const speakingBgmVolume = 0.18;
-        bgmPlayer.volume = defaultBgmVolume;
+        const bgmFadeInDurationMs = 6000;
+        const bgmFadeInStepMs = 120;
+        bgmPlayer.volume = initialBgmVolume;
         let hasStartedBgm = false;
+        let bgmFadeInterval = null;
+
+        const clearBgmFadeInterval = () => {
+            if (bgmFadeInterval !== null) {
+                clearInterval(bgmFadeInterval);
+                bgmFadeInterval = null;
+            }
+        };
+
+        const fadeInBgmVolume = () => {
+            clearBgmFadeInterval();
+
+            const totalSteps = Math.max(1, Math.round(bgmFadeInDurationMs / bgmFadeInStepMs));
+            const volumeStep = (defaultBgmVolume - initialBgmVolume) / totalSteps;
+            let nextVolume = initialBgmVolume;
+
+            bgmFadeInterval = setInterval(() => {
+                nextVolume = Math.min(defaultBgmVolume, nextVolume + volumeStep);
+                bgmPlayer.volume = nextVolume;
+
+                if (nextVolume >= defaultBgmVolume) {
+                    clearBgmFadeInterval();
+                }
+            }, bgmFadeInStepMs);
+        };
 
         const startBgmAfterYes = async () => {
             if (hasStartedBgm) {
@@ -1342,8 +1370,10 @@
             }
 
             try {
+                bgmPlayer.volume = initialBgmVolume;
                 await bgmPlayer.play();
                 hasStartedBgm = true;
+                fadeInBgmVolume();
                 trackEvent('bgm_started_after_yes', { track_name: randomBgmTrack });
             } catch {
                 trackEvent('bgm_start_failed_after_yes', { track_name: randomBgmTrack });
@@ -1359,6 +1389,7 @@
             utterance.rate = 0.95;
             utterance.volume = 1;
             utterance.onstart = () => {
+                clearBgmFadeInterval();
                 bgmPlayer.volume = speakingBgmVolume;
             };
             utterance.onend = () => {

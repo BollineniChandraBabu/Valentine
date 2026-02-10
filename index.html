@@ -3,7 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="It is created for Sindhu by chandu">
+    <meta name="keywords" content="valentine, love, proposal, romantic, cute">
+    <meta name="author" content="It is created for Sindhu by chandu">
+    <meta name="theme-color" content="#e91e63">
+    <meta property="og:title" content="Will you be my Valentine?">
+    <meta property="og:description" content="It is created for Sindhu by chandu">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="favicon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Will you be my Valentine?">
+    <meta name="twitter:description" content="It is created for Sindhu by chandu">
+    <meta name="twitter:image" content="favicon.png">
     <title>Will you be my Valentine?</title>
+    <script>
+        (function setRandomFavicon() {
+            const faviconOptions = ['favicon.png', 'favicon.gif'];
+            const randomFavicon = faviconOptions[Math.floor(Math.random() * faviconOptions.length)];
+            const faviconLink = document.createElement('link');
+            faviconLink.rel = 'icon';
+            faviconLink.type = randomFavicon.endsWith('.gif') ? 'image/gif' : 'image/png';
+            faviconLink.href = randomFavicon;
+            document.head.appendChild(faviconLink);
+        }());
+    </script>
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -1318,10 +1341,10 @@
         });
 
         const bgmTracks = [
-            'assets/Bommarillu-Downringtone.com.mp3',
+            'assets/Bommarillu.mp3',
             'assets/ManasanthaNuvve.mp3',
             'assets/Manmadhudu.mp3',
-            'assets/Nenu Local-Downringtone.com.mp3',
+            'assets/NenuLocal.mp3',
             'assets/Sontham.mp3'
         ];
 
@@ -1331,10 +1354,38 @@
         const bgmPlayer = new Audio(randomBgmTrack);
         bgmPlayer.loop = true;
         bgmPlayer.preload = 'auto';
+        const initialBgmVolume = 0.03;
         const defaultBgmVolume = 0.35;
         const speakingBgmVolume = 0.18;
-        bgmPlayer.volume = defaultBgmVolume;
+        const bgmFadeInDurationMs = 6000;
+        const bgmFadeInStepMs = 120;
+        bgmPlayer.volume = initialBgmVolume;
         let hasStartedBgm = false;
+        let bgmFadeInterval = null;
+
+        const clearBgmFadeInterval = () => {
+            if (bgmFadeInterval !== null) {
+                clearInterval(bgmFadeInterval);
+                bgmFadeInterval = null;
+            }
+        };
+
+        const fadeInBgmVolume = () => {
+            clearBgmFadeInterval();
+
+            const totalSteps = Math.max(1, Math.round(bgmFadeInDurationMs / bgmFadeInStepMs));
+            const volumeStep = (defaultBgmVolume - initialBgmVolume) / totalSteps;
+            let nextVolume = initialBgmVolume;
+
+            bgmFadeInterval = setInterval(() => {
+                nextVolume = Math.min(defaultBgmVolume, nextVolume + volumeStep);
+                bgmPlayer.volume = nextVolume;
+
+                if (nextVolume >= defaultBgmVolume) {
+                    clearBgmFadeInterval();
+                }
+            }, bgmFadeInStepMs);
+        };
 
         const startBgmAfterYes = async () => {
             if (hasStartedBgm) {
@@ -1342,8 +1393,10 @@
             }
 
             try {
+                bgmPlayer.volume = initialBgmVolume;
                 await bgmPlayer.play();
                 hasStartedBgm = true;
+                fadeInBgmVolume();
                 trackEvent('bgm_started_after_yes', { track_name: randomBgmTrack });
             } catch {
                 trackEvent('bgm_start_failed_after_yes', { track_name: randomBgmTrack });
@@ -1359,6 +1412,7 @@
             utterance.rate = 0.95;
             utterance.volume = 1;
             utterance.onstart = () => {
+                clearBgmFadeInterval();
                 bgmPlayer.volume = speakingBgmVolume;
             };
             utterance.onend = () => {

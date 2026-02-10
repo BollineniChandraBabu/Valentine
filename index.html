@@ -1122,7 +1122,9 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-XYE89XRTTM');
+  gtag('config', 'G-XYE89XRTTM', {
+    anonymize_ip: true
+  });
 </script>
 </head>
 <body>
@@ -1204,6 +1206,144 @@
             'I’m thinking of you.',
             'You mean the world to me.'
         ];
+
+        const GA_TRACKING_ID = 'G-XYE89XRTTM';
+        const analyticsEnabled = typeof window.gtag === 'function';
+
+        const safeStorage = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch {
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch {
+                    // Ignore storage errors (private mode / blocked storage).
+                }
+            }
+        };
+
+        const getOrCreateId = (key) => {
+            const existing = safeStorage.get(key);
+            if (existing) {
+                return existing;
+            }
+            const created = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+            safeStorage.set(key, created);
+            return created;
+        };
+
+        const visitorId = getOrCreateId('valentine_visitor_id');
+        const sessionId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const previousVisitCount = Number(safeStorage.get('valentine_visit_count') || '0');
+        const visitCount = previousVisitCount + 1;
+        safeStorage.set('valentine_visit_count', String(visitCount));
+
+        const trackEvent = (eventName, params = {}) => {
+            if (!analyticsEnabled) {
+                return;
+            }
+            gtag('event', eventName, {
+                page_title: document.title,
+                page_path: window.location.pathname,
+                ...params
+            });
+        };
+
+        const setUserProperties = () => {
+            if (!analyticsEnabled) {
+                return;
+            }
+
+            gtag('config', GA_TRACKING_ID, {
+                user_id: visitorId,
+                user_properties: {
+                    visit_count: visitCount,
+                    language: navigator.language || 'unknown',
+                    viewport: `${window.innerWidth}x${window.innerHeight}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'
+                }
+            });
+        };
+
+        const sectionTiming = {
+            currentSection: null,
+            sectionStart: 0,
+            currentTab: null,
+            tabStart: 0
+        };
+
+        const startSectionTimer = (sectionName) => {
+            const now = performance.now();
+
+            if (sectionTiming.currentSection) {
+                const durationMs = Math.round(now - sectionTiming.sectionStart);
+                trackEvent('section_time_spent', {
+                    section_name: sectionTiming.currentSection,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2))
+                });
+            }
+
+            sectionTiming.currentSection = sectionName;
+            sectionTiming.sectionStart = now;
+        };
+
+        const startTabTimer = (tabName) => {
+            const now = performance.now();
+
+            if (sectionTiming.currentTab) {
+                const durationMs = Math.round(now - sectionTiming.tabStart);
+                trackEvent('tab_time_spent', {
+                    tab_name: sectionTiming.currentTab,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2))
+                });
+            }
+
+            sectionTiming.currentTab = tabName;
+            sectionTiming.tabStart = now;
+        };
+
+        setUserProperties();
+        trackEvent('experience_opened', {
+            visitor_id: visitorId,
+            session_id: sessionId,
+            visit_count: visitCount,
+            referrer: document.referrer || 'direct'
+        });
+
+        const bgmTracks = [
+            'assets/ManasanthaNuvve.mp3',
+            'assets/Manmadhudu.mp3',
+            'assets/Sontham.mp3'
+        ];
+
+        const randomBgmTrack = bgmTracks[Math.floor(Math.random() * bgmTracks.length)];
+        trackEvent('bgm_selected', { track_name: randomBgmTrack });
+
+        const bgmPlayer = new Audio(randomBgmTrack);
+        bgmPlayer.loop = true;
+        bgmPlayer.preload = 'auto';
+        let hasStartedBgm = false;
+
+        const startBgmAfterYes = async () => {
+            if (hasStartedBgm) {
+                return;
+            }
+
+            try {
+                await bgmPlayer.play();
+                hasStartedBgm = true;
+                trackEvent('bgm_started_after_yes', { track_name: randomBgmTrack });
+            } catch {
+                trackEvent('bgm_start_failed_after_yes', { track_name: randomBgmTrack });
+            }
+        };
 
         const speakMessage = (message) => {
             if (!('speechSynthesis' in window)) {
@@ -1862,6 +2002,12 @@
                 pageBody.querySelectorAll('.choice-button').forEach((button) => {
                     button.addEventListener('click', () => {
                         selectedChoiceIndex = Number(button.dataset.choice);
+                        const selectedChoice = todayEntry.choices[selectedChoiceIndex];
+                        trackEvent('daily_choice_selected', {
+                            day_title: todayEntry.title,
+                            choice_index: selectedChoiceIndex,
+                            choice_text: selectedChoice
+                        });
                         renderTabContent();
                     });
                 });
@@ -1887,6 +2033,8 @@
             contentTabs.querySelectorAll('.content-tab').forEach((tab) => {
                 tab.addEventListener('click', () => {
                     activeTab = tab.dataset.tab;
+                    trackEvent('tab_changed', { tab_name: activeTab, day_title: getTodayEntry().title });
+                    startTabTimer(activeTab);
                     renderTabs();
                     renderTabContent();
                 });
@@ -1932,6 +2080,12 @@
 
             renderTabs();
             renderTabContent();
+            startTabTimer(activeTab);
+            trackEvent('day_content_rendered', {
+                day_index: todayIndex,
+                day_title: todayEntry.title,
+                active_tab: activeTab
+            });
         };
 
         updateDayContent();
@@ -2081,6 +2235,8 @@
 
         const showInitialLoading = () => {
             const todayEntry = getTodayEntry();
+            startSectionTimer('initial_overlay_loading');
+            trackEvent('initial_loading_shown', { day_title: todayEntry.title });
             const overlay = document.createElement('div');
             overlay.className = 'initial-loading-overlay';
             overlay.innerHTML = buildLoadingMarkup(todayEntry);
@@ -2091,10 +2247,15 @@
             setTimeout(() => {
                 stopPromiseLoaderAnimation(overlay);
                 overlay.remove();
+                startSectionTimer('landing_page');
+                trackEvent('landing_page_ready', { day_title: todayEntry.title });
             }, 5000);
         };
 
         const renderLoadingPage = () => {
+            startSectionTimer('transition_loading_page');
+            trackEvent('transition_loading_shown');
+            startBgmAfterYes();
             container.innerHTML = `
                 <div class="loading-screen">
                     <div class="loading-heart" aria-hidden="true">💖</div>
@@ -2109,6 +2270,8 @@
 
         const renderQuestionPage = () => {
             const todayEntry = getTodayEntry();
+            startSectionTimer('question_page');
+            trackEvent('question_page_viewed', { day_title: todayEntry.title });
             container.innerHTML = `
                 <div class="success-content">
                     <h2 class="success-title">${todayEntry.title} Questions 💞</h2>
@@ -2148,10 +2311,14 @@
             `;
 
             document.getElementById('go-back').addEventListener('click', () => {
+                trackEvent('question_go_back_clicked', { day_title: todayEntry.title });
                 window.location.reload();
             });
 
-            document.getElementById('to-success').addEventListener('click', renderSuccessPage);
+            document.getElementById('to-success').addEventListener('click', () => {
+                trackEvent('question_next_clicked', { day_title: todayEntry.title });
+                renderSuccessPage();
+            });
 
             if (todayEntry.mcq?.length) {
                 container.querySelectorAll('.choice-button[data-question]').forEach((button) => {
@@ -2168,6 +2335,13 @@
 
                         quoteBox.textContent = `“${option.quote}”`;
                         quoteBox.hidden = false;
+
+                        trackEvent('mcq_answer_selected', {
+                            day_title: todayEntry.title,
+                            question_index: questionIndex,
+                            option_index: optionIndex,
+                            option_label: option.label
+                        });
                     });
                 });
             }
@@ -2175,6 +2349,8 @@
 
         const renderSuccessPage = () => {
             const todayEntry = getTodayEntry();
+            startSectionTimer('success_page');
+            trackEvent('success_page_viewed', { day_title: todayEntry.title });
             const successImage = todayEntry.successImage?.src || todayEntry.image?.src || defaultDay.successImage.src;
             const successAlt = todayEntry.successImage?.alt || todayEntry.image?.alt || defaultDay.successImage.alt;
             const whatsappMessage = encodeURIComponent('Love you too, Chandu ❤️');
@@ -2208,7 +2384,7 @@
                     </div>
                     <p class="final-note">Now come collect your hugs, kisses, and a lifetime of dates.</p>
                     <div class="success-actions">
-                        <a class="choice-button selected" href="https://wa.me/7093349948?text=${whatsappMessage}" target="_blank" rel="noopener">
+                        <a class="choice-button selected" id="whatsapp-cta" href="https://wa.me/7093349948?text=${whatsappMessage}" target="_blank" rel="noopener">
                             Send “Love you too” to Chandu ❤️
                         </a>
                     </div>
@@ -2223,6 +2399,11 @@
                 todayEntry.title
             );
 
+            const whatsappButton = document.getElementById('whatsapp-cta');
+            whatsappButton?.addEventListener('click', () => {
+                trackEvent('whatsapp_cta_clicked', { day_title: todayEntry.title });
+            });
+
             const openLetterButton = document.getElementById('success-open-letter');
             const letterTitle = openLetterButton.querySelector('.letter-title');
             const letterSubtitle = openLetterButton.querySelector('.letter-subtitle');
@@ -2230,6 +2411,10 @@
 
             openLetterButton.addEventListener('click', () => {
                 isLetterOpen = !isLetterOpen;
+                trackEvent('love_letter_toggled', {
+                    day_title: todayEntry.title,
+                    is_open: isLetterOpen
+                });
                 openLetterButton.classList.toggle('opened', isLetterOpen);
                 openLetterButton.setAttribute('aria-expanded', String(isLetterOpen));
                 letterContent.hidden = !isLetterOpen;
@@ -2244,6 +2429,11 @@
             const nextLetterButton = document.getElementById('success-next-letter');
             nextLetterButton.addEventListener('click', () => {
                 letterIndex = (letterIndex + 1) % todayEntry.letters.length;
+                trackEvent('love_letter_next_clicked', {
+                    day_title: todayEntry.title,
+                    letter_index: letterIndex + 1,
+                    total_letters: todayEntry.letters.length
+                });
                 container.querySelector('.love-letter').textContent = todayEntry.letters[letterIndex];
                 container.querySelector('.page-footer span').textContent = `Letter ${letterIndex + 1} of ${todayEntry.letters.length}`;
             });
@@ -2267,6 +2457,7 @@
 
         const handleNoInteraction = (event) => {
             event.preventDefault();
+            trackEvent('no_button_interaction', { trigger_type: event.type });
             event.stopPropagation();
             const randomMessage = noMessages[Math.floor(Math.random() * noMessages.length)];
             speakMessage(randomMessage);
@@ -2292,12 +2483,47 @@
             burst.addEventListener('animationend', () => burst.remove());
         };
 
-        yesBtn.addEventListener('mouseenter', createBurst);
+        yesBtn.addEventListener('mouseenter', () => {
+            trackEvent('yes_button_hovered');
+            createBurst();
+        });
 
         // 2. Logic for the "Yes" click (loading → question page → success page)
         yesBtn.addEventListener('click', () => {
+            trackEvent('yes_button_clicked');
+            startSectionTimer('yes_clicked_transition');
             speakMessage('Sindhu, I love you.');
             setTimeout(renderLoadingPage, 600);
+        });
+
+
+        window.addEventListener('beforeunload', () => {
+            const now = performance.now();
+
+            if (sectionTiming.currentSection) {
+                const durationMs = Math.round(now - sectionTiming.sectionStart);
+                trackEvent('section_time_spent', {
+                    section_name: sectionTiming.currentSection,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2)),
+                    unload: true
+                });
+            }
+
+            if (sectionTiming.currentTab) {
+                const tabDurationMs = Math.round(now - sectionTiming.tabStart);
+                trackEvent('tab_time_spent', {
+                    tab_name: sectionTiming.currentTab,
+                    duration_ms: tabDurationMs,
+                    duration_seconds: Number((tabDurationMs / 1000).toFixed(2)),
+                    unload: true
+                });
+            }
+
+            trackEvent('experience_closed', {
+                visitor_id: visitorId,
+                session_id: sessionId
+            });
         });
     </script>
 </body>

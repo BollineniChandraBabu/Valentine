@@ -1318,8 +1318,10 @@
         });
 
         const bgmTracks = [
+            'assets/Bommarillu-Downringtone.com.mp3',
             'assets/ManasanthaNuvve.mp3',
             'assets/Manmadhudu.mp3',
+            'assets/Nenu Local-Downringtone.com.mp3',
             'assets/Sontham.mp3'
         ];
 
@@ -1329,6 +1331,9 @@
         const bgmPlayer = new Audio(randomBgmTrack);
         bgmPlayer.loop = true;
         bgmPlayer.preload = 'auto';
+        const defaultBgmVolume = 0.35;
+        const speakingBgmVolume = 0.18;
+        bgmPlayer.volume = defaultBgmVolume;
         let hasStartedBgm = false;
 
         const startBgmAfterYes = async () => {
@@ -1353,6 +1358,15 @@
             utterance.pitch = 1.6;
             utterance.rate = 0.95;
             utterance.volume = 1;
+            utterance.onstart = () => {
+                bgmPlayer.volume = speakingBgmVolume;
+            };
+            utterance.onend = () => {
+                bgmPlayer.volume = defaultBgmVolume;
+            };
+            utterance.onerror = () => {
+                bgmPlayer.volume = defaultBgmVolume;
+            };
             speechSynthesis.cancel();
             speechSynthesis.speak(utterance);
         };

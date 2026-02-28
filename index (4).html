@@ -1,0 +1,3312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="It is created for Sindhu by chandu">
+    <meta name="keywords" content="valentine, love, proposal, romantic, cute">
+    <meta name="author" content="It is created for Sindhu by chandu">
+    <meta name="theme-color" content="#e91e63">
+    <meta property="og:title" content="Will you be my Valentine?">
+    <meta property="og:description" content="It is created for Sindhu by chandu">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="favicon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Will you be my Valentine?">
+    <meta name="twitter:description" content="It is created for Sindhu by chandu">
+    <meta name="twitter:image" content="favicon.png">
+    <title>Will you be my Valentine?</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous"
+    >
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.min.css"
+        rel="stylesheet"
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep:      #1a0814;
+            --bg-mid:       #2d0f22;
+            --rose-900:     #7a0038;
+            --rose-700:     #b5004f;
+            --rose-500:     #e91e63;
+            --rose-300:     #ff7fae;
+            --rose-100:     #ffd6e8;
+            --gold-500:     #c9954c;
+            --gold-300:     #e8c07a;
+            --gold-100:     #fef0d0;
+            --cream:        #fff5ee;
+            --text-light:   #fce8f0;
+            --text-muted:   #c4899f;
+            --glass-bg:     rgba(255, 255, 255, 0.06);
+            --glass-border: rgba(255, 200, 220, 0.18);
+            --glow-rose:    rgba(233, 30, 99, 0.5);
+            --glow-gold:    rgba(201, 149, 76, 0.4);
+            --font-display: 'Cormorant Garamond', Georgia, serif;
+            --font-body:    'Nunito', sans-serif;
+            --radius-card:  28px;
+            --radius-panel: 18px;
+            --radius-btn:   50px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body { min-height: 100%; }
+
+        /* ═══════════════════════════════════════
+           BODY — Midnight Rose atmosphere
+        ═══════════════════════════════════════ */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100dvh;
+            padding: 32px 16px 48px;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 0%,   #4a0a28 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 85% 100%, #1f0935 0%, transparent 55%),
+                radial-gradient(ellipse 60% 80% at 50% 50%,  #2a0d1e 0%, transparent 80%),
+                #140610;
+            font-family: var(--font-body);
+            color: var(--text-light);
+            overflow-x: hidden;
+            overflow-y: auto;
+            cursor: none; /* replaced by heart cursor */
+        }
+
+        /* Aurora blob orbs */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+            filter: blur(80px);
+        }
+        body::before {
+            width: 600px; height: 500px;
+            top: -150px; left: -180px;
+            background: radial-gradient(circle, #c2185b 0%, #6a0036 50%, transparent 75%);
+            animation: auroraFloat 18s ease-in-out infinite;
+        }
+        body::after {
+            width: 500px; height: 400px;
+            bottom: -120px; right: -140px;
+            background: radial-gradient(circle, #7b1fa2 0%, #3d0052 50%, transparent 75%);
+            animation: auroraFloat 22s ease-in-out infinite reverse;
+        }
+
+        /* ═══════════════════════════════════════
+           CARD — Luminous frosted-glass jewel
+        ═══════════════════════════════════════ */
+        .container {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(160deg,
+                rgba(255,255,255,0.09) 0%,
+                rgba(255,182,210,0.06) 50%,
+                rgba(120,0,60,0.12) 100%);
+            padding: 0 0 36px;
+            border-radius: var(--radius-card);
+            text-align: center;
+            max-width: 560px;
+            width: min(94vw, 560px);
+            backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
+            border: 1px solid rgba(255, 180, 210, 0.22);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.04) inset,
+                0 2px 0 rgba(255,200,220,0.12) inset,
+                0 40px 80px rgba(0,0,0,0.55),
+                0 0 60px rgba(180, 0, 80, 0.18),
+                0 0 120px rgba(100, 0, 50, 0.12);
+            animation: cardRise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+            will-change: transform;
+        }
+
+        /* Gold gradient border glow */
+        .container::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--radius-card) + 1px);
+            background: linear-gradient(135deg,
+                rgba(232, 192, 122, 0.7) 0%,
+                rgba(255, 150, 190, 0.4) 35%,
+                rgba(120, 0, 80, 0.1) 65%,
+                rgba(232, 192, 122, 0.5) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: borderPulse 5s ease-in-out infinite;
+        }
+
+        /* Inner light bloom top */
+        .container::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 70%; height: 160px;
+            background: radial-gradient(ellipse at top, rgba(255,200,220,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .container:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.05) inset,
+                0 2px 0 rgba(255,200,220,0.15) inset,
+                0 50px 100px rgba(0,0,0,0.6),
+                0 0 80px rgba(200, 0, 90, 0.22),
+                0 0 140px rgba(100, 0, 50, 0.15);
+        }
+
+        .container-inner {
+            padding: 28px 40px 4px;
+        }
+
+        /* ═══════════════════════════════════════
+           IMAGE
+        ═══════════════════════════════════════ */
+        #display-image {
+            width: clamp(150px, 38vw, 210px);
+            border-radius: 18px;
+            margin-bottom: 20px;
+            box-shadow:
+                0 0 0 3px rgba(232,192,122,0.25),
+                0 0 0 6px rgba(232,192,122,0.08),
+                0 20px 40px rgba(0,0,0,0.5),
+                0 0 40px rgba(220, 60, 120, 0.3);
+            animation: floaty 5s ease-in-out infinite, imageGlow 4s ease-in-out infinite;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        #display-image:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow:
+                0 0 0 3px rgba(232,192,122,0.4),
+                0 0 0 8px rgba(232,192,122,0.12),
+                0 30px 50px rgba(0,0,0,0.55),
+                0 0 60px rgba(220, 60, 120, 0.45);
+        }
+
+        /* ═══════════════════════════════════════
+           TYPOGRAPHY
+        ═══════════════════════════════════════ */
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5.5vw, 2.9rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 8px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            /* Gold shimmer text-shadow */
+            text-shadow:
+                0 0 20px rgba(232,192,122,0.4),
+                0 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .subtitle {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: clamp(1rem, 2.8vw, 1.15rem);
+            color: var(--text-muted);
+            margin: 0 0 24px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ═══════════════════════════════════════
+           LOVE NOTE — parchment on dark
+        ═══════════════════════════════════════ */
+        .love-note {
+            font-family: var(--font-body);
+            font-size: clamp(0.92rem, 2.4vw, 1rem);
+            line-height: 1.72;
+            background: linear-gradient(160deg,
+                rgba(255, 235, 215, 0.08) 0%,
+                rgba(220, 80, 120, 0.06) 100%);
+            border-radius: var(--radius-panel);
+            padding: 20px 22px 18px 30px;
+            margin: 14px 0 20px;
+            border: 1px solid rgba(232, 192, 122, 0.2);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.03) inset;
+            color: rgba(255, 230, 240, 0.92);
+            position: relative;
+        }
+
+        .love-note::before {
+            content: "❝";
+            position: absolute;
+            top: 4px; left: 10px;
+            font-size: 2.2rem;
+            color: rgba(232, 192, 122, 0.35);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        /* ═══════════════════════════════════════
+           DAY HIGHLIGHT PANEL
+        ═══════════════════════════════════════ */
+        .day-highlight {
+            background: linear-gradient(145deg,
+                rgba(180, 30, 80, 0.18) 0%,
+                rgba(100, 0, 50, 0.12) 100%);
+            border-radius: var(--radius-panel);
+            padding: 20px 22px;
+            border: 1px solid rgba(232, 192, 122, 0.22);
+            box-shadow:
+                0 8px 30px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(255,255,255,0.03) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .day-highlight::after {
+            content: "";
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, rgba(232,192,122,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .day-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold-300);
+            font-weight: 700;
+            margin: 0 0 6px;
+            opacity: 0.85;
+        }
+
+        #day-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.55rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 10px;
+            letter-spacing: -0.01em;
+            text-shadow: 0 0 20px rgba(232,192,122,0.3);
+        }
+
+        .day-message {
+            color: rgba(252, 210, 228, 0.88);
+            font-size: 0.97rem;
+            line-height: 1.6;
+            margin: 0 0 10px;
+        }
+
+        .day-extra {
+            margin: 12px 0;
+            padding: 12px 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(232,192,122,0.12);
+            color: rgba(252,220,235,0.82);
+            font-size: 0.92rem;
+        }
+
+        .day-extra ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+        }
+
+        .day-reminder {
+            font-weight: 600;
+            color: var(--rose-300);
+            margin: 0;
+            font-size: 0.93rem;
+        }
+
+        .season-note {
+            margin: 10px 0 0;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ═══════════════════════════════════════
+           TABS & PAGE CONTENT
+        ═══════════════════════════════════════ */
+        .day-pages {
+            margin-top: 22px;
+            text-align: left;
+        }
+
+        .content-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+            scrollbar-width: none;
+        }
+        .content-tabs::-webkit-scrollbar { display: none; }
+
+        .content-tab {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            border: 1px solid rgba(232,192,122,0.15);
+            border-radius: 999px;
+            padding: 7px 14px;
+            font-size: 0.83rem;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+            transition: all 0.22s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .content-tab:hover {
+            background: rgba(232,192,122,0.1);
+            color: var(--gold-300);
+            border-color: rgba(232,192,122,0.35);
+        }
+
+        .content-tab.active {
+            background: linear-gradient(135deg, #c2185b, #880e4f);
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 6px 18px rgba(194, 24, 91, 0.45), 0 0 0 1px rgba(232,192,122,0.3);
+        }
+
+        .page-content {
+            background: rgba(0,0,0,0.25);
+            border-radius: var(--radius-panel);
+            padding: 20px;
+            border: 1px solid rgba(232,192,122,0.14);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        }
+
+        .page-content.animate {
+            animation: fadeSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 12px;
+            text-shadow: 0 0 15px rgba(232,192,122,0.25);
+        }
+
+        .question-list {
+            margin: 0 0 14px 18px;
+            color: rgba(252,220,235,0.8);
+            line-height: 1.7;
+        }
+
+        /* ═══════════════════════════════════════
+           CHOICE BUTTONS
+        ═══════════════════════════════════════ */
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .choice-button {
+            background: rgba(255,255,255,0.05);
+            color: rgba(252,220,235,0.9);
+            border: 1px solid rgba(232,192,122,0.2);
+            border-radius: 14px;
+            padding: 11px 13px;
+            font-weight: 600;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            text-decoration: none;
+            line-height: 1.35;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        a.choice-button { text-decoration: none; }
+
+        .choice-button:hover {
+            background: rgba(194,24,91,0.2);
+            border-color: rgba(232,192,122,0.4);
+            color: var(--gold-100);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .choice-button.selected {
+            background: linear-gradient(135deg, #b5004f, #7a0038);
+            color: #fff;
+            border-color: rgba(232,192,122,0.5);
+            box-shadow: 0 6px 20px rgba(181,0,79,0.45), 0 0 0 1px rgba(232,192,122,0.3);
+        }
+
+        /* ═══════════════════════════════════════
+           LOVE LETTERS
+        ═══════════════════════════════════════ */
+        .love-letter {
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 16px 18px;
+            font-size: 0.95rem;
+            color: rgba(255,225,238,0.9);
+            line-height: 1.65;
+            border: 1px solid rgba(232,192,122,0.12);
+        }
+
+        .letter-card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .letter-seal {
+            border: 1px solid rgba(232,192,122,0.25);
+            border-radius: 18px;
+            padding: 20px 22px;
+            background: linear-gradient(135deg,
+                rgba(180,30,80,0.2) 0%,
+                rgba(80,0,40,0.25) 100%);
+            box-shadow: 0 10px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.03) inset;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .letter-seal::before, .letter-seal::after {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(232,192,122,0.3), transparent);
+        }
+        .letter-seal::before { top: 16px; }
+        .letter-seal::after  { bottom: 16px; }
+
+        .letter-seal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.4), 0 0 30px rgba(194,24,91,0.2);
+            border-color: rgba(232,192,122,0.45);
+        }
+
+        .letter-seal.opened {
+            background: linear-gradient(135deg,
+                rgba(194,24,91,0.25) 0%,
+                rgba(100,0,50,0.3) 100%);
+        }
+
+        .letter-icon { font-size: 2.2rem; }
+
+        .letter-title {
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .letter-subtitle {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 0.87rem;
+            gap: 10px;
+        }
+
+        /* ═══════════════════════════════════════
+           MAIN BUTTONS
+        ═══════════════════════════════════════ */
+        .buttons {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 36px;
+            font-size: clamp(1.05rem, 3.5vw, 1.18rem);
+            font-family: var(--font-body);
+            font-weight: 700;
+            border: none;
+            border-radius: var(--radius-btn);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            min-width: 140px;
+            min-height: 52px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            position: relative;
+            overflow: hidden;
+            letter-spacing: 0.3px;
+        }
+
+        /* Ripple */
+        button .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            background: rgba(255,255,255,0.35);
+            animation: rippleEffect 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+
+        #yes-btn {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 45%, #ad1457 100%);
+            color: #fff;
+            box-shadow:
+                0 6px 0 #7a0030,
+                0 12px 30px rgba(194,24,91,0.55),
+                0 0 30px rgba(233,30,99,0.3);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            animation: heartbeat 2.8s ease-in-out infinite;
+        }
+
+        #yes-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+            transform: translateX(-150%);
+            transition: transform 0.5s ease;
+        }
+
+        #yes-btn:hover::before {
+            transform: translateX(150%);
+        }
+
+        #yes-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow:
+                0 8px 0 #7a0030,
+                0 18px 40px rgba(194,24,91,0.65),
+                0 0 50px rgba(233,30,99,0.4);
+        }
+
+        #yes-btn:active {
+            transform: translateY(3px) scale(0.98);
+            box-shadow: 0 2px 0 #7a0030, 0 6px 20px rgba(194,24,91,0.4);
+        }
+
+        #no-btn {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-muted);
+            border: 1px solid rgba(255,255,255,0.12);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        #no-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.09);
+            animation: wiggle 0.35s ease;
+        }
+
+        #no-btn:active {
+            transform: scale(0.97);
+        }
+
+        /* ═══════════════════════════════════════
+           SIGNATURE
+        ═══════════════════════════════════════ */
+        .signature {
+            margin-top: 26px;
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.12rem;
+            color: var(--text-muted);
+        }
+
+        .signature strong {
+            font-style: normal;
+            background: linear-gradient(135deg, var(--gold-300), var(--rose-300));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ═══════════════════════════════════════
+           MCQ
+        ═══════════════════════════════════════ */
+        .mcq-item {
+            background: rgba(0,0,0,0.2);
+            border-radius: var(--radius-panel);
+            padding: 16px 18px;
+            border: 1px solid rgba(232,192,122,0.12);
+            margin-bottom: 14px;
+        }
+
+        .mcq-question {
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 12px;
+            font-size: 0.95rem;
+        }
+
+        .mcq-quote {
+            margin: 10px 0 0;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(194,24,91,0.15);
+            color: rgba(255,220,234,0.85);
+            font-style: italic;
+            border-left: 3px solid rgba(232,192,122,0.4);
+            font-size: 0.9rem;
+        }
+
+        /* ═══════════════════════════════════════
+           SUCCESS PAGE
+        ═══════════════════════════════════════ */
+        .success-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeSlide 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            isolation: isolate;   /* new stacking context — rain stays behind */
+        }
+
+        .success-content p { font-size: 1.1rem; margin: 8px 0; }
+
+        .success-content img {
+            width: min(240px, 78vw);
+            height: auto;
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 0 0 3px rgba(232,192,122,0.3), 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .success-content .final-note {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .success-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 0 0 8px;
+            text-shadow: 0 0 20px rgba(232,192,122,0.35);
+        }
+
+        .success-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin: 0 0 18px;
+        }
+
+        .success-message {
+            font-size: 1rem;
+            line-height: 1.65;
+            color: rgba(255,225,238,0.9);
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(232,192,122,0.14);
+        }
+
+        .success-questions, .success-letters {
+            text-align: left;
+            background: rgba(0,0,0,0.2);
+            border-radius: 14px;
+            padding: 16px 18px;
+            border: 1px solid rgba(232,192,122,0.14);
+            margin-bottom: 14px;
+            width: 100%;
+        }
+
+        .success-questions h3, .success-letters h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--text-light);
+            margin: 0 0 12px;
+        }
+
+        .success-letters ul, .success-questions ul {
+            padding-left: 18px;
+            color: rgba(252,210,228,0.82);
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .success-actions .choice-button {
+            padding: 12px 22px;
+            font-size: 0.95rem;
+        }
+
+        /* ═══════════════════════════════════════
+           RIBBON
+        ═══════════════════════════════════════ */
+        .card-ribbon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 0;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(232,192,122,0.08) 30%,
+                rgba(232,192,122,0.15) 50%,
+                rgba(232,192,122,0.08) 70%,
+                transparent 100%);
+            border-bottom: 1px solid rgba(232,192,122,0.18);
+            font-size: 1rem;
+            letter-spacing: 8px;
+            color: rgba(232,192,122,0.6);
+            margin-bottom: 24px;
+        }
+        .card-ribbon span:nth-child(2) { font-size: 0.65rem; opacity: 0.5; }
+
+        /* ═══════════════════════════════════════
+           CANVAS PARTICLE LAYER
+        ═══════════════════════════════════════ */
+        #particle-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ═══════════════════════════════════════
+           HEART CURSOR
+        ═══════════════════════════════════════ */
+        #heart-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 20px;
+            transform: translate(-50%, -50%);
+            transition: transform 0.08s ease;
+            filter: drop-shadow(0 0 6px rgba(233,30,99,0.8));
+        }
+
+        .cursor-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            font-size: 14px;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: trailFade 0.6s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0%   { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
+            100% { opacity: 0;   transform: translate(-50%,-50%) scale(0.3); }
+        }
+
+        /* ═══════════════════════════════════════
+           LOADING SCREEN
+        ═══════════════════════════════════════ */
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 0;
+            animation: fadeSlide 0.6s ease;
+        }
+
+        .initial-loading-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(20,6,16,0.97);
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-light);
+            text-shadow: 0 0 20px rgba(232,192,122,0.4);
+            margin: 0;
+        }
+
+        .loading-icon { font-size: clamp(2.2rem, 6vw, 3rem); }
+
+        .loading-heart {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: clamp(2.2rem, 6vw, 3rem);
+            animation: heartbeat 1.6s ease-in-out infinite;
+        }
+
+        .loading-subtitle { font-size: 1rem; color: var(--text-muted); margin: 0; }
+        .loading-theme { font-size: 0.95rem; color: var(--gold-300); font-weight: 600; margin: 0; }
+
+        /* ═══════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════ */
+        @media (max-width: 600px) {
+            body { padding: 16px 10px 40px; cursor: auto; }
+            #heart-cursor { display: none; }
+            .container { width: 100%; border-radius: 22px; }
+            .container-inner { padding: 18px 16px 4px; }
+            .card-ribbon { padding: 10px 0; margin-bottom: 16px; }
+            h1 { font-size: clamp(1.75rem, 6vw, 2.1rem); }
+            #display-image { width: min(62vw, 190px); margin-bottom: 14px; }
+            .love-note { padding: 14px 16px 14px 24px; font-size: 0.92rem; }
+            .day-highlight { padding: 14px 16px; }
+            .choice-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .choice-button { font-size: 0.85rem; padding: 9px 10px; }
+            .buttons { flex-direction: column; align-items: stretch; gap: 12px; margin-top: 22px; }
+            button { width: 100%; min-width: 0; }
+            .success-actions { flex-direction: column; align-items: stretch; }
+            .success-actions .choice-button { width: 100%; text-align: center; }
+            .content-tabs { -webkit-overflow-scrolling: touch; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 12px 8px 32px; }
+            .container { border-radius: 18px; }
+            .container-inner { padding: 14px 12px 4px; }
+            .love-note::before { display: none; }
+            .choice-grid { grid-template-columns: 1fr; }
+            .content-tab { padding: 6px 10px; font-size: 0.78rem; }
+            .page-content { padding: 14px; }
+            .letter-seal { padding: 14px 16px; }
+            .mcq-item { padding: 12px 14px; }
+            .floating-hearts span:nth-child(n+6) { display: none; }
+        }
+
+        @media (max-height: 700px) {
+            .container-inner { padding-top: 14px; }
+            #display-image { width: clamp(100px, 24vw, 160px); margin-bottom: 10px; }
+            .love-note { padding: 10px 14px 10px 22px; margin: 10px 0 14px; }
+            .day-highlight { padding: 12px 14px; }
+        }
+
+        @media (hover: none) {
+            #display-image:hover, .container:hover { transform: none; }
+            #yes-btn:active  { transform: translateY(3px) scale(0.98); }
+            #no-btn:active   { transform: scale(0.97); }
+            .choice-button:active { transform: scale(0.97); }
+            .letter-seal:active   { transform: scale(0.98); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           LOADERS — dark theme
+        ═══════════════════════════════════════ */
+        .petal-field {
+            position: relative;
+            width: min(260px, 80vw);
+            height: 140px;
+            margin-top: 6px;
+            overflow: hidden;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(120,0,60,0.4), rgba(60,0,30,0.5));
+            border: 1px solid rgba(232,192,122,0.15);
+        }
+
+        .petal {
+            position: absolute;
+            top: -20px;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation-name: petalFall;
+            animation-duration: var(--fall-duration, 2.8s);
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            animation-fill-mode: both;
+        }
+
+        .rose-display, .teddy-display, .promise-display,
+        .proposal-display, .hug-display, .kiss-display, .valentine-display {
+            display: grid;
+            place-items: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .rose-loader-stage {
+            position: relative;
+            width: min(240px, 78vw);
+            height: 130px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, rgba(120,0,60,0.45), rgba(60,0,30,0.55));
+            border: 1px solid rgba(232,192,122,0.12);
+            overflow: hidden;
+        }
+
+        .rose-heart-particle {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.1rem;
+            opacity: 0;
+            animation: roseAssemble 2.6s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        .teddy-loader {
+            display: grid;
+            place-items: center;
+            width: 116px; height: 116px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 30%, rgba(180,60,100,0.5), rgba(80,0,40,0.6));
+            box-shadow: 0 0 30px rgba(194,24,91,0.3);
+        }
+
+        .teddy-bounce {
+            font-size: 3rem;
+            animation: teddyBounce 1.05s cubic-bezier(0.4,0,0.2,1) infinite;
+            transform-origin: center bottom;
+        }
+
+        .teddy-shadow {
+            width: 52px; height: 12px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.4);
+            filter: blur(2px);
+            animation: teddyShadow 1.05s ease-in-out infinite;
+        }
+
+        .promise-loader-stage {
+            position: relative;
+            width: min(240px, 78vw); height: 140px;
+            border-radius: 18px;
+            background: radial-gradient(circle at top, rgba(120,0,60,0.5), rgba(50,0,30,0.6));
+            border: 1px solid rgba(232,192,122,0.12);
+            overflow: hidden;
+        }
+
+        .promise-loader-stage .petal-field {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            margin-top: 0; border-radius: 0;
+            background: transparent; border: none;
+            pointer-events: none; z-index: 1;
+        }
+
+        .promise-loader-canvas { position: relative; z-index: 2; width: 100%; height: 100%; display: block; }
+        .promise-symbols { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+        .promise-symbol { position: absolute; display: grid; place-items: center; }
+        .promise-symbol.teddy  { left: 18%; bottom: 18px; font-size: 2.15rem; animation: teddyBounce 1.05s cubic-bezier(0.4,0,0.2,1) infinite; }
+        .promise-symbol.flower { right: 20%; bottom: 30px; font-size: 1.6rem; animation: promisePulse 1.7s ease-in-out infinite; animation-delay: 0.2s; }
+        .promise-symbol.heart  { right: 34%; top: 20px; font-size: 1.55rem; animation: promisePulse 1.5s ease-in-out infinite; animation-delay: 0.5s; }
+
+        .rose-bloom { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; font-size: 1.6rem; }
+        .rose-stem  { font-size: 1.4rem; }
+
+        .proposal-ring {
+            display: grid; place-items: center;
+            width: 80px; height: 80px; border-radius: 999px;
+            background: radial-gradient(circle at center, rgba(200,80,120,0.5), rgba(80,0,40,0.6));
+            border: 2px solid rgba(232,192,122,0.35);
+            box-shadow: 0 0 20px rgba(194,24,91,0.3);
+            font-size: 1.8rem;
+        }
+
+        .proposal-sparkles, .hug-hearts, .kiss-sparkles, .valentine-fireworks { display: flex; gap: 6px; font-size: 1.2rem; }
+
+        .hug-cloud {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 8px 14px; border-radius: 999px;
+            background: rgba(180,30,80,0.25);
+            border: 1px solid rgba(232,192,122,0.18);
+            font-size: 1.4rem;
+        }
+
+        .kiss-lips { font-size: 2rem; letter-spacing: 6px; }
+        .valentine-heart { font-size: 2rem; }
+
+        /* floating hearts */
+        .floating-hearts {
+            position: fixed; inset: 0;
+            pointer-events: none; overflow: hidden; z-index: 0;
+        }
+
+        .burst-heart {
+            position: fixed; font-size: 24px; opacity: 0;
+            animation: burst 1.4s ease-out forwards;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(233,30,99,0.6));
+        }
+
+        .floating-hearts span {
+            position: absolute; bottom: -50px; font-size: 18px;
+            opacity: 0.4; animation: heartsUp 10s linear infinite;
+            filter: drop-shadow(0 0 4px rgba(233,30,99,0.5));
+        }
+
+        .floating-hearts span:nth-child(2) { animation-delay: 1.2s; font-size: 22px; animation-duration: 12s; }
+        .floating-hearts span:nth-child(3) { animation-delay: 3.5s; font-size: 15px; animation-duration: 9s; }
+        .floating-hearts span:nth-child(4) { animation-delay: 2s;   font-size: 20px; animation-duration: 11s; }
+        .floating-hearts span:nth-child(5) { animation-delay: 4.5s; font-size: 24px; animation-duration: 13s; }
+        .floating-hearts span:nth-child(6) { animation-delay: 1.5s; font-size: 17px; animation-duration: 10s; }
+        .floating-hearts span:nth-child(7) { animation-delay: 2.7s; font-size: 20px; animation-duration: 11.5s; }
+        .floating-hearts span:nth-child(8) { animation-delay: 0.8s; font-size: 13px; animation-duration: 8s; }
+        .floating-hearts span:nth-child(9) { animation-delay: 3.2s; font-size: 18px; animation-duration: 10.5s; }
+
+        @media (max-width: 480px) { .floating-hearts span:nth-child(n+6) { display: none; } }
+
+        /* KEYFRAMES */
+        @keyframes auroraFloat {
+            0%, 100% { transform: translate(0,0) scale(1); }
+            33%  { transform: translate(40px, 30px) scale(1.08); }
+            66%  { transform: translate(-20px, 15px) scale(0.95); }
+        }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+        @keyframes imageGlow {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(232,192,122,0.25), 0 0 0 6px rgba(232,192,122,0.08), 0 20px 40px rgba(0,0,0,0.5), 0 0 40px rgba(220,60,120,0.3); }
+            50%       { box-shadow: 0 0 0 3px rgba(232,192,122,0.45), 0 0 0 8px rgba(232,192,122,0.14), 0 24px 44px rgba(0,0,0,0.5), 0 0 60px rgba(220,60,120,0.5); }
+        }
+        @keyframes cardRise {
+            from { transform: translateY(40px) scale(0.97); opacity: 0; }
+            to   { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        @keyframes borderPulse {
+            0%, 100% { opacity: 0.6; }
+            50%       { opacity: 1; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            40% { transform: scale(1.04); }
+            70% { transform: scale(0.97); }
+        }
+        @keyframes heartsUp {
+            0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0; }
+            15%  { opacity: 0.5; }
+            100% { transform: translateY(-115vh) scale(1.15) rotate(20deg); opacity: 0; }
+        }
+        @keyframes wiggle {
+            0%   { transform: rotate(0); }
+            25%  { transform: rotate(3deg); }
+            50%  { transform: rotate(-3deg); }
+            75%  { transform: rotate(2deg); }
+            100% { transform: rotate(0); }
+        }
+        @keyframes burst {
+            0%   { transform: translate(0,0) scale(0.4); opacity: 0; }
+            25%  { opacity: 1; }
+            100% { transform: translate(var(--x,0), var(--y,-80px)) scale(1.3); opacity: 0; }
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(14px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes petalFall {
+            0%   { transform: translateY(0) rotate(0deg) scale(0.9); opacity: 0; }
+            20%  { opacity: 0.85; }
+            100% { transform: translateY(160px) rotate(120deg) scale(1.1); opacity: 0; }
+        }
+        @keyframes roseAssemble {
+            0%      { opacity: 0; transform: translate(calc(-50% + var(--sx,0px)), calc(-50% + var(--sy,0px))) scale(0.5); }
+            35%     { opacity: 0.9; }
+            60%,100%{ opacity: 0.8; transform: translate(calc(-50% + var(--tx,0px)), calc(-50% + var(--ty,0px))) scale(1); }
+        }
+        @keyframes teddyBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            45% { transform: translateY(-18px) scale(1.05); }
+            70% { transform: translateY(-6px) scale(0.98); }
+        }
+        @keyframes teddyShadow {
+            0%, 100% { transform: scaleX(1); opacity: 0.3; }
+            45% { transform: scaleX(0.65); opacity: 0.15; }
+            70% { transform: scaleX(0.82); opacity: 0.2; }
+        }
+        @keyframes promisePulse {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.75; }
+            50% { transform: translateY(-7px) scale(1.12); opacity: 1; }
+        }
+        @keyframes rippleEffect {
+            to { transform: scale(4); opacity: 0; }
+        }
+
+        /* ══════════════════════════════════════════
+           YES BUTTON → HEART BLOOM TRANSITION
+        ══════════════════════════════════════════ */
+
+        /* Step 1: button text fades, heart emoji appears */
+        @keyframes yesMorph {
+            0%   { transform: scale(1);    opacity: 1; letter-spacing: 0.3px; }
+            15%  { transform: scale(0.88); opacity: 0; }
+            30%  { transform: scale(1.05); opacity: 0; }
+            45%  { transform: scale(1);    opacity: 1; font-size: 2rem; }
+        }
+
+        /* Step 2: heart button pulses larger */
+        @keyframes heartGrow {
+            0%   { transform: scale(1); }
+            20%  { transform: scale(1.18); }
+            40%  { transform: scale(1.05); }
+            60%  { transform: scale(1.35); }
+            80%  { transform: scale(1.2);  }
+            100% { transform: scale(1.6);  }
+        }
+
+        /* Step 3: full-screen heart bloom overlay */
+        @keyframes heartBloom {
+            0%   { transform: translate(-50%,-50%) scale(0);   opacity: 0.9; }
+            60%  { opacity: 1; }
+            100% { transform: translate(-50%,-50%) scale(60);  opacity: 1; }
+        }
+
+        /* Screen flash on transition */
+        @keyframes screenFlash {
+            0%   { opacity: 0; }
+            30%  { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Particle orbit around growing heart */
+        @keyframes orbitParticle {
+            0%   { transform: rotate(var(--start-angle)) translateX(var(--orbit-r)) scale(0); opacity: 0; }
+            20%  { opacity: 1; transform: rotate(calc(var(--start-angle) + 60deg)) translateX(var(--orbit-r)) scale(1); }
+            80%  { opacity: 0.8; transform: rotate(calc(var(--start-angle) + 300deg)) translateX(calc(var(--orbit-r) * 1.5)) scale(1.2); }
+            100% { opacity: 0;   transform: rotate(calc(var(--start-angle) + 400deg)) translateX(calc(var(--orbit-r) * 3)) scale(0.5); }
+        }
+
+        /* Page-out: card content slides + fades */
+        @keyframes contentExit {
+            0%   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+            100% { opacity: 0; transform: translateY(-30px) scale(0.96); filter: blur(4px); }
+        }
+
+        /* Page-in: new content rises */
+        @keyframes contentEnter {
+            0%   { opacity: 0; transform: translateY(40px) scale(0.97); filter: blur(6px); }
+            60%  { filter: blur(0); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+
+        /* Word-by-word reveal for text */
+        @keyframes wordReveal {
+            0%   { opacity: 0; transform: translateY(12px) rotate(-2deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+
+        /* Loading heartbeat pulse ring */
+        @keyframes pulseRing {
+            0%   { transform: translate(-50%,-50%) scale(0.8); opacity: 0.8; }
+            100% { transform: translate(-50%,-50%) scale(2.4); opacity: 0; }
+        }
+
+        /* Floating emoji for loading screen */
+        @keyframes floatEmoji {
+            0%   { transform: translateY(0) rotate(var(--r, 0deg)) scale(0.8); opacity: 0; }
+            15%  { opacity: 1; }
+            85%  { opacity: 1; }
+            100% { transform: translateY(-80px) rotate(var(--r2, 20deg)) scale(1.2); opacity: 0; }
+        }
+
+        /* Success title dramatic entrance */
+        @keyframes titleSlam {
+            0%   { transform: scale(2.5) translateY(-20px); opacity: 0; filter: blur(10px); }
+            50%  { transform: scale(0.95) translateY(4px); opacity: 1; filter: blur(0); }
+            70%  { transform: scale(1.03); }
+            100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); }
+        }
+
+        /* Heart rain for success page */
+        @keyframes heartRain {
+            0%   { transform: translateY(0) rotate(var(--tilt, -8deg)) scale(0.5); opacity: 0; }
+            8%   { opacity: var(--max-op, 0.35); }
+            88%  { opacity: var(--max-op, 0.35); }
+            100% { transform: translateY(600px) rotate(var(--tilt2, 12deg)) scale(1.1); opacity: 0; }
+        }
+
+        /* Shimmer sweep on panels */
+        @keyframes shimmerSweep {
+            0%   { background-position: -200% center; }
+            100% { background-position: 300% center; }
+        }
+
+        /* ── Loading screen styles ── */
+        .loading-screen-rich {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .loading-ring-wrap {
+            position: relative;
+            width: 90px;
+            height: 90px;
+        }
+
+        .loading-ring-pulse {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgba(233,30,99,0.5);
+            animation: pulseRing 1.4s ease-out infinite;
+        }
+
+        .loading-ring-pulse:nth-child(2) { animation-delay: 0.5s; border-color: rgba(232,192,122,0.4); }
+        .loading-ring-pulse:nth-child(3) { animation-delay: 1s;   border-color: rgba(233,30,99,0.3); }
+
+        .loading-heart-big {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            font-size: 2.4rem;
+            animation: heartbeat 0.9s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(233,30,99,0.8));
+        }
+
+        .loading-label {
+            font-family: var(--font-display);
+            font-size: clamp(1.3rem, 4vw, 1.7rem);
+            color: var(--text-light);
+            text-shadow: 0 0 20px rgba(232,192,122,0.4);
+            animation: fadeSlide 0.5s ease both;
+        }
+
+        .loading-sub {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .loading-emoji-field {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .loading-emoji-particle {
+            position: absolute;
+            font-size: 1.4rem;
+            animation: floatEmoji var(--dur, 2s) ease-in-out var(--del, 0s) infinite;
+        }
+
+        /* ── Question page stagger ── */
+        .q-stagger > * {
+            opacity: 0;
+            animation: contentEnter 0.5s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        /* ── Success page styles ── */
+        .success-heart-rain {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;          /* behind all content */
+        }
+
+        .heart-rain-drop {
+            position: absolute;
+            top: -30px;
+            opacity: 0;
+            animation: heartRain var(--dur, 2.5s) ease-in var(--del, 0s) infinite;
+        }
+
+        /* All direct children of success-content sit above the rain */
+        .success-content > *:not(.success-heart-rain) {
+            position: relative;
+            z-index: 1;
+        }
+
+        .success-title-wrap {
+            position: relative;
+            z-index: 2;          /* title always on top */
+            animation: titleSlam 0.7s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        .shimmer-panel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shimmer-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(105deg, transparent 30%, rgba(232,192,122,0.08) 50%, transparent 70%);
+            background-size: 200% 100%;
+            animation: shimmerSweep 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* ── Transition overlay ── */
+        #transition-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            pointer-events: none;
+            display: none;
+        }
+
+        #transition-heart {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #e91e63 0%, #880e4f 60%, #4a0020 100%);
+            transform: translate(-50%,-50%) scale(0);
+            opacity: 0;
+            box-shadow: 0 0 40px rgba(233,30,99,0.8), 0 0 80px rgba(233,30,99,0.4);
+        }
+
+        #screen-flash {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,150,190,0.4) 0%, rgba(180,0,80,0.95) 100%);
+            opacity: 0;
+        }
+
+    </style>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYE89XRTTM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XYE89XRTTM', {
+    anonymize_ip: true
+  });
+</script>
+</head>
+<body>
+    <!-- Canvas particle system -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Heart bloom transition overlay -->
+    <div id="transition-overlay" aria-hidden="true">
+        <div id="transition-heart"></div>
+        <div id="screen-flash"></div>
+    </div>
+
+    <!-- Heart cursor -->
+    <div id="heart-cursor" aria-hidden="true">💗</div>
+
+    <div class="floating-hearts" aria-hidden="true">
+        <span style="left: 5%;">💗</span>
+        <span style="left: 18%;">💖</span>
+        <span style="left: 32%;">🌸</span>
+        <span style="left: 48%;">💞</span>
+        <span style="left: 62%;">💘</span>
+        <span style="left: 75%;">💓</span>
+        <span style="left: 88%;">💝</span>
+        <span style="left: 41%;">✦</span>
+        <span style="left: 94%;">💕</span>
+    </div>
+    <main class="container-fluid px-3 px-md-4 py-3 py-md-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-8 col-xl-6 d-flex justify-content-center">
+                <div class="container" id="main-card">
+                    <div class="card-ribbon" aria-hidden="true">
+                        <span>💗</span><span>✦</span><span>💗</span>
+                    </div>
+                    <div class="container-inner">
+                    <div id="content-wrapper">
+                        <img id="display-image" src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27320%27%20height%3D%27240%27%20viewBox%3D%270%200%20320%20240%27%3E%3Crect%20width%3D%27320%27%20height%3D%27240%27%20rx%3D%2724%27%20fill%3D%27%23ffe6ef%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2755%25%27%20text-anchor%3D%27middle%27%20font-size%3D%2756%27%3E%F0%9F%92%96%3C/text%3E%3C/svg%3E" alt="Today's love scene">
+                        <h1 id="question">Sindhu, will you be my Valentine?</h1>
+                        <p class="subtitle">A soft moment, a brave question, and a forever kind of yes.</p>
+                        <div class="love-note">
+                            You make everything feel lighter, sweeter, and brighter. I’d love to spend this Valentine’s Day
+                            laughing, cuddling, and making new memories that feel like home.
+                        </div>
+                        <div class="day-highlight">
+                            <p class="day-label" id="day-label">Today is</p>
+                            <h2 id="day-title">Rose Day 🌹</h2>
+                            <p class="day-message" id="day-message">
+                                Let me shower you with roses and remind you how wildly beautiful love can be.
+                            </p>
+                            <div class="day-extra" id="day-extra"></div>
+                            <p class="day-reminder" id="day-reminder">Come back tomorrow for a brand-new love surprise. 💞</p>
+                            <p class="season-note" id="season-note" hidden></p>
+                        </div>
+                        <div class="day-pages">
+                            <div class="content-tabs" id="content-tabs" aria-label="Today's love tabs"></div>
+                            <div class="page-content" id="page-content">
+                                <h3 class="page-title" id="page-title">Rose Day Love Page</h3>
+                                <div id="page-body"></div>
+                                <div class="page-footer">
+                                    <span id="page-count">Today’s page</span>
+                                    <span id="today-badge">Today’s pick 💖</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="buttons d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center" id="button-group">
+                            <button id="yes-btn">Yes</button>
+                            <button id="no-btn">No</button>
+                        </div>
+                        <p class="signature">
+                            With love, <strong>Chandu ❤️</strong>
+                        </p>
+                    </div>
+                    </div><!-- /.container-inner -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const container = document.getElementById('content-wrapper');
+        const dayLabel = document.getElementById('day-label');
+        const dayTitle = document.getElementById('day-title');
+        const dayMessage = document.getElementById('day-message');
+        const dayExtra = document.getElementById('day-extra');
+        const dayReminder = document.getElementById('day-reminder');
+        const seasonNote = document.getElementById('season-note');
+        const contentTabs = document.getElementById('content-tabs');
+        const pageContent = document.getElementById('page-content');
+        const pageTitle = document.getElementById('page-title');
+        const pageBody = document.getElementById('page-body');
+        const pageCount = document.getElementById('page-count');
+        const todayBadge = document.getElementById('today-badge');
+        const noMessages = [
+            'I miss you.',
+            'I like you.',
+            'I adore you.',
+            'I’m thinking of you.',
+            'You mean the world to me.'
+        ];
+
+        const GA_TRACKING_ID = 'G-XYE89XRTTM';
+        const analyticsEnabled = typeof window.gtag === 'function';
+
+        const safeStorage = {
+            get: (key) => {
+                try {
+                    return localStorage.getItem(key);
+                } catch {
+                    return null;
+                }
+            },
+            set: (key, value) => {
+                try {
+                    localStorage.setItem(key, value);
+                } catch {
+                    // Ignore storage errors (private mode / blocked storage).
+                }
+            }
+        };
+
+        const getOrCreateId = (key) => {
+            const existing = safeStorage.get(key);
+            if (existing) {
+                return existing;
+            }
+            const created = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+            safeStorage.set(key, created);
+            return created;
+        };
+
+        const visitorId = getOrCreateId('valentine_visitor_id');
+        const sessionId = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+        const previousVisitCount = Number(safeStorage.get('valentine_visit_count') || '0');
+        const visitCount = previousVisitCount + 1;
+        safeStorage.set('valentine_visit_count', String(visitCount));
+
+        const trackEvent = (eventName, params = {}) => {
+            if (!analyticsEnabled) {
+                return;
+            }
+            gtag('event', eventName, {
+                page_title: document.title,
+                page_path: window.location.pathname,
+                ...params
+            });
+        };
+
+        const setUserProperties = () => {
+            if (!analyticsEnabled) {
+                return;
+            }
+
+            gtag('config', GA_TRACKING_ID, {
+                user_id: visitorId,
+                user_properties: {
+                    visit_count: visitCount,
+                    language: navigator.language || 'unknown',
+                    viewport: `${window.innerWidth}x${window.innerHeight}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'unknown'
+                }
+            });
+        };
+
+        const sectionTiming = {
+            currentSection: null,
+            sectionStart: 0,
+            currentTab: null,
+            tabStart: 0
+        };
+
+        const startSectionTimer = (sectionName) => {
+            const now = performance.now();
+
+            if (sectionTiming.currentSection) {
+                const durationMs = Math.round(now - sectionTiming.sectionStart);
+                trackEvent('section_time_spent', {
+                    section_name: sectionTiming.currentSection,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2))
+                });
+            }
+
+            sectionTiming.currentSection = sectionName;
+            sectionTiming.sectionStart = now;
+        };
+
+        const startTabTimer = (tabName) => {
+            const now = performance.now();
+
+            if (sectionTiming.currentTab) {
+                const durationMs = Math.round(now - sectionTiming.tabStart);
+                trackEvent('tab_time_spent', {
+                    tab_name: sectionTiming.currentTab,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2))
+                });
+            }
+
+            sectionTiming.currentTab = tabName;
+            sectionTiming.tabStart = now;
+        };
+
+        setUserProperties();
+        trackEvent('experience_opened', {
+            visitor_id: visitorId,
+            session_id: sessionId,
+            visit_count: visitCount,
+            referrer: document.referrer || 'direct'
+        });
+
+        const bgmTracks = [
+            'assets/Bommarillu.mp3',
+            'assets/ManasanthaNuvve.mp3',
+            'assets/Manmadhudu.mp3',
+            'assets/NenuLocal.mp3',
+            'assets/Sontham.mp3'
+        ];
+
+        const randomBgmTrack = bgmTracks[Math.floor(Math.random() * bgmTracks.length)];
+        trackEvent('bgm_selected', { track_name: randomBgmTrack });
+
+        const bgmPlayer = new Audio(randomBgmTrack);
+        bgmPlayer.loop = true;
+        bgmPlayer.preload = 'auto';
+        const initialBgmVolume = 0.03;
+        const defaultBgmVolume = 0.35;
+        const speakingBgmVolume = 0.18;
+        const bgmFadeInDurationMs = 6000;
+        const bgmFadeInStepMs = 120;
+        bgmPlayer.volume = initialBgmVolume;
+        let hasStartedBgm = false;
+        let bgmFadeInterval = null;
+
+        const clearBgmFadeInterval = () => {
+            if (bgmFadeInterval !== null) {
+                clearInterval(bgmFadeInterval);
+                bgmFadeInterval = null;
+            }
+        };
+
+        const fadeInBgmVolume = () => {
+            clearBgmFadeInterval();
+
+            const totalSteps = Math.max(1, Math.round(bgmFadeInDurationMs / bgmFadeInStepMs));
+            const volumeStep = (defaultBgmVolume - initialBgmVolume) / totalSteps;
+            let nextVolume = initialBgmVolume;
+
+            bgmFadeInterval = setInterval(() => {
+                nextVolume = Math.min(defaultBgmVolume, nextVolume + volumeStep);
+                bgmPlayer.volume = nextVolume;
+
+                if (nextVolume >= defaultBgmVolume) {
+                    clearBgmFadeInterval();
+                }
+            }, bgmFadeInStepMs);
+        };
+
+        const startBgmAfterYes = async () => {
+            if (hasStartedBgm) {
+                return;
+            }
+
+            try {
+                bgmPlayer.volume = initialBgmVolume;
+                await bgmPlayer.play();
+                hasStartedBgm = true;
+                fadeInBgmVolume();
+                trackEvent('bgm_started_after_yes', { track_name: randomBgmTrack });
+            } catch {
+                trackEvent('bgm_start_failed_after_yes', { track_name: randomBgmTrack });
+            }
+        };
+
+        const speakMessage = (message) => {
+            if (!('speechSynthesis' in window)) {
+                return;
+            }
+            const utterance = new SpeechSynthesisUtterance(message);
+            utterance.pitch = 1.6;
+            utterance.rate = 0.95;
+            utterance.volume = 1;
+            utterance.onstart = () => {
+                clearBgmFadeInterval();
+                bgmPlayer.volume = speakingBgmVolume;
+            };
+            utterance.onend = () => {
+                bgmPlayer.volume = defaultBgmVolume;
+            };
+            utterance.onerror = () => {
+                bgmPlayer.volume = defaultBgmVolume;
+            };
+            speechSynthesis.cancel();
+            speechSynthesis.speak(utterance);
+        };
+
+        const createFallbackImage = (label) => {
+            const safeLabel = label || 'Love note';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+                    <defs>
+                        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffe6ef"/>
+                            <stop offset="100%" stop-color="#ffd1f0"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+                    <text x="50%" y="46%" text-anchor="middle" font-size="56">💖</text>
+                    <text x="50%" y="66%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#b21856">
+                        ${safeLabel}
+                    </text>
+                    <text x="50%" y="78%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="12" fill="#6b3a59">
+                        Image unavailable
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
+        const createDecorativeImage = (emoji, label, accent = '#ff9cc6') => {
+            const safeLabel = label || 'Love note';
+            const safeEmoji = emoji || '💖';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240" viewBox="0 0 320 240">
+                    <defs>
+                        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff1f7"/>
+                            <stop offset="100%" stop-color="${accent}"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+                    <circle cx="80" cy="60" r="24" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="250" cy="80" r="18" fill="rgba(255,255,255,0.4)"/>
+                    <text x="50%" y="48%" text-anchor="middle" font-size="56">${safeEmoji}</text>
+                    <text x="50%" y="68%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#7a2e56">
+                        ${safeLabel}
+                    </text>
+                    <text x="50%" y="80%" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="12" fill="#6b3a59">
+                        Love note preview
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
+        const createValentinePenguinImage = (label = 'Be my Valentine?') => {
+            const safeLabel = label || 'Be my Valentine?';
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="360" height="260" viewBox="0 0 360 260">
+                    <defs>
+                        <linearGradient id="bed" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#ffd1e8"/>
+                            <stop offset="100%" stop-color="#ffb3d5"/>
+                        </linearGradient>
+                        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff6fb"/>
+                            <stop offset="100%" stop-color="#fde2f0"/>
+                        </linearGradient>
+                        <linearGradient id="penguin" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#8fb6ff"/>
+                            <stop offset="100%" stop-color="#6d93ff"/>
+                        </linearGradient>
+                    </defs>
+                    <rect width="360" height="260" rx="28" fill="url(#wall)"/>
+                    <rect x="18" y="110" width="324" height="120" rx="26" fill="url(#bed)"/>
+                    <rect x="30" y="84" width="200" height="60" rx="24" fill="#ffdbe9"/>
+                    <rect x="214" y="70" width="110" height="100" rx="26" fill="#f7b9d6"/>
+                    <rect x="214" y="70" width="110" height="100" rx="26" fill="url(#bed)" opacity="0.6"/>
+                    <rect x="250" y="108" width="30" height="50" rx="10" fill="#fff4fb" opacity="0.6"/>
+
+                    <ellipse cx="150" cy="185" rx="72" ry="52" fill="url(#penguin)"/>
+                    <ellipse cx="150" cy="180" rx="48" ry="38" fill="#fff9f2"/>
+                    <ellipse cx="115" cy="200" rx="18" ry="26" fill="#86a9ff"/>
+                    <ellipse cx="185" cy="200" rx="18" ry="26" fill="#86a9ff"/>
+                    <polygon points="150,170 165,178 150,186 135,178" fill="#f6b146"/>
+                    <circle cx="140" cy="162" r="6" fill="#2d2a32"/>
+                    <circle cx="160" cy="162" r="6" fill="#2d2a32"/>
+                    <circle cx="138" cy="160" r="2" fill="#fff"/>
+                    <circle cx="158" cy="160" r="2" fill="#fff"/>
+
+                    <path d="M70 70c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff7ab8"/>
+                    <path d="M110 50c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff6fae"/>
+                    <path d="M250 44c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff6fae"/>
+                    <path d="M290 88c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff8fbf"/>
+                    <path d="M82 110c8-10 18-10 26 0c-8 10-18 10-26 0z" fill="#ff8fbf"/>
+
+                    <text x="50%" y="248" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="16" fill="#7a2e56">
+                        ${safeLabel}
+                    </text>
+                </svg>
+            `;
+
+            return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+        };
+
+        const setImageWithFallback = (imageEl, src, altText, label) => {
+            if (!imageEl) {
+                return;
+            }
+
+            imageEl.alt = altText || label || 'Love note image';
+            imageEl.src = src;
+            imageEl.onerror = () => {
+                imageEl.onerror = null;
+                imageEl.src = createFallbackImage(label);
+            };
+        };
+
+        const valentineWeek = [
+            {
+                month: 1,
+                day: 7,
+                title: 'Rose Day 🌹',
+                image: {
+                    src: createDecorativeImage('🌹', 'Rose Day', '#ffb3c7'),
+                    alt: 'A bouquet of roses glowing with love'
+                },
+                successImage: {
+                    src: createDecorativeImage('🌷', 'Rose Day Celebration', '#ff8fbf'),
+                    alt: 'A rose-filled celebration for a sweet yes'
+                },
+                loading: {
+                    title: 'Preparing your rose surprise...',
+                    icon: '🌹💞🌹',
+                    petals: '🌹'
+                },
+                message: 'A single rose can say “I adore you,” but I want to give you a whole garden of care.',
+                proposal: 'Will you let me fill your days with little blooms of love?',
+                questions: [
+                    'Which color rose matches your mood today?',
+                    'Can I surprise you with a tiny bouquet and a big hug?',
+                    'Will you accept a rose and my heart with it?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'What kind of rose surprise would make you smile first?',
+                        options: [
+                            { label: 'A single rose with a note 💌', quote: 'Simple, sincere, and straight from my heart to yours.' },
+                            { label: 'A mini bouquet after class/work 🌹', quote: 'A little bloom to say: I missed you all day.' },
+                            { label: 'Roses hidden around the room ✨', quote: 'A tiny treasure hunt where every flower says “I adore you.”' },
+                            { label: 'A rose plus your favorite snack 🍫', quote: 'Because love should always come with sweet extras.' }
+                        ]
+                    },
+                    {
+                        prompt: 'Which rose vibe feels most like us?',
+                        options: [
+                            { label: 'Soft and classic ❤️', quote: 'Timeless love, gentle moments, and warm forever feelings.' },
+                            { label: 'Playful and bright 🌼', quote: 'Lots of laughter, teasing smiles, and happy little chaos.' },
+                            { label: 'Dreamy and poetic 🌙', quote: 'Late-night talks, starlit wishes, and love that lingers.' },
+                            { label: 'A little bit of everything 💖', quote: 'Perfect—our story gets to be beautifully us in every way.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Blush pink roses',
+                    'Sunny yellow roses',
+                    'Classic red roses',
+                    'A single white rose'
+                ],
+                letters: [
+                    'Every petal feels like a soft thank you for the way you light up my days. If I could, I’d leave a rose on your pillow every morning and a kiss on your forehead every night.',
+                    'I want our love to bloom gently, like a garden that grows brighter each day. You’re my favorite flower in every season.'
+                ]
+            },
+            {
+                month: 1,
+                day: 8,
+                title: 'Propose Day 💍',
+                image: {
+                    src: createDecorativeImage('💍', 'Propose Day', '#f0b1ff'),
+                    alt: 'A sparkling ring for a sweet proposal'
+                },
+                successImage: {
+                    src: createDecorativeImage('✨', 'Propose Day Yes', '#d9a6ff'),
+                    alt: 'A sparkling yes moment with hearts'
+                },
+                loading: {
+                    title: 'Setting up your forever question...',
+                    icon: '💍💖💍',
+                    petals: '✨'
+                },
+                message: 'Today I’m brave enough to ask the sweetest question of all.',
+                proposal: 'Will you be my forever yes, my favorite hello, and my best love story?',
+                questions: [
+                    'Can we turn every “someday” into “us”?',
+                    'Will you say yes to slow dances, shared dreams, and silly smiles?',
+                    'May I be the one who always chooses you?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'How should I pop the question?',
+                        options: [
+                            { label: 'Under fairy lights ✨', quote: 'A soft glow, a steady heartbeat, and the simplest question: will you be mine?' },
+                            { label: 'Over a handwritten note 💌', quote: 'Every word would hold the promise of forever, tucked gently between the lines.' },
+                            { label: 'During a sunset walk 🌅', quote: 'When the sky blushes, I’d ask you to stay and shine with me always.' },
+                            { label: 'With a cozy at-home surprise 🕯️', quote: 'Just us, our favorite song, and a forever yes whispered softly.' }
+                        ]
+                    },
+                    {
+                        prompt: 'What kind of forever do you want us to build?',
+                        options: [
+                            { label: 'Playful and adventurous 🎢', quote: 'I promise a life full of laughter, road trips, and new stories.' },
+                            { label: 'Calm and cozy 🧸', quote: 'Let’s make a home where peace lives and love always feels safe.' },
+                            { label: 'Romantic and dreamy 💫', quote: 'I’ll keep choosing you in every sunrise and every starlit night.' },
+                            { label: 'All of the above 💖', quote: 'Then I’ll give you every version of forever, all wrapped in love.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'A sunset walk proposal',
+                    'A cozy candlelit question',
+                    'A note tucked in a book',
+                    'A promise whispered softly'
+                ],
+                letters: [
+                    'I’m not asking for perfection, just a lifetime of real love. The kind that shows up, holds on, and keeps choosing each other every day.',
+                    'I want to build a life where we celebrate little wins, hold each other on hard days, and never stop being best friends.'
+                ]
+            },
+            {
+                month: 1,
+                day: 9,
+                title: 'Chocolate Day 🍫',
+                image: {
+                    src: createDecorativeImage('🍫', 'Chocolate Day', '#ffc4dd'),
+                    alt: 'Delicious chocolates for a sweet day'
+                },
+                successImage: {
+                    src: createDecorativeImage('🍬', 'Chocolate Day Celebration', '#ffb3d5'),
+                    alt: 'Chocolate treats raining down in celebration'
+                },
+                loading: {
+                    title: 'Unwrapping your sweet surprise...',
+                    icon: '🍫💞🍫',
+                    petals: '🍫'
+                },
+                message: 'Life is sweeter with you, so let’s share every bite and every laugh.',
+                proposal: 'Can I be the one who brings your favorite treats and warm hugs?',
+                questions: [
+                    'Which chocolate should we share first: dark, milk, or all of them?',
+                    'Can I be the sweet surprise in your day?',
+                    'Will you save the last bite for me?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'Pick our chocolate date style:',
+                        options: [
+                            { label: 'Movie + blanket + truffles 🎬', quote: 'A cozy night, your hand in mine, and sweet bites between scenes.' },
+                            { label: 'Cafe dessert run ☕', quote: 'Two spoons, one table, and endless smiling over chocolate crumbs.' },
+                            { label: 'Homemade brownie evening 🧁', quote: 'Messy aprons, warm oven air, and kisses stolen in the kitchen.' },
+                            { label: 'Surprise gift box at your door 🎁', quote: 'A sweet reminder that I’m always thinking of you.' }
+                        ]
+                    },
+                    {
+                        prompt: 'How should I deliver your sweet treat?',
+                        options: [
+                            { label: 'With a handwritten tag 📝', quote: 'Each bite comes with a tiny “I love you.”' },
+                            { label: 'With a voice note confession 🎙️', quote: 'So you can hear my smile while unwrapping it.' },
+                            { label: 'With a surprise hug 🤗', quote: 'Chocolate melts fast, but my affection won’t.' },
+                            { label: 'With all three 💞', quote: 'Then it’s settled: maximum sweetness, maximum love.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Caramel truffle',
+                    'Hazelnut praline',
+                    'Dark chocolate sea salt',
+                    'Strawberry cream'
+                ],
+                letters: [
+                    'Love feels like melting chocolate on a rainy afternoon—warm, sweet, and wrapped in comfort. I want to be that for you.',
+                    'Let’s make every day a little sweeter, with shared treats, soft laughter, and all the joy in between.'
+                ]
+            },
+            {
+                month: 1,
+                day: 10,
+                title: 'Teddy Day 🧸',
+                image: {
+                    src: createDecorativeImage('🧸', 'Teddy Day', '#ffd1e8'),
+                    alt: 'A cuddly teddy bear waving hello'
+                },
+                successImage: {
+                    src: createDecorativeImage('🤗', 'Teddy Day Hug', '#ffc8e0'),
+                    alt: 'A bear hug celebration'
+                },
+                loading: {
+                    title: 'Fluffing your teddy cuddles...',
+                    icon: '🧸💝🧸',
+                    petals: '💗'
+                },
+                message: 'Here’s a teddy bear to remind you you’re always safe and adored.',
+                proposal: 'Will you be my cozy cuddle buddy for every season of love?',
+                questions: [
+                    'Should our teddy be named Snuggle or Honey?',
+                    'Can I be your safe place after a long day?',
+                    'Will you let me keep you wrapped in warmth?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'What should our teddy carry for you?',
+                        options: [
+                            { label: 'A tiny “miss you” card 💌', quote: 'A soft reminder that you’re always on my mind.' },
+                            { label: 'A little heart charm 💗', quote: 'So you can keep a piece of my love with you all day.' },
+                            { label: 'A pocket-size cuddle coupon 🎟️', quote: 'Redeem anytime for one long, warm hug.' },
+                            { label: 'All of the above 🧸', quote: 'Because you deserve every cute and cozy thing.' }
+                        ]
+                    },
+                    {
+                        prompt: 'When do you want your teddy hug most?',
+                        options: [
+                            { label: 'Right after waking up 🌤️', quote: 'A soft start to the day with love in the air.' },
+                            { label: 'After a hectic afternoon 🌆', quote: 'Let me be your pause button and your peace.' },
+                            { label: 'Before sleep at night 🌙', quote: 'A calm cuddle so your dreams feel safer and sweeter.' },
+                            { label: 'Anytime, every time 💞', quote: 'Then I’ll never stop showing up with comfort.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Snuggle bear',
+                    'Honey bear',
+                    'Moonlight bear',
+                    'Heart hug bear'
+                ],
+                letters: [
+                    'If love had a shape, it would be soft and cuddly. I want to be your comfort, your warmth, and your favorite place to rest.',
+                    'Whenever you need a safe place, I’ll be your gentle hug, your cozy corner, and your calm.'
+                ]
+            },
+            {
+                month: 1,
+                day: 11,
+                title: 'Promise Day 🤞',
+                image: {
+                    src: createDecorativeImage('🤞', 'Promise Day', '#f7b2ff'),
+                    alt: 'Pinky promise with floating hearts'
+                },
+                successImage: {
+                    src: createDecorativeImage('💞', 'Promise Day Promise', '#e6a6ff'),
+                    alt: 'Hands linked in a promise'
+                },
+                loading: {
+                    title: 'Sealing your promise moment...',
+                    icon: '🤞💫🤞',
+                    petals: '💫'
+                },
+                message: 'I promise to choose you, respect you, and care for you every day.',
+                proposal: 'Will you let me keep a forever promise by your side?',
+                questions: [
+                    'Can I promise to listen, laugh, and love you better every day?',
+                    'Will you hold my hand through every season?',
+                    'Can we promise to make each other feel safe and seen?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'Which promise should I lead with today?',
+                        options: [
+                            { label: 'To communicate gently 🗣️', quote: 'Even in hard moments, I’ll choose kindness and clarity.' },
+                            { label: 'To protect your peace 🕊️', quote: 'I’ll be your calm, not your chaos.' },
+                            { label: 'To celebrate your growth 🌱', quote: 'I’ll cheer every step you take, big or small.' },
+                            { label: 'To do all three 🤍', quote: 'Then I’ll build love with intention, every single day.' }
+                        ]
+                    },
+                    {
+                        prompt: 'What does “forever promise” mean to you?',
+                        options: [
+                            { label: 'Consistency over grand gestures 🫶', quote: 'Love is in the steady things we do for each other.' },
+                            { label: 'Loyalty through every season 🌦️', quote: 'I’ll stay, support, and stand with you no matter what.' },
+                            { label: 'Growth as a team 🤝', quote: 'We keep learning each other and choosing better together.' },
+                            { label: 'All of it, always 💍', quote: 'Beautiful—our promise can be deep, warm, and complete.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Always be honest',
+                    'Always be kind',
+                    'Always show up',
+                    'Always choose you'
+                ],
+                letters: [
+                    'My promise is simple: I will love you in ways that feel steady and true. I’ll be there, with patience, kindness, and a heart that keeps choosing you.',
+                    'I promise to hold your heart gently, celebrate your wins, and stand by you when the world feels loud.'
+                ]
+            },
+            {
+                month: 1,
+                day: 12,
+                title: 'Hug Day 🤗',
+                image: {
+                    src: createDecorativeImage('🤗', 'Hug Day', '#ffc4dd'),
+                    alt: 'A warm hug with happy hearts'
+                },
+                successImage: {
+                    src: createDecorativeImage('💗', 'Hug Day Cuddle', '#ffb6d5'),
+                    alt: 'A cozy hug celebration'
+                },
+                loading: {
+                    title: 'Wrapping you in hugs...',
+                    icon: '🤗💗🤗',
+                    petals: '💞'
+                },
+                message: 'Let every hug remind you that you’re cherished, safe, and adored.',
+                proposal: 'Can I be the arms you run into whenever you need comfort?',
+                questions: [
+                    'How many hugs should I owe you today—10 or 100?',
+                    'Can I be the squeeze that turns your day around?',
+                    'Will you let me hold you close when words fall short?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'Choose your ideal hug moment:',
+                        options: [
+                            { label: 'A long hello hug 🤗', quote: 'The kind where the whole day melts away in one embrace.' },
+                            { label: 'A reassuring “you got this” hug 💪', quote: 'A quick squeeze packed with confidence and love.' },
+                            { label: 'A quiet, no-words-needed hug 🌙', quote: 'Just heartbeat, warmth, and being fully understood.' },
+                            { label: 'All hug types unlocked 💖', quote: 'Perfect, I’ll keep a full hug menu ready for you.' }
+                        ]
+                    },
+                    {
+                        prompt: 'What should I whisper during your hug?',
+                        options: [
+                            { label: '“I’m proud of you.” ✨', quote: 'Because your effort and heart deserve to be seen.' },
+                            { label: '“I’m here for you.” 🌷', quote: 'No matter what the day brings, I’m by your side.' },
+                            { label: '“You’re my safe place.” 🏡', quote: 'Loving you feels like home in the best way.' },
+                            { label: '“All of the above.” 💞', quote: 'Then I’ll say it again and again until you feel it deeply.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Morning sunshine hug',
+                    'After-work unwind hug',
+                    'Quiet midnight hug',
+                    'Celebration hug'
+                ],
+                letters: [
+                    'Hugs say what words can’t: “I’m here, I’ve got you, and you’re never alone.” I hope you feel that in every embrace we share.',
+                    'Whenever you’re tired, I want to hold you close and remind you that you’re deeply loved.'
+                ]
+            },
+            {
+                month: 1,
+                day: 13,
+                title: 'Kiss Day 💋',
+                image: {
+                    src: createDecorativeImage('💋', 'Kiss Day', '#ff9cc6'),
+                    alt: 'A sweet kiss with floating sparkles'
+                },
+                successImage: {
+                    src: createDecorativeImage('😘', 'Kiss Day Blush', '#ff8fbf'),
+                    alt: 'A kiss blown with heart sparkles'
+                },
+                loading: {
+                    title: 'Sending you a thousand kisses...',
+                    icon: '💋✨💋',
+                    petals: '✨'
+                },
+                message: 'A kiss that says thank you, I love you, and I’m all yours.',
+                proposal: 'Will you be the kiss that makes my heart flutter forever?',
+                questions: [
+                    'May I steal a sweet kiss and leave a thousand smiles?',
+                    'Can I be your favorite hello and goodnight?',
+                    'Will you let my kiss say “I love you” every time?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'Pick our kiss-day mood:',
+                        options: [
+                            { label: 'Shy and blushy 😊', quote: 'A soft smile, a gentle kiss, and butterflies everywhere.' },
+                            { label: 'Playful and giggly 😄', quote: 'Tiny pecks, big laughs, and endless teasing affection.' },
+                            { label: 'Slow and cinematic 🎞️', quote: 'Like time pauses and it’s just us in the moment.' },
+                            { label: 'All moods, same love 💘', quote: 'Then I’ll love you in every tempo and every tone.' }
+                        ]
+                    },
+                    {
+                        prompt: 'Where should your bonus kiss land?',
+                        options: [
+                            { label: 'Forehead 💋', quote: 'For comfort, care, and quiet devotion.' },
+                            { label: 'Cheek 💗', quote: 'For sweetness, warmth, and everyday affection.' },
+                            { label: 'Hand 🤍', quote: 'For respect, tenderness, and old-school romance.' },
+                            { label: 'You decide, I deliver ✨', quote: 'Gladly—your wish is my favorite love plan.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'Forehead kiss',
+                    'Cheek kiss',
+                    'Hand kiss',
+                    'Slow, sweet kiss'
+                ],
+                letters: [
+                    'Every kiss is a tiny promise—soft, sincere, and full of devotion. I hope mine always make you feel cherished and adored.',
+                    'Let our kisses be little reminders that we belong to each other, today and always.'
+                ]
+            },
+            {
+                month: 1,
+                day: 14,
+                title: 'Valentine’s Day 💘',
+                image: {
+                    src: createValentinePenguinImage('Will you be my Valentine?'),
+                    alt: 'A cozy penguin with hearts and a Valentine message'
+                },
+                successImage: {
+                    src: createValentinePenguinImage('Best decision ever 💖'),
+                    alt: 'A penguin celebrating with hearts and confetti'
+                },
+                loading: {
+                    title: 'Cueing the Valentine fireworks...',
+                    icon: '💘🎉💘',
+                    petals: '💖'
+                },
+                message: 'Today I celebrate you, us, and every day that led here.',
+                proposal: 'Will you be my Valentine today, tomorrow, and always?',
+                questions: [
+                    'Will you be my forever Valentine?',
+                    'Can we write a love story that’s gentle and brave?',
+                    'Will you be my today, my tomorrow, and my always?'
+                ],
+                mcq: [
+                    {
+                        prompt: 'How should we celebrate our Valentine moment?',
+                        options: [
+                            { label: 'A candlelit dinner 🍽️', quote: 'Slow conversation, warm lights, and eyes only for you.' },
+                            { label: 'A rooftop or terrace under stars 🌌', quote: 'Just us, night air, and promises whispered close.' },
+                            { label: 'A cozy at-home date night 🛋️', quote: 'Soft music, shared dessert, and love in its comfiest form.' },
+                            { label: 'Whatever includes us together 💞', quote: 'Perfect choice—being with you is the real celebration.' }
+                        ]
+                    },
+                    {
+                        prompt: 'What should our next love chapter focus on?',
+                        options: [
+                            { label: 'More quality time ⏳', quote: 'Intentional moments that feel full and meaningful.' },
+                            { label: 'More adventures 🌍', quote: 'New places, new memories, same hand to hold.' },
+                            { label: 'More deep talks 💬', quote: 'Heart-to-heart conversations that keep us close.' },
+                            { label: 'All three, please 💖', quote: 'Then our story keeps getting richer in every way.' }
+                        ]
+                    }
+                ],
+                choices: [
+                    'A candlelit dinner',
+                    'A stargazing date',
+                    'A handwritten letter',
+                    'A slow dance at home'
+                ],
+                letters: [
+                    'Valentine’s Day is just one day, but loving you is my favorite everyday. Thank you for being my calm, my joy, and my home.',
+                    'I want to keep choosing you, celebrating you, and loving you in all the small and beautiful ways.'
+                ]
+            }
+        ];
+
+        const getTodayKey = () => {
+            const now = new Date();
+            return { month: now.getMonth(), day: now.getDate() };
+        };
+
+        const buildPreviousDays = (currentIndex) => {
+            const previousDays = valentineWeek.slice(0, currentIndex).map((entry) => `
+                <li><strong>${entry.title}:</strong> ${entry.proposal}</li>
+            `).join('');
+
+            return `
+                <p>Here’s a replay of every love note that led to today:</p>
+                <ul>${previousDays}</ul>
+            `;
+        };
+
+        const todayKey = getTodayKey();
+        const todayIndex = valentineWeek.findIndex(
+            (entry) => entry.month === todayKey.month && entry.day === todayKey.day
+        );
+
+        const defaultDay = {
+            title: 'Everyday Love ✨',
+            image: {
+                src: createDecorativeImage('💖', 'Everyday Love', '#ffd1e8'),
+                alt: 'A cozy love scene for any day'
+            },
+            successImage: {
+                src: createDecorativeImage('🎉', 'Everyday Love Cheers', '#ffc4dd'),
+                alt: 'A cheerful celebration for an everyday yes'
+            },
+            loading: {
+                title: 'Getting your love dashboard ready...',
+                icon: '💖✨💖',
+                petals: '💗'
+            },
+            message: 'Even outside Valentine’s week, I’m still choosing you with my whole heart.',
+            proposal: 'Will you keep this love story close until next Valentine’s Day?',
+            questions: [
+                'Can we plan a tiny date just for us?',
+                'Which song reminds you of us right now?',
+                'Can I send you a sweet message today?'
+            ],
+            choices: [
+                'A cozy coffee date',
+                'A sunset walk',
+                'A movie night',
+                'A handwritten note'
+            ],
+            letters: [
+                'No special day is required for loving you. I want to keep showing up in all the small ways that make your heart feel safe and treasured.',
+                'Until Valentine’s week arrives again, let’s keep building our love with laughter, patience, and gentle moments.'
+            ]
+        };
+
+        let activeTab = 'questions';
+        let selectedChoiceIndex = null;
+        let letterIndex = 0;
+        let isLetterOpen = false;
+
+        const getTodayEntry = () => (todayIndex === -1 ? defaultDay : valentineWeek[todayIndex]);
+
+        const renderTabContent = () => {
+            const todayEntry = getTodayEntry();
+
+            if (activeTab === 'questions') {
+                pageBody.innerHTML = `
+                    <ul class="question-list">
+                        ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            if (activeTab === 'choices') {
+                pageBody.innerHTML = `
+                    <div class="choice-grid">
+                        ${todayEntry.choices.map((choice, index) => `
+                            <button class="choice-button ${selectedChoiceIndex === index ? 'selected' : ''}" type="button" data-choice="${index}">
+                                ${choice}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <p>${selectedChoiceIndex === null ? 'Pick a little love surprise.' : `You chose: ${todayEntry.choices[selectedChoiceIndex]} 💖`}</p>
+                `;
+
+                pageBody.querySelectorAll('.choice-button').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        selectedChoiceIndex = Number(button.dataset.choice);
+                        const selectedChoice = todayEntry.choices[selectedChoiceIndex];
+                        trackEvent('daily_choice_selected', {
+                            day_title: todayEntry.title,
+                            choice_index: selectedChoiceIndex,
+                            choice_text: selectedChoice
+                        });
+                        renderTabContent();
+                    });
+                });
+            }
+
+            pageContent.classList.remove('animate');
+            void pageContent.offsetWidth;
+            pageContent.classList.add('animate');
+        };
+
+        const renderTabs = () => {
+            const tabs = [
+                { id: 'questions', label: 'Questions 💬' },
+                { id: 'choices', label: 'Choices 🎀' }
+            ];
+
+            contentTabs.innerHTML = tabs.map((tab) => `
+                <button class="content-tab ${activeTab === tab.id ? 'active' : ''}" data-tab="${tab.id}" type="button">
+                    ${tab.label}
+                </button>
+            `).join('');
+
+            contentTabs.querySelectorAll('.content-tab').forEach((tab) => {
+                tab.addEventListener('click', () => {
+                    activeTab = tab.dataset.tab;
+                    trackEvent('tab_changed', { tab_name: activeTab, day_title: getTodayEntry().title });
+                    startTabTimer(activeTab);
+                    renderTabs();
+                    renderTabContent();
+                });
+            });
+        };
+
+        const updateDayContent = () => {
+            const todayEntry = getTodayEntry();
+            const isValentineToday = todayIndex === valentineWeek.length - 1;
+            const displayImage = document.getElementById('display-image');
+
+            dayLabel.textContent = 'Today is';
+            dayTitle.textContent = todayEntry.title;
+            dayMessage.textContent = todayEntry.message;
+            setImageWithFallback(
+                displayImage,
+                todayEntry.image?.src || defaultDay.image.src,
+                todayEntry.image?.alt || defaultDay.image.alt,
+                todayEntry.title
+            );
+
+            if (isValentineToday) {
+                dayExtra.innerHTML = buildPreviousDays(valentineWeek.length - 1);
+                dayReminder.textContent = 'Happy Valentine’s Day! Relive every sweet promise again. 💖';
+            } else {
+                dayExtra.textContent = todayEntry.proposal;
+                dayReminder.textContent = todayIndex === -1
+                    ? 'Come back next Valentine’s Day for a brand-new wave of love. 💌'
+                    : 'Come back tomorrow for a brand-new love surprise. 💞';
+            }
+
+            if (todayIndex === -1) {
+                seasonNote.hidden = false;
+                seasonNote.textContent = 'It’s not Valentine’s week yet—this page is a little love preview just for you.';
+            } else {
+                seasonNote.hidden = true;
+            }
+
+            pageTitle.textContent = `${todayEntry.title} Love Page`;
+            pageCount.textContent = todayIndex === -1 ? 'Love note for today' : 'Today’s page';
+            todayBadge.textContent = 'Today’s pick 💖';
+            todayBadge.style.opacity = '1';
+
+            renderTabs();
+            renderTabContent();
+            startTabTimer(activeTab);
+            trackEvent('day_content_rendered', {
+                day_index: todayIndex,
+                day_title: todayEntry.title,
+                active_tab: activeTab
+            });
+        };
+
+        updateDayContent();
+
+        const buildLoadingMarkup = (todayEntry) => {
+            const loading = todayEntry.loading || defaultDay.loading;
+            const dayThemeLabel = todayEntry.title || 'Valentine’s Day';
+            const loadingSymbols = [loading.petals, '💗', '🌸', '🌹', '💖', '🌷'];
+            const petals = Array.from({ length: 8 }).map((_, index) => {
+                const left = 10 + index * 10;
+                const delay = (index * -0.35).toFixed(2);
+                const duration = (2.4 + (index % 4) * 0.4).toFixed(2);
+                const symbol = loadingSymbols[index % loadingSymbols.length];
+                return `<span class="petal" style="left:${left}%; animation-delay:${delay}s; --fall-duration:${duration}s;">${symbol}</span>`;
+            }).join('');
+            const themedMarkup = `
+                <div class="promise-display">
+                    <div class="promise-loader-stage" aria-hidden="true">
+                        <div class="petal-field">
+                            ${petals}
+                        </div>
+                        <canvas class="promise-loader-canvas" width="240" height="140"></canvas>
+                        <div class="promise-symbols">
+                            <span class="promise-symbol teddy">🧸</span>
+                            <span class="promise-symbol flower">🌸</span>
+                            <span class="promise-symbol heart">💗</span>
+                        </div>
+                    </div>
+                    <div class="hug-hearts">💞 ✨ 💞</div>
+                </div>
+            `;
+
+            return `
+                <div class="loading-screen">
+                    <h2 class="loading-title">${loading.title}</h2>
+                    <p class="loading-theme">Today’s theme: ${dayThemeLabel}</p>
+                    <div class="loading-heart" aria-hidden="true">💖</div>
+                    <div class="loading-icon">${loading.icon}</div>
+                    <p class="loading-subtitle">Hold on, love is on the way...</p>
+                    ${themedMarkup}
+                </div>
+            `;
+        };
+
+        const createPromiseLoaderAnimation = (overlay) => {
+            const canvas = overlay.querySelector('.promise-loader-canvas');
+            if (!canvas) {
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                return;
+            }
+
+            const pointCount = innerWidth < 600 ? 360 : 520;
+            const particles = Array.from({ length: pointCount }, () => ({ x: 0, y: 0 }));
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const phaseDuration = 1200;
+            const start = performance.now();
+            let rafId = 0;
+
+            const heartShape = (t) => {
+                const sine = Math.sin(t);
+                return {
+                    x: 16 * Math.pow(sine, 3),
+                    y: 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)
+                };
+            };
+
+            const roseShape = (t) => {
+                const radius = Math.sin(5 * t);
+                return {
+                    x: radius * Math.cos(t) * 24,
+                    y: -radius * Math.sin(t) * 24
+                };
+            };
+
+            const leftHandShape = (t) => ({
+                x: -34 + 16 * Math.cos(t),
+                y: 14 * Math.sin(t)
+            });
+
+            const rightHandShape = (t) => ({
+                x: 34 - 16 * Math.cos(t),
+                y: 14 * Math.sin(t)
+            });
+
+            const drawFrame = (now) => {
+                const elapsed = now - start;
+                const phase = Math.min(3, Math.floor(elapsed / phaseDuration));
+                const phaseProgress = Math.min(1, (elapsed % phaseDuration) / phaseDuration);
+                const pulse = 1 + Math.sin(elapsed * 0.01) * 0.12;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(233, 30, 99, 0.9)';
+
+                for (let i = 0; i < pointCount; i += 1) {
+                    const t = (i / pointCount) * Math.PI * 2;
+                    let targetX = 0;
+                    let targetY = 0;
+
+                    if (phase === 0) {
+                        const p = roseShape(t);
+                        targetX = p.x * phaseProgress * 2.2;
+                        targetY = p.y * phaseProgress * 2.2;
+                    } else if (phase === 1) {
+                        const p = heartShape(t);
+                        targetX = p.x * phaseProgress * 1.9;
+                        targetY = p.y * phaseProgress * 1.9;
+                    } else if (phase === 2) {
+                        const p = i % 2 === 0 ? leftHandShape(t) : rightHandShape(t);
+                        targetX = p.x * phaseProgress;
+                        targetY = p.y * phaseProgress;
+                    } else {
+                        const radius = 28 + Math.sin(elapsed * 0.012) * 5;
+                        targetX = Math.cos(t) * radius;
+                        targetY = Math.sin(t) * radius;
+                    }
+
+                    const particle = particles[i];
+                    particle.x += (targetX - particle.x) * 0.12;
+                    particle.y += (targetY - particle.y) * 0.12;
+
+                    const size = 1.1 + pulse * 0.6;
+                    ctx.beginPath();
+                    ctx.arc(centerX + particle.x, centerY + particle.y, size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                if (elapsed < 5000) {
+                    rafId = requestAnimationFrame(drawFrame);
+                }
+            };
+
+            rafId = requestAnimationFrame(drawFrame);
+            overlay.dataset.promiseRaf = String(rafId);
+        };
+
+        const stopPromiseLoaderAnimation = (overlay) => {
+            const rafValue = Number(overlay?.dataset?.promiseRaf);
+            if (Number.isFinite(rafValue) && rafValue > 0) {
+                cancelAnimationFrame(rafValue);
+            }
+        };
+
+        const showInitialLoading = () => {
+            const todayEntry = getTodayEntry();
+            startSectionTimer('initial_overlay_loading');
+            trackEvent('initial_loading_shown', { day_title: todayEntry.title });
+            const overlay = document.createElement('div');
+            overlay.className = 'initial-loading-overlay';
+            overlay.innerHTML = buildLoadingMarkup(todayEntry);
+            document.body.appendChild(overlay);
+
+            createPromiseLoaderAnimation(overlay);
+
+            setTimeout(() => {
+                stopPromiseLoaderAnimation(overlay);
+                overlay.remove();
+                startSectionTimer('landing_page');
+                trackEvent('landing_page_ready', { day_title: todayEntry.title });
+            }, 5000);
+        };
+
+        const renderLoadingPage = () => {
+            startSectionTimer('transition_loading_page');
+            trackEvent('transition_loading_shown');
+            startBgmAfterYes();
+
+            const FLOAT_EMOJIS = ['💖','🌸','💕','✨','🌹','💗','⭐','✦'];
+            const emojiHTML = FLOAT_EMOJIS.map((e, i) => `
+                <span class="loading-emoji-particle" style="
+                    left: ${8 + i * 11}%;
+                    bottom: 0;
+                    --dur: ${1.8 + Math.random() * 1.2}s;
+                    --del: ${i * 0.22}s;
+                ">${e}</span>
+            `).join('');
+
+            container.innerHTML = `
+                <div class="loading-screen-rich" style="animation: contentEnter 0.5s cubic-bezier(0.22,1,0.36,1) both;">
+                    <div class="loading-emoji-field" aria-hidden="true">${emojiHTML}</div>
+                    <div class="loading-ring-wrap" aria-hidden="true">
+                        <div class="loading-ring-pulse"></div>
+                        <div class="loading-ring-pulse"></div>
+                        <div class="loading-ring-pulse"></div>
+                        <div class="loading-heart-big">💖</div>
+                    </div>
+                    <p class="loading-label">She said yes…</p>
+                    <p class="loading-sub">Preparing your love story ✨</p>
+                </div>
+            `;
+
+            // Cycle through romantic loading phrases
+            const phrases = [
+                'She said yes…',
+                'Heart is racing 💓',
+                'Writing love notes…',
+                'Counting the reasons…',
+                'Almost ready ✨'
+            ];
+            let pi = 0;
+            const label = container.querySelector('.loading-label');
+            const phraseTimer = setInterval(() => {
+                pi = (pi + 1) % phrases.length;
+                if (label) {
+                    label.style.opacity = '0';
+                    label.style.transform = 'translateY(8px)';
+                    label.style.transition = 'all 0.3s ease';
+                    setTimeout(() => {
+                        if (label) {
+                            label.textContent = phrases[pi];
+                            label.style.opacity = '1';
+                            label.style.transform = 'translateY(0)';
+                        }
+                    }, 320);
+                }
+            }, 700);
+
+            setTimeout(() => {
+                clearInterval(phraseTimer);
+                renderQuestionPage();
+            }, 3000);
+        };
+
+        showInitialLoading();
+
+        const renderQuestionPage = () => {
+            const todayEntry = getTodayEntry();
+            startSectionTimer('question_page');
+            trackEvent('question_page_viewed', { day_title: todayEntry.title });
+            container.innerHTML = `
+                <div class="success-content">
+                    <h2 class="success-title">${todayEntry.title} Questions 💞</h2>
+                    <p class="success-subtitle">Answer just one, or let me know which feels the sweetest.</p>
+                    <div class="success-questions">
+                        <h3>Today’s love questions</h3>
+                        ${
+                            todayEntry.mcq?.length
+                                ? todayEntry.mcq.map((item, index) => `
+                                    <div class="mcq-item" data-question="${index}">
+                                        <p class="mcq-question">${item.prompt}</p>
+                                        <div class="choice-grid">
+                                            ${item.options.map((option, optionIndex) => `
+                                                <button class="choice-button" type="button" data-question="${index}" data-option="${optionIndex}">
+                                                    ${option.label}
+                                                </button>
+                                            `).join('')}
+                                        </div>
+                                        <div class="mcq-quote" data-quote="${index}" hidden></div>
+                                    </div>
+                                `).join('')
+                                : `
+                                    <ul>
+                                        ${todayEntry.questions.map((question) => `<li>${question}</li>`).join('')}
+                                    </ul>
+                                `
+                        }
+                    </div>
+                    <div class="success-message">
+                        Your answers are my favorite love notes. I’m all ears and all heart.
+                    </div>
+                    <div class="success-actions">
+                        <button class="choice-button" id="go-back" type="button">Go back</button>
+                        <button class="choice-button selected" id="to-success" type="button">Next page →</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('go-back').addEventListener('click', () => {
+                trackEvent('question_go_back_clicked', { day_title: todayEntry.title });
+                window.location.reload();
+            });
+
+            document.getElementById('to-success').addEventListener('click', () => {
+                trackEvent('question_next_clicked', { day_title: todayEntry.title });
+                renderSuccessPage();
+            });
+
+            if (todayEntry.mcq?.length) {
+                container.querySelectorAll('.choice-button[data-question]').forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const questionIndex = Number(button.dataset.question);
+                        const optionIndex = Number(button.dataset.option);
+                        const questionBlock = container.querySelector(`.mcq-item[data-question="${questionIndex}"]`);
+                        const quoteBox = container.querySelector(`.mcq-quote[data-quote="${questionIndex}"]`);
+                        const option = todayEntry.mcq[questionIndex].options[optionIndex];
+
+                        questionBlock.querySelectorAll('.choice-button').forEach((choice) => {
+                            choice.classList.toggle('selected', choice === button);
+                        });
+
+                        quoteBox.textContent = `“${option.quote}”`;
+                        quoteBox.hidden = false;
+
+                        trackEvent('mcq_answer_selected', {
+                            day_title: todayEntry.title,
+                            question_index: questionIndex,
+                            option_index: optionIndex,
+                            option_label: option.label
+                        });
+                    });
+                });
+            }
+        };
+
+        const renderSuccessPage = () => {
+            const todayEntry = getTodayEntry();
+            startSectionTimer('success_page');
+            trackEvent('success_page_viewed', { day_title: todayEntry.title });
+            const successImage = todayEntry.successImage?.src || todayEntry.image?.src || defaultDay.successImage.src;
+            const successAlt = todayEntry.successImage?.alt || todayEntry.image?.alt || defaultDay.successImage.alt;
+            const whatsappMessage = encodeURIComponent('Love you too, Chandu ❤️');
+            isLetterOpen = false;
+            letterIndex = 0;
+
+            // Heart rain drops
+            const rainEmojis = ['💖','💗','💕','🌸','✨','🌹','💓','⭐'];
+            const rainHTML = Array.from({length:14}, (_,i) => {
+                const tiltA = ((Math.random() - 0.5) * 24).toFixed(1);
+                const tiltB = ((Math.random() - 0.5) * 20).toFixed(1);
+                const opacity = (0.18 + Math.random() * 0.18).toFixed(2);
+                return `<div class="heart-rain-drop" style="
+                    left:${4+i*7}%;
+                    --dur:${(2.2+Math.random()*2).toFixed(1)}s;
+                    --del:${(Math.random()*3).toFixed(1)}s;
+                    --tilt:${tiltA}deg;
+                    --tilt2:${tiltB}deg;
+                    --max-op:${opacity};
+                    font-size:${(0.85+Math.random()*0.8).toFixed(1)}rem;
+                ">${rainEmojis[i%rainEmojis.length]}</div>`;
+            }).join('');
+
+
+            container.innerHTML = `
+                <div class="success-content" id="success-root" style="position:relative;overflow:hidden;border-radius:inherit;">
+                    <div class="success-heart-rain" aria-hidden="true">${rainHTML}</div>
+
+                    <div class="success-title-wrap">
+                        <h2 class="success-title">She said YES! 💖</h2>
+                        <p class="success-subtitle" style="animation:contentEnter 0.5s ease 0.2s both;">You just made my whole world glow.</p>
+                    </div>
+
+                    <img src="${successImage}" alt="${successAlt}" style="border-radius:18px;margin-bottom:16px;animation:contentEnter 0.6s cubic-bezier(0.22,1,0.36,1) 0.25s both;box-shadow:0 0 0 3px rgba(232,192,122,0.35),0 0 0 7px rgba(232,192,122,0.1),0 24px 50px rgba(0,0,0,0.55),0 0 60px rgba(220,60,120,0.4);">
+
+                    <div class="success-message shimmer-panel" style="animation:contentEnter 0.5s ease 0.35s both;position:relative;">
+                        💫 Every day with you is a gift I never want to unwrap too fast.
+                        I'll keep choosing you — in every little moment and every big one.
+                        Thank you for this yes. It means everything. 🌹
+                    </div>
+
+                    <div class="success-letters shimmer-panel" style="animation:contentEnter 0.5s ease 0.45s both;position:relative;">
+                        <h3>💌 Love letters for today</h3>
+                        <div class="letter-card">
+                            <button class="letter-seal" id="success-open-letter" type="button" aria-expanded="false">
+                                <span class="letter-icon">💌</span>
+                                <span class="letter-title">Open today's love letter</span>
+                                <span class="letter-subtitle">A sweet note is waiting just for you.</span>
+                            </button>
+                            <div class="letter-content" hidden>
+                                <div class="love-letter" id="letter-text">${todayEntry.letters[letterIndex]}</div>
+                                <div class="page-footer">
+                                    <span id="letter-count">Letter ${letterIndex + 1} of ${todayEntry.letters.length}</span>
+                                    <button class="choice-button" id="success-next-letter" type="button">Next letter →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="final-note" style="animation:contentEnter 0.5s ease 0.55s both;">
+                        Now come collect your hugs, kisses, and a lifetime of dates. 🫶
+                    </p>
+                    <div class="success-actions" style="animation:contentEnter 0.5s ease 0.65s both;">
+                        <a class="choice-button selected" id="whatsapp-cta"
+                           href="https://wa.me/7093349948?text=${whatsappMessage}"
+                           target="_blank" rel="noopener"
+                           style="display:flex;align-items:center;gap:8px;justify-content:center;">
+                            💬 Send "Love you too" to Chandu
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            const successImg = container.querySelector('.success-content img');
+            setImageWithFallback(successImg, successImage, successAlt, todayEntry.title);
+
+            const whatsappButton = document.getElementById('whatsapp-cta');
+            whatsappButton?.addEventListener('click', () => {
+                trackEvent('whatsapp_cta_clicked', { day_title: todayEntry.title });
+            });
+
+            const openLetterButton = document.getElementById('success-open-letter');
+            const letterTitle = openLetterButton.querySelector('.letter-title');
+            const letterSubtitle = openLetterButton.querySelector('.letter-subtitle');
+            const letterContent = container.querySelector('.letter-content');
+
+            openLetterButton.addEventListener('click', () => {
+                isLetterOpen = !isLetterOpen;
+                trackEvent('love_letter_toggled', { day_title: todayEntry.title, is_open: isLetterOpen });
+                openLetterButton.classList.toggle('opened', isLetterOpen);
+                openLetterButton.setAttribute('aria-expanded', String(isLetterOpen));
+
+                if (isLetterOpen) {
+                    letterContent.hidden = false;
+                    letterContent.style.animation = 'contentEnter 0.45s cubic-bezier(0.22,1,0.36,1) both';
+                } else {
+                    letterContent.style.animation = 'contentExit 0.3s ease both';
+                    setTimeout(() => { letterContent.hidden = true; }, 280);
+                }
+                letterTitle.textContent = isLetterOpen ? 'Close today\'s love letter' : 'Open today\'s love letter';
+                letterSubtitle.textContent = isLetterOpen ? 'Keep it close, then tuck it back in.' : 'A sweet note is waiting just for you.';
+            });
+
+            const nextLetterButton = document.getElementById('success-next-letter');
+            nextLetterButton.addEventListener('click', () => {
+                letterIndex = (letterIndex + 1) % todayEntry.letters.length;
+                trackEvent('love_letter_next_clicked', { day_title: todayEntry.title, letter_index: letterIndex + 1, total_letters: todayEntry.letters.length });
+                const lt = document.getElementById('letter-text');
+                const lc = document.getElementById('letter-count');
+                if (lt) { lt.style.animation = 'none'; void lt.offsetWidth; lt.textContent = todayEntry.letters[letterIndex]; lt.style.animation = 'contentEnter 0.4s ease both'; }
+                if (lc) lc.textContent = `Letter ${letterIndex + 1} of ${todayEntry.letters.length}`;
+            });
+
+            const card = document.getElementById('main-card');
+            if (card) {
+                card.style.transition = 'box-shadow 1s ease, background 1s ease';
+                card.style.background = 'linear-gradient(160deg, rgba(100,0,50,0.25) 0%, rgba(50,0,25,0.35) 100%)';
+                card.style.boxShadow = '0 0 0 1px rgba(232,192,122,0.15) inset, 0 50px 100px rgba(0,0,0,0.7), 0 0 100px rgba(200,0,80,0.25)';
+            }
+        };
+
+        // 1. Logic for the runaway "No" button
+        const moveNoButton = () => {
+            const padding = 20;
+            const btnW = noBtn.offsetWidth || 140;
+            const btnH = noBtn.offsetHeight || 48;
+            const maxX = Math.max(padding, window.innerWidth - btnW - padding);
+            const maxY = Math.max(padding, window.innerHeight - btnH - padding);
+            const x = padding + Math.random() * (maxX - padding);
+            const y = padding + Math.random() * (maxY - padding);
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${Math.round(x)}px`;
+            noBtn.style.top = `${Math.round(y)}px`;
+            noBtn.style.zIndex = '9999';
+            noBtn.style.margin = '0';
+        };
+
+        const handleNoInteraction = (event) => {
+            event.preventDefault();
+            trackEvent('no_button_interaction', { trigger_type: event.type });
+            event.stopPropagation();
+            const randomMessage = noMessages[Math.floor(Math.random() * noMessages.length)];
+            speakMessage(randomMessage);
+            moveNoButton();
+        };
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', handleNoInteraction, { passive: false });
+        noBtn.addEventListener('click', handleNoInteraction);
+
+        const createBurst = () => {
+            const burst = document.createElement('span');
+            burst.classList.add('burst-heart');
+            burst.textContent = '💖';
+            const angle = Math.random() * Math.PI * 2;
+            const distance = 80 + Math.random() * 60;
+            burst.style.setProperty('--x', `${Math.cos(angle) * distance}px`);
+            burst.style.setProperty('--y', `${Math.sin(angle) * distance}px`);
+            const rect = yesBtn.getBoundingClientRect();
+            burst.style.left = `${rect.left + rect.width / 2}px`;
+            burst.style.top = `${rect.top + rect.height / 2}px`;
+            document.body.appendChild(burst);
+            burst.addEventListener('animationend', () => burst.remove());
+        };
+
+        yesBtn.addEventListener('mouseenter', () => {
+            trackEvent('yes_button_hovered');
+            createBurst();
+        });
+
+        // ══════════════════════════════════════════════════════
+        //  YES CLICK → Heart Bloom → Page Transition
+        // ══════════════════════════════════════════════════════
+        let yesClicked = false;
+        yesBtn.addEventListener('click', () => {
+            if (yesClicked) return;
+            yesClicked = true;
+
+            trackEvent('yes_button_clicked');
+            startSectionTimer('yes_clicked_transition');
+            speakMessage('Sindhu, I love you.');
+
+            const btnRect = yesBtn.getBoundingClientRect();
+            const btnCx = btnRect.left + btnRect.width / 2;
+            const btnCy = btnRect.top  + btnRect.height / 2;
+
+            // ── Phase 1: Button morphs to heart (0–600ms) ──
+            yesBtn.textContent = '💖';
+            yesBtn.style.cssText += `
+                font-size: 1.8rem;
+                background: radial-gradient(circle at center, #ff4081, #c2185b, #880e4f);
+                box-shadow: 0 0 0 #7a0030, 0 20px 50px rgba(233,30,99,0.7), 0 0 60px rgba(233,30,99,0.5);
+                transition: none;
+                animation: none;
+                letter-spacing: 0;
+            `;
+
+            // Spawn orbit particles around button
+            const ORBIT_EMOJIS = ['✨','💕','🌸','⭐','💗','✦'];
+            for (let i = 0; i < 8; i++) {
+                const orb = document.createElement('div');
+                orb.style.cssText = `
+                    position: fixed;
+                    left: ${btnCx}px; top: ${btnCy}px;
+                    font-size: ${10 + Math.random() * 10}px;
+                    pointer-events: none;
+                    z-index: 9000;
+                    --start-angle: ${i * 45}deg;
+                    --orbit-r: ${40 + Math.random() * 30}px;
+                    animation: orbitParticle ${1.2 + Math.random() * 0.5}s ease-out ${i * 0.06}s both;
+                    transform-origin: 0 0;
+                `;
+                orb.textContent = ORBIT_EMOJIS[i % ORBIT_EMOJIS.length];
+                document.body.appendChild(orb);
+                setTimeout(() => orb.remove(), 1800);
+            }
+
+            // ── Phase 2: Heart grows bigger (400–1200ms) ──
+            setTimeout(() => {
+                let scale = 1;
+                let beat = 0;
+                const growInterval = setInterval(() => {
+                    beat++;
+                    // Heartbeat pattern: expand → slight retract → bigger expand
+                    const beatScale = beat % 2 === 0 ? 1.25 : 1.0;
+                    scale = Math.min(scale * 1.22 * beatScale, 12);
+                    yesBtn.style.transform = `scale(${scale})`;
+                    yesBtn.style.boxShadow = `
+                        0 0 0 #7a0030,
+                        0 0 ${scale * 8}px rgba(233,30,99,0.8),
+                        0 0 ${scale * 20}px rgba(233,30,99,0.5),
+                        0 0 ${scale * 40}px rgba(233,30,99,0.2)
+                    `;
+
+                    // Burst more hearts around it
+                    if (beat % 2 === 0) {
+                        for (let j = 0; j < 3; j++) {
+                            const b = document.createElement('span');
+                            b.className = 'burst-heart';
+                            b.textContent = ['💖','💗','💕','🌸'][Math.floor(Math.random()*4)];
+                            const angle = Math.random() * Math.PI * 2;
+                            const dist = 60 + Math.random() * 80;
+                            b.style.setProperty('--x', `${Math.cos(angle)*dist}px`);
+                            b.style.setProperty('--y', `${Math.sin(angle)*dist}px`);
+                            b.style.left = `${btnCx}px`;
+                            b.style.top  = `${btnCy}px`;
+                            b.style.fontSize = `${14 + Math.random()*14}px`;
+                            document.body.appendChild(b);
+                            b.addEventListener('animationend', () => b.remove());
+                        }
+                    }
+
+                    if (beat >= 6) {
+                        clearInterval(growInterval);
+                        triggerBloom();
+                    }
+                }, 140);
+            }, 300);
+
+            // ── Phase 3: Full-screen bloom + transition ──
+            const triggerBloom = () => {
+                const overlay = document.getElementById('transition-overlay');
+                const bloomHeart = document.getElementById('transition-heart');
+                const flash = document.getElementById('screen-flash');
+
+                // Position bloom at button center
+                bloomHeart.style.left = btnCx + 'px';
+                bloomHeart.style.top  = btnCy + 'px';
+                overlay.style.display = 'block';
+
+                // Bloom expands
+                bloomHeart.style.transition = 'transform 0.9s cubic-bezier(0.22,1,0.36,1), opacity 0.3s ease';
+                bloomHeart.style.opacity = '1';
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        bloomHeart.style.transform = 'translate(-50%,-50%) scale(60)';
+                    });
+                });
+
+                // Screen flash mid-bloom
+                setTimeout(() => {
+                    flash.style.transition = 'opacity 0.3s ease';
+                    flash.style.opacity = '1';
+                    setTimeout(() => {
+                        flash.style.opacity = '0';
+                    }, 300);
+                }, 400);
+
+                // Navigate after bloom fills screen
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                    bloomHeart.style.transform = 'translate(-50%,-50%) scale(0)';
+                    bloomHeart.style.opacity = '0';
+                    yesBtn.style.transform = '';
+                    renderLoadingPage();
+                }, 1050);
+            };
+        });
+
+
+        window.addEventListener('beforeunload', () => {
+            const now = performance.now();
+
+            if (sectionTiming.currentSection) {
+                const durationMs = Math.round(now - sectionTiming.sectionStart);
+                trackEvent('section_time_spent', {
+                    section_name: sectionTiming.currentSection,
+                    duration_ms: durationMs,
+                    duration_seconds: Number((durationMs / 1000).toFixed(2)),
+                    unload: true
+                });
+            }
+
+            if (sectionTiming.currentTab) {
+                const tabDurationMs = Math.round(now - sectionTiming.tabStart);
+                trackEvent('tab_time_spent', {
+                    tab_name: sectionTiming.currentTab,
+                    duration_ms: tabDurationMs,
+                    duration_seconds: Number((tabDurationMs / 1000).toFixed(2)),
+                    unload: true
+                });
+            }
+
+            trackEvent('experience_closed', {
+                visitor_id: visitorId,
+                session_id: sessionId
+            });
+        });
+    </script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.2.0/mdb.umd.min.js"
+        defer
+    ></script>
+
+    <script>
+    /* ═══════════════════════════════════════════════════════
+       RICH UI ENHANCEMENTS
+    ═══════════════════════════════════════════════════════ */
+
+    /* 1. Canvas particle system — floating rose petals & stars */
+    (function() {
+        const canvas = document.getElementById('particle-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        function resize() {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const EMOJIS = ['🌸','💗','✦','🌹','💖','⋆','✿'];
+        const particles = [];
+
+        class Particle {
+            constructor() { this.reset(true); }
+            reset(initial) {
+                this.x  = Math.random() * canvas.width;
+                this.y  = initial ? Math.random() * canvas.height : -30;
+                this.vy = 0.4 + Math.random() * 0.8;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.size = 10 + Math.random() * 14;
+                this.opacity = 0;
+                this.maxOpacity = 0.15 + Math.random() * 0.25;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+                this.emoji = EMOJIS[Math.floor(Math.random() * EMOJIS.length)];
+                this.phase = initial ? Math.random() * Math.PI * 2 : 0;
+                this.sway = 0.5 + Math.random() * 1.5;
+            }
+            update() {
+                this.phase += 0.018;
+                this.x += this.vx + Math.sin(this.phase) * 0.4;
+                this.y += this.vy;
+                this.rotation += this.rotationSpeed;
+                if (this.y < canvas.height * 0.3) this.opacity = Math.min(this.opacity + 0.008, this.maxOpacity);
+                if (this.y > canvas.height * 0.8) this.opacity = Math.max(this.opacity - 0.012, 0);
+                if (this.y > canvas.height + 40) this.reset(false);
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.font = `${this.size}px serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.emoji, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        const COUNT = window.innerWidth < 480 ? 16 : 28;
+        for (let i = 0; i < COUNT; i++) particles.push(new Particle());
+
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(loop);
+        }
+        loop();
+    })();
+
+    /* 2. Heart cursor trail */
+    (function() {
+        const cursor = document.getElementById('heart-cursor');
+        if (!cursor || window.matchMedia('(max-width: 600px)').matches) return;
+
+        let mx = -100, my = -100;
+        let lastTrail = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx + 'px';
+            cursor.style.top  = my + 'px';
+
+            const now = Date.now();
+            if (now - lastTrail > 80) {
+                lastTrail = now;
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.textContent = '💗';
+                trail.style.left = mx + 'px';
+                trail.style.top  = my + 'px';
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 700);
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursor.style.left = '-100px';
+            cursor.style.top  = '-100px';
+        });
+    })();
+
+    /* 3. Button ripple effect */
+    (function() {
+        document.querySelectorAll('button, .choice-button, .letter-seal').forEach(btn => {
+            btn.addEventListener('pointerdown', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                const size = Math.max(rect.width, rect.height) * 1.5;
+                ripple.style.cssText = `
+                    width: ${size}px; height: ${size}px;
+                    left: ${e.clientX - rect.left - size/2}px;
+                    top: ${e.clientY - rect.top - size/2}px;
+                `;
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 700);
+            });
+        });
+    })();
+
+    /* 4. 3D card tilt on mouse (desktop only) */
+    (function() {
+        const card = document.getElementById('main-card');
+        if (!card || window.matchMedia('(max-width: 600px)').matches) return;
+
+        const MAX_TILT = 6;
+
+        card.addEventListener('mousemove', (e) => {
+            const rect  = card.getBoundingClientRect();
+            const cx    = rect.left + rect.width / 2;
+            const cy    = rect.top  + rect.height / 2;
+            const dx    = (e.clientX - cx) / (rect.width / 2);
+            const dy    = (e.clientY - cy) / (rect.height / 2);
+            const tiltX = -dy * MAX_TILT;
+            const tiltY =  dx * MAX_TILT;
+            card.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(900px) rotateX(0) rotateY(0) translateY(0)';
+            card.style.transition = 'transform 0.5s ease';
+            setTimeout(() => { card.style.transition = ''; }, 500);
+        });
+    })();
+
+    /* 5. Confetti burst on YES click */
+    (function() {
+        const yesBtn = document.getElementById('yes-btn');
+        if (!yesBtn) return;
+
+        const CONFETTI_EMOJIS = ['💖','🌸','✨','💕','🌹','💗','⭐','💫','🎊','✦'];
+
+        function launchConfetti() {
+            const count = window.innerWidth < 480 ? 18 : 32;
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const el  = document.createElement('div');
+                    el.style.cssText = `
+                        position: fixed;
+                        left: 50%; top: 50%;
+                        pointer-events: none;
+                        font-size: ${14 + Math.random() * 18}px;
+                        z-index: 9997;
+                        animation: confettiFly ${0.8 + Math.random() * 0.9}s ease-out forwards;
+                        --cx: ${(Math.random() - 0.5) * 100}vw;
+                        --cy: ${-20 - Math.random() * 60}vh;
+                        --rot: ${(Math.random() - 0.5) * 540}deg;
+                    `;
+                    el.textContent = CONFETTI_EMOJIS[Math.floor(Math.random() * CONFETTI_EMOJIS.length)];
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 1800);
+                }, i * 30);
+            }
+        }
+
+        /* inject confetti keyframe */
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFly {
+                0%   { transform: translate(-50%,-50%) scale(0.3) rotate(0); opacity: 1; }
+                100% { transform: translate(calc(-50% + var(--cx)), calc(-50% + var(--cy))) scale(1.1) rotate(var(--rot)); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        yesBtn.addEventListener('click', launchConfetti);
+    })();
+
+    /* 6. Staggered content reveal on load */
+    (function() {
+        const targets = document.querySelectorAll(
+            '#content-wrapper > *, .container-inner > *'
+        );
+        targets.forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(18px)';
+            el.style.transition = `opacity 0.55s ease ${0.1 + i * 0.08}s, transform 0.55s ease ${0.1 + i * 0.08}s`;
+        });
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                targets.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
